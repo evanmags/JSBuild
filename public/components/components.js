@@ -13,18 +13,31 @@
 //     event: handler => {},
 //     -OR-
 //     event: handler(),
+//   },
+//   ---applied to elemetn at build time---
+//   CSSselector: String of most specific attribute,
+//   DOMelement: this element in the dom,
+//   Update(){
+//     function allowing for auto update of elements
+//   },
+//   getHas(): {
+//     returns has array
+//   }
+//   setHas(): {
+//     updates has array
+//     invokes Update()
 //   }
 // }
 
 import { colors } from "../exports.js";
 
-export const link = () => {
+export const link = (props) => {
   return {
     a: {
       id: "link",
-      href: "#"
+      href: props.href || '#'
     },
-    has: ["click here!"],
+    has: [props.text || "click here!"],
     style: {
       color: colors.black,
       border: `1px solid`,
@@ -56,18 +69,6 @@ export const link = () => {
     }
   };
 };
-
-export const button = link();
-button.has = ["Learn More!"];
-button.a.href = "#about";
-
-export const backButton = link();
-backButton.has = ["go back!"];
-backButton.a.href = "#home";
-
-export const nextButton = link();
-nextButton.has = ["Reach Out"];
-nextButton.a.href = "#contact";
 
 export const menuButton = ({ ...props }) => {
   return {

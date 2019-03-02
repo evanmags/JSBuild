@@ -1,6 +1,6 @@
 import { c } from "../exports.js";
 
-const homeContent = [
+export const homeContent = [
   c.sectionHeader("Check it out!"),
   c.subhead("Object oriented compositon of beautiful websites"),
   c.p(
@@ -16,7 +16,6 @@ const homeContent = [
   c.p(
     "Or you can make an API call from a script tag to deliver your app via .json file"
   ),
-  c.button
+  c.link({href: '#about', text: 'Learn More!'})
 ];
 
-export { homeContent };

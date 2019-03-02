@@ -1,9 +1,7 @@
 import { c } from "../exports.js";
 
-const contactContent = [
+export const contactContent = [
   c.sectionHeader("Contact"),
   c.subhead("Reach out to help, ask, or suggest"),
-  c.buttonRow([c.homeButton, c.button])
+  c.buttonRow([c.link({href: '#Home', text: 'Home'}), c.link({href: '#about', text: 'Learn More!'})])
 ];
-
-export { contactContent };

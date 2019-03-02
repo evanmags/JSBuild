@@ -38,6 +38,8 @@ const app = {
 };
 
 render(app, document.querySelector("body"));
+
 style(e.styles);
+
 router.paths = e.routes;
 router.run();

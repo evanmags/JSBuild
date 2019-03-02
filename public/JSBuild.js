@@ -1,6 +1,6 @@
 // the only truely global variable in JSBuild is this array, 
 // which will hold a reference of every element rendered to the page
-const elements = [];
+let elements = [];
 
 // quick reimplementation of React.createElement(e, p, c) for jsx use without React loaded...
 // does not handle functions from jsx well (if at all in some cases)
@@ -29,24 +29,13 @@ const Component = {
   update() {
     // removed element from 'elements' array
     if (elements.includes(this)) {
-      elements.splice(elements.indexOf(this), 1);
-    }
-
-    // finds tag object in element
-    const key = Object.keys(this)[0];
-    // pull attributes from element
-    const attrs = this[key];
-    let selector;
-
-    // does not use the already defined .selector in the object as that lacks the same specificity
-    if (attrs.id) {
-      selector = `${key}#${attrs.id}`;
-    } else if (attrs.classList) {
-      selector = `${key}.${attrs.classList.split(" ").join(".")}`;
+      elements = elements.filter((ele)=>{
+        return ele.DOMelement !== this.DOMelement;
+      });
     }
 
     // locates the "this" aka the element to replace
-    const replace = document.querySelector(selector);
+    const replace = this.DOMelement;
     // grabs the parent element
     const parent = replace.parentElement;
 
@@ -57,9 +46,6 @@ const Component = {
     if (this.style) {
       styleThis(this);
     }
-
-    // places 'element' back in at the end of the elements array
-    elements.push(this);
   },
 
   //getter function
@@ -99,10 +85,11 @@ const build = l => {
   } else if (typeof l === "object") {
     Object.assign(l, Component);
 
-    elements.push(l);
-
     for (var tag in l) {
+      //create element
       d = document.createElement(tag);
+      
+      l.DOMelement = d;
 
       // loop through attribute object
       for (var a in l[tag]) {
@@ -111,6 +98,13 @@ const build = l => {
 
       break;
     }
+
+    elements = elements.filter((ele)=>{
+      return ele.DOMelement !== d;
+    });
+
+    elements.push(l);
+
 
     //add child elements
     if (l.has) {
@@ -179,7 +173,7 @@ const style = obj => {
         selector = `${key}`;
       }
 
-      e.selector = selector;
+      e.CSSselector = selector;
 
       //define how to add selectors to the style object
       if (obj[selector]) {
@@ -259,7 +253,7 @@ const styleThis = element => {
   let selector,
     keys = [];
 
-  if (!element.selector) {
+  if (!element.CSSselector) {
     for (var key in element) {
       if (element[key].classList) {
         selector = `.${element[key].classList.split(" ").join(".")}`;
@@ -268,7 +262,7 @@ const styleThis = element => {
       } else {
         selector = `${key}`;
       }
-      element.selector = selector;
+      element.CSSselector = selector;
       break;
     }
   }
@@ -277,7 +271,7 @@ const styleThis = element => {
     keys.push(styleSheet.cssRules[key].selectorText);
   }
 
-  if (!keys.includes(element.selector)) {
+  if (!keys.includes(element.CSSselector)) {
     //create base string in correct scope
     //loop through and append each rule as string to base rule string
     ruleStr = ``;
@@ -289,7 +283,7 @@ const styleThis = element => {
 
     //insert selectors with rules to the end of the sheet.
     styleSheet.insertRule(
-      `${element.selector} { ${ruleStr} } \n`,
+      `${element.CSSselector} { ${ruleStr} } \n`,
       styleSheet.cssRules.length
     );
   }
@@ -309,8 +303,9 @@ const router = {
   },
   paths: {},
   run() {
-    window.location.hash = "#home";
+    window.location.hash = window.location.pathname !== `/` ? window.location.pathname.replace(`/`, "#") : '#home';
     window.onhashchange = function(e) {
+      console.log('hash')
       for (var p in router.paths) {
         if (window.location.hash === `#${p}`) {
           window.scrollTo(0, 0);
@@ -323,6 +318,7 @@ const router = {
       return router.paths.home();
     };
     window.onpopstate = function() {
+      console.log('pop')
       for (var p in router.paths) {
         if (window.location.pathname === `/${p}`) {
           return router.paths[p]();

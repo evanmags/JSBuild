@@ -12,7 +12,6 @@
 //  In general routes use pages, pages use components, and components use styles.
 //  Your app uses all of these and accesses them from here.
 
-
 //styles import comes first
 export { colors, styles } from "./styles/styles.js";
 
@@ -23,6 +22,7 @@ export { c };
 //export pages
 export { homeContent } from "./pages/home.js";
 export { aboutContent } from "./pages/about.js";
+export { styleContent } from "./pages/style.js";
 export { contactContent } from "./pages/contact.js";
 
 //routes comes last

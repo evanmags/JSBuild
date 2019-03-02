@@ -1,6 +1,6 @@
 import { c } from "../exports.js";
 
-const aboutContent = [
+export const aboutContent = [
   c.sectionHeader("About JSBuild"),
   c.subhead("Building Components"),
   c.p(
@@ -15,12 +15,12 @@ const aboutContent = [
     "Now in order to render anything to the page we are required to declare an element object inside of our component"
   ),
   c.codeBlock(
-    `const sample = {
-        h1:{
-          id:'header'
-          classList:'red underline'
-        }
-      }`
+  `export const sample = {
+    h1:{
+      id:'header'
+      classList:'red underline'
+    }
+  }`
   ),
   c.p(
     "This element object should contain any and all attributes that you wish to pass to the rendered element. Just make sure that they are formatted as you would see when declaring for any element you pull from the DOM. (i.e. id, classList, ect.) since the elements are created using node[attribute] = 'value'."
@@ -32,12 +32,12 @@ const aboutContent = [
     `For example, here we've taken our 'sample' element and placed it inside of a div called 'sampleBlock'.`
   ),
   c.codeBlock(
-    `const sampleBlock = {
-        div: {
-          id: 'sampleBlock'
-        },
-        has: [sample, { hr: {} }, variable, func()],
-      }`
+  `export const sampleBlock = {
+    div: {
+      id: 'sampleBlock'
+    },
+    has: [sample, { hr: {} }, variable, func()],
+  }`
   ),
   c.p("All of these will work and below you can see the rendered component"),
   c.sampleBlock,
@@ -45,6 +45,8 @@ const aboutContent = [
     "Note that the order of elements in the 'has' array dictates the order in which elements are rendered to and appear on the page."
   ),
   c.p("In the next section we will learn more about styling components"),
-  c.buttonRow([c.backButton, c.nextButton])
+  c.buttonRow([
+    c.link({href: '#home', text: 'Home'}), 
+    c.link({href: '#style', text: 'Styling'})
+  ])
 ];
-export { aboutContent };
