@@ -1,5 +1,5 @@
 // general element structure:
-// const element = {
+// export const element = {
 //   type: {
 //     attribute: String
 //   },
@@ -14,7 +14,7 @@
 //     -OR-
 //     event: handler(),
 //   },
-//   ---applied to elemetn at build time---
+//   ---applied to element at build time---
 //   CSSselector: String of most specific attribute,
 //   DOMelement: this element in the dom,
 //   Update(){
@@ -31,11 +31,11 @@
 
 import { colors } from "../exports.js";
 
-export const link = (props) => {
+export const link = props => {
   return {
     a: {
       id: "link",
-      href: props.href || '#'
+      href: props.href || "#"
     },
     has: [props.text || "click here!"],
     style: {

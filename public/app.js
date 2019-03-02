@@ -22,7 +22,10 @@
 
 import * as e from "./exports.js";
 
-const app = {
+// App is typically the only componant buildt in the app.js file.
+// this is not a requirement but a convention.
+// App could also be buildt in the components folder and imported like an other componant
+const App = {
   div: {
     id: "app"
   },
@@ -37,7 +40,7 @@ const app = {
   }
 };
 
-render(app, document.querySelector("body"));
+render(App, document.querySelector("body"));
 
 style(e.styles);
 

@@ -1,29 +1,34 @@
-import { c, homeContent, aboutContent, styleContent, contactContent } from "../exports.js";
+import {
+  c,
+  homeContent,
+  aboutContent,
+  styleContent,
+  contactContent
+} from "../exports.js";
 
 function changeTab(ele) {
-  document.querySelectorAll("#menuButton").forEach(li => {
-    li.classList.remove("active");
+  document.querySelectorAll("#menuButton").forEach(l => {
+    l.classList.remove("active");
   });
-  ele.DOMelement.classList.add('active');
+  ele.DOMelement.classList.add("active");
 }
 
 const routes = {
   home: () => {
-    console.log(document.referrer.split(`/`))
     c.container.setHas([...homeContent]);
-    changeTab(c.home)
+    changeTab(c.home);
   },
   about: () => {
     c.container.setHas([...aboutContent]);
-    changeTab(c.about)
+    changeTab(c.about);
   },
   style: () => {
     c.container.setHas([...styleContent]);
-    changeTab(c.about)
+    changeTab(c.about);
   },
   contact: () => {
     c.container.setHas([...contactContent]);
-    changeTab(c.contact)
+    changeTab(c.contact);
   }
 };
 

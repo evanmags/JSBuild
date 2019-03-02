@@ -1,4 +1,4 @@
-// the only truely global variable in JSBuild is this array, 
+// the only truely global variable in JSBuild is this array,
 // which will hold a reference of every element rendered to the page
 let elements = [];
 
@@ -22,14 +22,14 @@ const createElement = (element, props, children) => {
   }
 };
 
-// constructor object that is applied to all non-text-only componants 
+// constructor object that is applied to all non-text-only componants
 const Component = {
   // called on 'has' change
   // can also be called at will with other functions
   update() {
     // removed element from 'elements' array
     if (elements.includes(this)) {
-      elements = elements.filter((ele)=>{
+      elements = elements.filter(ele => {
         return ele.DOMelement !== this.DOMelement;
       });
     }
@@ -55,7 +55,6 @@ const Component = {
 
   //setter function
   setHas(val) {
-
     //clears intervals of all children (as they are about to be replaced)
     this.has.forEach(e => {
       if (e.int) {
@@ -65,7 +64,7 @@ const Component = {
     });
 
     // clears own timer if running
-    if(this.int){
+    if (this.int) {
       clearInterval(this.int);
       this.int = false;
     }
@@ -88,7 +87,7 @@ const build = l => {
     for (var tag in l) {
       //create element
       d = document.createElement(tag);
-      
+
       l.DOMelement = d;
 
       // loop through attribute object
@@ -99,12 +98,11 @@ const build = l => {
       break;
     }
 
-    elements = elements.filter((ele)=>{
+    elements = elements.filter(ele => {
       return ele.DOMelement !== d;
     });
 
     elements.push(l);
-
 
     //add child elements
     if (l.has) {
@@ -148,7 +146,7 @@ const sortObjs = arr => {
   });
 };
 
-//this is the main styling fucntion. 
+//this is the main styling fucntion.
 //pass in your styles object and it will create a stylesheet and append it to the page
 const style = obj => {
   //create a blank style tag
@@ -303,28 +301,28 @@ const router = {
   },
   paths: {},
   run() {
-    window.location.hash = window.location.pathname !== `/` ? window.location.pathname.replace(`/`, "#") : '#home';
-    window.onhashchange = function(e) {
-      console.log('hash')
-      for (var p in router.paths) {
-        if (window.location.hash === `#${p}`) {
-          window.scrollTo(0, 0);
-          window.history.replaceState({}, p, `/${p}`);
-          return router.paths[p]();
-        }
-      }
+    window.location.hash =
+      window.location.pathname !== `/`
+        ? window.location.pathname.replace(`/`, "#")
+        : "#home";
+
+    window.onhashchange = function() {
+      const p = window.location.hash.replace(/[#/]/, "");
       window.scrollTo(0, 0);
+      if (router.paths[p]) {
+        window.history.replaceState({}, p, `/${p}`);
+        return router.paths[p]();
+      }
       window.history.replaceState({}, p, `/home`);
       return router.paths.home();
     };
+
     window.onpopstate = function() {
-      console.log('pop')
-      for (var p in router.paths) {
-        if (window.location.pathname === `/${p}`) {
-          return router.paths[p]();
-        }
-      }
+      const p = window.location.pathname.replace(/[#/]/, "");
       window.scrollTo(0, 0);
+      if (router.paths[p]) {
+        return router.paths[p]();
+      }
       return router.paths.home();
     };
   }

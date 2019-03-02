@@ -16,6 +16,5 @@ export const homeContent = [
   c.p(
     "Or you can make an API call from a script tag to deliver your app via .json file"
   ),
-  c.link({href: '#about', text: 'Learn More!'})
+  c.link({ href: "#about", text: "Learn More!" })
 ];
-

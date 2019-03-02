@@ -15,7 +15,7 @@ export const aboutContent = [
     "Now in order to render anything to the page we are required to declare an element object inside of our component"
   ),
   c.codeBlock(
-  `export const sample = {
+    `export const sample = {
     h1:{
       id:'header'
       classList:'red underline'
@@ -32,7 +32,7 @@ export const aboutContent = [
     `For example, here we've taken our 'sample' element and placed it inside of a div called 'sampleBlock'.`
   ),
   c.codeBlock(
-  `export const sampleBlock = {
+    `export const sampleBlock = {
     div: {
       id: 'sampleBlock'
     },
@@ -46,7 +46,7 @@ export const aboutContent = [
   ),
   c.p("In the next section we will learn more about styling components"),
   c.buttonRow([
-    c.link({href: '#home', text: 'Home'}), 
-    c.link({href: '#style', text: 'Styling'})
+    c.link({ href: "#home", text: "Home" }),
+    c.link({ href: "#style", text: "Styling" })
   ])
 ];
