@@ -27,3 +27,13 @@ export { contactContent } from "./pages/contact.js";
 
 //routes comes last
 export { routes } from "./routes/paths.js";
+
+// module.exports = {
+//     styles: require("./styles/styles.js"),
+//     c: require("./components/components.js"),
+//     homeContent: require("./pages/home.js"),
+//     aboutContent: require("./pages/about.js"),
+//     styleContent: require("./pages/style.js"),
+//     contactContent: require("./pages/contact.js"),
+//     routes: require("./routes/paths.js"),
+// }

@@ -20,7 +20,7 @@
 //    | index.html
 // index.js
 
-import * as e from "./exports.js";
+import * as e from "./app/exports.js";
 
 // App is typically the only componant buildt in the app.js file.
 // this is not a requirement but a convention.

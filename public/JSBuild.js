@@ -106,7 +106,7 @@ const build = l => {
 
     //add child elements
     if (l.has) {
-      l.has.forEach(i => {
+      [...l.has].forEach(i => {
         if (typeof i === "string") {
           d.appendChild(document.createTextNode(i));
         } else if (typeof i === "object") {
@@ -146,6 +146,45 @@ const sortObjs = arr => {
   });
 };
 
+//takes a stylesheet, a selector, and a string of rules
+const appendCSSRules = (sheet, selector, ruleStr) => {
+  //insert selectors with rules to the end of the sheet.
+  sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
+};
+
+const createSelector = element => {
+  //requires element tag object to be first key:value in obj
+  for (var key in element) {
+    // creates selector with preference set as class>id>tag
+    if (element[key].classList) {
+      return (selector = `${key}.${element[key].classList
+        .split(" ")
+        .join(".")}`);
+    } else if (element[key].id) {
+      return (selector = `${key}#${element[key].id}`);
+    } else {
+      return (selector = `${key}`);
+    }
+  }
+};
+
+// takes a css style object and creates a string
+// with selector and rules to append to the stylesheet
+const createRuleString = obj => {
+  // create base string in correct scope
+  ruleStr = ``;
+
+  // loop through and append each rule as string to base rule string
+  for (let rule in obj) {
+    ruleStr += `${rule.replace("_", "-")}: ${String(obj[rule]).replace(
+      "_",
+      "-"
+    )};\n`;
+  }
+
+  return ruleStr;
+};
+
 //this is the main styling fucntion.
 //pass in your styles object and it will create a stylesheet and append it to the page
 const style = obj => {
@@ -159,38 +198,23 @@ const style = obj => {
 
   // loop through array of elements created during the build process
   elements.forEach(e => {
-    //requires element tag object to be first key:value in obj
-    for (var key in e) {
-      // creates selector with preference set as class>id>tag
-      let selector;
-      if (e[key].classList) {
-        selector = `.${e[key].classList.split(" ").join(".")}`;
-      } else if (e[key].id) {
-        selector = `#${e[key].id}`;
-      } else {
-        selector = `${key}`;
-      }
+    e.CSSselector = createSelector(e);
 
-      e.CSSselector = selector;
-
-      //define how to add selectors to the style object
-      if (obj[selector]) {
-        // if the selector exists, add to it
-        for (var style in e.style) {
-          obj[selector][style] = e.style[style];
-        }
-      } else {
-        // otherwise create it and append the entire component style object to it
-        obj[selector] = e.style;
+    //define how to add selectors to the style object
+    if (obj[e.CSSselector]) {
+      // if the selector exists, add to it
+      for (var style in e.style) {
+        obj[e.CSSselector][style] = e.style[style];
       }
-      //end loop after first instance (hence 'tag first' requirement)
-      break;
+    } else {
+      // otherwise create it and append the entire component style object to it
+      obj[e.CSSselector] = e.style;
     }
   });
 
-  //organize styles for better readability of styleSheet
-  //unnecessary IF correct specificity is used in construction
-  //create blank arrays for sorting
+  // organize styles for better readability of styleSheet
+  // unnecessary IF correct specificity is used in construction
+  // create blank arrays for sorting
   let classRules = [];
   let idRules = [];
   let tagRules = [];
@@ -224,22 +248,12 @@ const style = obj => {
   //loop through expanded styles object and add new styles to the styleSheet
   for (let key in obj) {
     //create base string in correct scope
-    ruleStr = ``;
-
-    //loop through and append each rule as string to base rule string
-    for (let rule in obj[key]) {
-      ruleStr += `${rule.replace("_", "-")}: ${String(obj[key][rule]).replace(
-        "_",
-        "-"
-      )};\n`;
-    }
+    ruleStr = createRuleString(obj[key]);
 
     //insert selectors with rules to the end of the sheet.
-    styleSheet.insertRule(
-      `${key} { ${ruleStr} }\n`,
-      styleSheet.cssRules.length
-    );
+    appendCSSRules(styleSheet, key, ruleStr);
   }
+  return obj;
 };
 
 const styleThis = element => {
@@ -248,21 +262,10 @@ const styleThis = element => {
   }
 
   const styleSheet = document.querySelector("#JSBuild_styles").sheet;
-  let selector,
-    keys = [];
+  let keys = [];
 
   if (!element.CSSselector) {
-    for (var key in element) {
-      if (element[key].classList) {
-        selector = `.${element[key].classList.split(" ").join(".")}`;
-      } else if (element[key].id) {
-        selector = `#${element[key].id}`;
-      } else {
-        selector = `${key}`;
-      }
-      element.CSSselector = selector;
-      break;
-    }
+    element.CSSselector = createSelector(element);
   }
 
   for (var key in styleSheet.cssRules) {
@@ -270,20 +273,9 @@ const styleThis = element => {
   }
 
   if (!keys.includes(element.CSSselector)) {
-    //create base string in correct scope
-    //loop through and append each rule as string to base rule string
-    ruleStr = ``;
-    for (let rule in element.style) {
-      ruleStr += `${rule.replace("_", "-")}: ${String(
-        element.style[rule]
-      ).replace("_", "-")}; \n`;
-    }
-
-    //insert selectors with rules to the end of the sheet.
-    styleSheet.insertRule(
-      `${element.CSSselector} { ${ruleStr} } \n`,
-      styleSheet.cssRules.length
-    );
+    // if (!styles[element.CSSselector]) {
+    ruleStr = createRuleString(element.style);
+    appendCSSRules(styleSheet, element.CSSselector, ruleStr);
   }
 
   if (element.has.length > 0) {
