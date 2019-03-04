@@ -33,7 +33,7 @@ export const styleContent = [
     "Properties on the other hand are either single words or written with underscores replacing hyphens. Properties can also be written using strings, template literals or or functions but must eventually match a CSS property that your browser will understand"
   ),
   c.buttonRow([
-    c.link({ href: "#about", text: "Back" }),
+    c.link({ href: "#clock  ", text: "Back" }),
     c.link({ href: "#contact", text: "Contact Me" })
   ])
 ];

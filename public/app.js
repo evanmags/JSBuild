@@ -29,11 +29,11 @@ const App = {
   div: {
     id: "app"
   },
-  has: [e.c.menu, e.c.banner, e.c.container],
+  has: [e.c.menu, e.c.banner, e.c.container, e.c.footer],
   style: {
-    background: e.colors.white,
+    background: e.colors.light_red,
     min_height: "100vh",
-    padding: "50px 0 30px",
+    padding: "50px 0 0 0",
     display: "flex",
     flex_direction: "column",
     font_family: "Laila"

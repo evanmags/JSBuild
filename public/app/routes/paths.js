@@ -2,6 +2,7 @@ import {
   c,
   homeContent,
   aboutContent,
+  clockContent,
   styleContent,
   contactContent
 } from "../exports.js";
@@ -24,6 +25,10 @@ const routes = {
   },
   style: () => {
     c.container.setHas([...styleContent]);
+    changeTab(c.about);
+  },
+  clock: () => {
+    c.container.setHas([...clockContent]);
     changeTab(c.about);
   },
   contact: () => {

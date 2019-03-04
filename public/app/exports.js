@@ -22,6 +22,7 @@ export { c };
 //export pages
 export { homeContent } from "./pages/home.js";
 export { aboutContent } from "./pages/about.js";
+export { clockContent } from "./pages/clock.js";
 export { styleContent } from "./pages/style.js";
 export { contactContent } from "./pages/contact.js";
 

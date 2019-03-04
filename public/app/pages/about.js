@@ -15,7 +15,7 @@ export const aboutContent = [
     "Now in order to render anything to the page we are required to declare an element object inside of our component"
   ),
   c.codeBlock(
-    `export const sample = {
+    ` export const sample = {
     h1:{
       id:'header'
       classList:'red underline'
@@ -32,7 +32,7 @@ export const aboutContent = [
     `For example, here we've taken our 'sample' element and placed it inside of a div called 'sampleBlock'.`
   ),
   c.codeBlock(
-    `export const sampleBlock = {
+    ` export const sampleBlock = {
     div: {
       id: 'sampleBlock'
     },
@@ -44,9 +44,49 @@ export const aboutContent = [
   c.p(
     "Note that the order of elements in the 'has' array dictates the order in which elements are rendered to and appear on the page."
   ),
+  c.p('In general the structure for any componant should look like this:'),
+  c.codeBlock(
+  ` export const element = {
+    type: {
+      attribute: String
+    },
+    has: [...children],
+    style: {
+      CSSProperty: Value as String,
+      //--- '-' becomes '_' in property ---//
+      //--- '-' can be '_' or '-' in value string ---//
+    },
+    events: {
+      event: handler => {},
+      -OR-
+      event: handler(),
+    },
+    timers: {
+      func() {
+        return setInterval
+        -OR-
+        return setTimeout
+      }
+    }
+      //--- The following methods are applied ---//
+    //--- to every element object at build time ---//
+    CSSselector: String of concatenated attribute,
+    DOMelement: this element in the dom,
+    Update(){
+      function allowing for auto update of elements
+    },
+    getHas(): {
+      returns has array
+    }
+    setHas(): {
+      updates has array
+      invokes Update()
+    }
+  }`
+    ),
   c.p("In the next section we will learn more about styling components"),
   c.buttonRow([
     c.link({ href: "#home", text: "Home" }),
-    c.link({ href: "#style", text: "Styling" })
+    c.link({ href: "#clock", text: "Clock Example" })
   ])
 ];

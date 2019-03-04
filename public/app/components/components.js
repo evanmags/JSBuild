@@ -6,7 +6,7 @@
 //   has: [...children],
 //   style: {
 //     CSSProperty: Value as String,
-//     /** '-' becomes '_' in property **/
+//              ß/** '-' becomes '_' in property **/
 //     /** '-' can be either '_' or '-' in value string **/
 //   },
 //   events: {
@@ -14,6 +14,13 @@
 //     -OR-
 //     event: handler(),
 //   },
+//   timers: {
+//     func() {
+//       return setInterval
+//       -OR-
+//       return setTimeout
+//     }
+//   }
 //   ---applied to element at build time---
 //   CSSselector: String of most specific attribute,
 //   DOMelement: this element in the dom,
@@ -184,7 +191,13 @@ export const codeBlock = props => {
     },
     has: [code(props)],
     style: {
-      margin: "15px 0"
+      margin: "15px auto",
+      max_width: '85%',
+      padding: "20px",
+      background: colors.trans_red,
+      border_radius: '5px',
+      border: `1px solid ${colors.red}`,
+      box_shadow: `2px 2px 5px ${colors.dark_yellow}`
     }
   };
 };
@@ -194,6 +207,9 @@ export const clock = {
     id: "clock"
   },
   has: [new Date().toLocaleTimeString()],
+  style: {
+    text_align: 'center'
+  },
   events: {
     click() {
       clearInterval(clock.int);
@@ -202,6 +218,7 @@ export const clock = {
   timers: {
     date() {
       return (clock.int = setInterval(() => {
+        console.log('timer fired')
         return clock.setHas([new Date().toLocaleTimeString()]);
       }, 1000));
     }
@@ -212,7 +229,7 @@ export const banner = {
   div: {
     id: "banner"
   },
-  has: [header("JSBuild"), subhead("Websites built on JS Objects"), clock],
+  has: [header("JSBuild"), subhead("Websites built on JS Objects")],
   style: {
     margin: "3vh auto 0",
     text_align: "center"
@@ -270,7 +287,30 @@ export const menu = {
     display: "flex",
     color: "#333",
     box_shadow: `3px 0 3px ${colors.red}`,
-    background: "#f1e9d1"
+    background: colors.yellow
+  }
+};
+
+export const footer = {
+  div: {
+    id: "footer"
+  },
+  has: [
+    p('JSBuild'),
+    p('Copyright (c) 2019 Evan Magnussen'),
+    p('MIT License'),
+  ],
+  style: {
+    align_self: 'flex-end',
+    min_height: "80px",
+    width: "100vw",
+    padding: "20px 10vw",
+    margin_top: '50px',
+    display: "flex",
+    flex_direction: 'column',
+    align_items: 'flex-end',
+    color: '#333',
+    background: colors.trans_red
   }
 };
 
@@ -283,7 +323,7 @@ export const container = {
   style: {
     width: "82vw",
     max_width: "1100px",
-    margin: "1vh auto",
+    margin: "auto",
     padding: "15px 30px",
     box_shadow: `1px 1px 8px 0 ${colors.red}`,
     transition: `transform .2s, box-shadow .2s`,

@@ -1,7 +1,10 @@
 const colors = {
   black: "#343434",
-  white: "#f1e1e1",
+  trans_red: '#f1c1c166',
+  light_red: "#f1e1e1",
   red: "#f1c1c1",
+  yellow: '#f1e9d1',
+  dark_yellow: '#ebe0bd',
   lightgrey: "#989898"
 };
 
@@ -34,13 +37,17 @@ const styles = {
     margin: "0 20px"
   },
   hr: {
-    width: "85%"
+    width: "65%"
   },
   ".red": {
     color: "red"
   },
   ".underline": {
     text_decoration: "underline"
+  },
+  "#footer p": {
+    margin: "0",
+    font_size: '12px'
   }
 };
 
