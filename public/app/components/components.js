@@ -303,12 +303,10 @@ export const sidebarItems = (props) => {
       has: [el],
       style: {
         font_size: '13px',
-        width: '135px',
-        margin: '12px 0',
-        flex: '0 0 25px',
+        margin: '10px 0',
+        flex: '0 0 30px',
         display: 'flex',
         align_items: 'center',
-        justify_content: 'flex-start',
         text_transform: 'capitalize',
         padding_left: '12px',
         border_left: '0px solid #d88282',
@@ -340,11 +338,10 @@ export const sidebar = {
   style: {
     position: 'sticky',
     top: '130px',
-    margin: '0 2vw 0 0',
-    width: '150px',
-    height: '250px',
+    margin: '0 2.5vw 0 0',
+    width: '140px',
     display: 'flex',
-    align_items: 'flex-start',
+    align_items: 'stretch',
     flex_direction: 'column'
   },
 }
@@ -375,8 +372,8 @@ export const main = {
     width: '100%',
     flex: '1 1 100%',
     display: 'flex',
-    align_items: 'stretch',
-    justify_content: 'center'
+    justify_content: 'center',
+    align_items: 'flex-start'
   }
 }
 

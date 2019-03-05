@@ -60,7 +60,7 @@ const styles = {
     padding_left: '8px',
     background_position: `0px 0px`,
     border_left: `4px solid ${colors.dark_red}`,
-    box_shadow: `1px 1px 3px ${colors.dark_red}`
+    box_shadow: `1px 1px 5px -1px ${colors.dark_red}`
   }
 };
 
