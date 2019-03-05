@@ -94,6 +94,7 @@ export const menuButton = ({ ...props }) => {
       align_items: "center",
       text_transform: "uppercase",
       text_decoration: "none",
+      border: '0px solid transparent',
       transition: "all .1s"
     },
     events: {
@@ -231,7 +232,7 @@ export const banner = {
   },
   has: [header("JSBuild"), subhead("Websites built on JS Objects")],
   style: {
-    margin: "3vh auto 0",
+    margin: "5vh auto",
     text_align: "center"
   }
 };
@@ -291,6 +292,94 @@ export const menu = {
   }
 };
 
+export const sidebarItems = (props) => {
+  let arr = [];
+  props.forEach((el, i, ar)=>{
+    const item = {
+      span:{
+        id: `sidebarItem${i}`,
+        classList: `sidebarItem`
+      },
+      has: [el],
+      style: {
+        font_size: '13px',
+        width: '135px',
+        margin: '12px 0',
+        flex: '0 0 25px',
+        display: 'flex',
+        align_items: 'center',
+        justify_content: 'flex-start',
+        text_transform: 'capitalize',
+        padding_left: '12px',
+        border_left: '0px solid #d88282',
+        background_image: `linear-gradient(to right, ${colors.red} 0px, ${colors.red} 150px)`,
+        background_repeat: 'no-repeat',
+        background_position: '150px 0px',
+        box_shadow: '0 0 0 0 transparent',
+        transition: 'all .1s'
+      },
+      events: {
+        click: (e)=>{
+          document.querySelectorAll(".sidebarItem").forEach(li => {
+            li.classList.remove("viewing");
+          });
+          e.target.classList.toggle("viewing");
+        }
+      }
+    }
+    arr.push(item)
+  })
+  return arr;
+}
+
+export const sidebar = {
+  div: {
+    id: 'sidebar'
+  },
+  has: sidebarItems(['component', 'clock example', 'lists', 'conditionals', 'styling', 'routing']),
+  style: {
+    position: 'sticky',
+    top: '130px',
+    margin: '0 2vw 0 0',
+    width: '150px',
+    height: '250px',
+    display: 'flex',
+    align_items: 'flex-start',
+    flex_direction: 'column'
+  },
+}
+
+export const container = {
+  div: {
+    id: "blue",
+    classList: "green"
+  },
+  has: [],
+  style: {
+    min_width: "50vw",
+    max_width: "1100px",
+    padding: "15px 30px",
+    box_shadow: `1px 1px 8px 0 ${colors.red}`,
+    transition: `transform .2s, box-shadow .2s`,
+    overflow: "hidden"
+  }
+};
+
+export const main = {
+  main: {
+    id: 'main'
+  },
+  has: [container],
+  style: {
+    padding: '0 9vw',
+    width: '100%',
+    flex: '1 1 100%',
+    display: 'flex',
+    align_items: 'stretch',
+    justify_content: 'center'
+  }
+}
+
 export const footer = {
   div: {
     id: "footer"
@@ -311,22 +400,5 @@ export const footer = {
     align_items: 'flex-end',
     color: '#333',
     background: colors.trans_red
-  }
-};
-
-export const container = {
-  div: {
-    id: "blue",
-    classList: "green"
-  },
-  has: [],
-  style: {
-    width: "82vw",
-    max_width: "1100px",
-    margin: "auto",
-    padding: "15px 30px",
-    box_shadow: `1px 1px 8px 0 ${colors.red}`,
-    transition: `transform .2s, box-shadow .2s`,
-    overflow: "hidden"
   }
 };

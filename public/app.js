@@ -29,7 +29,7 @@ const App = {
   div: {
     id: "app"
   },
-  has: [e.c.menu, e.c.banner, e.c.container, e.c.footer],
+  has: [e.c.menu, e.c.banner, e.c.main, e.c.footer],
   style: {
     background: e.colors.light_red,
     min_height: "100vh",

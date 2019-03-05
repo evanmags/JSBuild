@@ -3,6 +3,7 @@ const colors = {
   trans_red: '#f1c1c166',
   light_red: "#f1e1e1",
   red: "#f1c1c1",
+  dark_red: '#d88282',
   yellow: '#f1e9d1',
   dark_yellow: '#ebe0bd',
   lightgrey: "#989898"
@@ -48,6 +49,18 @@ const styles = {
   "#footer p": {
     margin: "0",
     font_size: '12px'
+  },
+  ".sidebarItem:hover": {
+    color: "#d88282",
+    border_left: `4px solid #d88282`,
+    padding_left: '8px'
+  },
+  '.sidebarItem.viewing': {
+    width: '125px',
+    padding_left: '8px',
+    background_position: `0px 0px`,
+    border_left: `4px solid ${colors.dark_red}`,
+    box_shadow: `1px 1px 3px ${colors.dark_red}`
   }
 };
 
