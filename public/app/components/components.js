@@ -36,6 +36,17 @@
 //   }
 // }
 
+//  general element function structure:
+//  function element()
+//  -OR-
+//  const element = (props) => {
+//    doSomething(props.val1)
+//    doAnotherThing(props.val1)
+//    return {
+//      ....general compnant structure....
+//    }
+//  }
+
 import { colors } from "../exports.js";
 
 export const link = props => {
@@ -56,7 +67,7 @@ export const link = props => {
       padding: "8px 15px",
       margin: "10px 50px 20px",
       psudo: {
-        ':hover': {
+        ":hover": {
           color: "#232323"
         },
         ":active": {
@@ -64,7 +75,7 @@ export const link = props => {
           box_shadow: "1px 2px 0 0"
         }
       }
-    },
+    }
   };
 };
 
@@ -85,10 +96,10 @@ export const menuButton = ({ ...props }) => {
       align_items: "center",
       text_transform: "uppercase",
       text_decoration: "none",
-      border: '0px solid transparent',
+      border: "0px solid transparent",
       transition: "all .1s",
       psudo: {
-        ':hover': {
+        ":hover": {
           color: "#d88282",
           border_top: "none",
           border_bottom: `4px solid ${colors.dark_red}`,
@@ -101,7 +112,7 @@ export const menuButton = ({ ...props }) => {
           padding_bottom: `4px`,
           border_top: `4px solid ${colors.dark_red}`,
           border_bottom: "none"
-        },
+        }
       }
     }
   };
@@ -192,10 +203,10 @@ export const codeBlock = props => {
     has: [code(props)],
     style: {
       margin: "15px auto",
-      max_width: '85%',
+      max_width: "85%",
       padding: "20px",
       background: colors.trans_red,
-      border_radius: '5px',
+      border_radius: "5px",
       border: `1px solid ${colors.red}`,
       box_shadow: `2px 2px 5px ${colors.dark_yellow}`,
       psudo: {
@@ -213,7 +224,7 @@ export const clock = {
   },
   has: [new Date().toLocaleTimeString()],
   style: {
-    text_align: 'center'
+    text_align: "center"
   },
   events: {
     click() {
@@ -223,7 +234,7 @@ export const clock = {
   timers: {
     date() {
       return (clock.int = setInterval(() => {
-        console.log('timer fired')
+        console.log("timer fired");
         return clock.setHas([new Date().toLocaleTimeString()]);
       }, 1000));
     }
@@ -296,38 +307,40 @@ export const menu = {
   }
 };
 
-export const sidebarItems = (props) => {
+export const sidebarItems = props => {
   let arr = [];
-  props.forEach((el, i, ar)=>{
+  props.forEach((el, i, ar) => {
     const item = {
-      span:{
+      span: {
         id: `sidebarItem${i}`,
         classList: `sidebarItem`
       },
       has: [el],
       style: {
-        font_size: '13px',
-        margin: '10px 0',
-        flex: '0 0 30px',
-        display: 'flex',
-        align_items: 'center',
-        text_transform: 'capitalize',
-        padding_left: '12px',
-        border_left: '0px solid #d88282',
-        background_image: `linear-gradient(to right, ${colors.red} 0px, ${colors.red} 150px)`,
-        background_repeat: 'no-repeat',
-        background_position: '150px 0px',
-        box_shadow: '0 0 0 0 transparent',
-        transition: 'all .1s',
+        font_size: "13px",
+        margin: "10px 0",
+        flex: "0 0 30px",
+        display: "flex",
+        align_items: "center",
+        text_transform: "capitalize",
+        padding_left: "12px",
+        border_left: "0px solid #d88282",
+        background_image: `linear-gradient(to right, ${colors.red} 0px, ${
+          colors.red
+        } 150px)`,
+        background_repeat: "no-repeat",
+        background_position: "150px 0px",
+        box_shadow: "0 0 0 0 transparent",
+        transition: "all .1s",
         psudo: {
           ":hover": {
             color: "#d88282",
             border_left: `4px solid #d88282`,
-            padding_left: '8px'
+            padding_left: "8px"
           },
-          '.viewing': {
-            width: '125px',
-            padding_left: '8px',
+          ".viewing": {
+            width: "125px",
+            padding_left: "8px",
             background_position: `0px 0px`,
             border_left: `4px solid ${colors.dark_red}`,
             box_shadow: `1px 1px 5px -1px ${colors.dark_red}`
@@ -335,34 +348,41 @@ export const sidebarItems = (props) => {
         }
       },
       events: {
-        click: (e)=>{
+        click: e => {
           document.querySelectorAll(".sidebarItem").forEach(li => {
             li.classList.remove("viewing");
           });
           e.target.classList.toggle("viewing");
         }
       }
-    }
-    arr.push(item)
-  })
+    };
+    arr.push(item);
+  });
   return arr;
-}
+};
 
 export const sidebar = {
   div: {
-    id: 'sidebar'
+    id: "sidebar"
   },
-  has: sidebarItems(['component', 'clock example', 'lists', 'conditionals', 'styling', 'routing']),
+  has: sidebarItems([
+    "component",
+    "clock example",
+    "lists",
+    "conditionals",
+    "styling",
+    "routing"
+  ]),
   style: {
-    position: 'sticky',
-    top: '130px',
-    margin: '0 2.5vw 0 0',
-    width: '140px',
-    display: 'flex',
-    align_items: 'stretch',
-    flex_direction: 'column'
-  },
-}
+    position: "sticky",
+    top: "130px",
+    margin: "0 2.5vw 0 0",
+    width: "140px",
+    display: "flex",
+    align_items: "stretch",
+    flex_direction: "column"
+  }
+};
 
 export const container = {
   div: {
@@ -382,44 +402,40 @@ export const container = {
 
 export const main = {
   main: {
-    id: 'main'
+    id: "main"
   },
   has: [container],
   style: {
-    padding: '0 9vw',
-    width: '100%',
-    flex: '1 1 100%',
-    display: 'flex',
-    justify_content: 'center',
-    align_items: 'flex-start'
+    padding: "0 9vw",
+    width: "100%",
+    flex: "1 1 100%",
+    display: "flex",
+    justify_content: "center",
+    align_items: "flex-start"
   }
-}
+};
 
 export const footer = {
   div: {
     id: "footer"
   },
-  has: [
-    p('JSBuild'),
-    p('Copyright (c) 2019 Evan Magnussen'),
-    p('MIT License'),
-  ],
+  has: [p("JSBuild"), p("Copyright (c) 2019 Evan Magnussen"), p("MIT License")],
   style: {
-    align_self: 'flex-end',
+    align_self: "flex-end",
     min_height: "80px",
     width: "100vw",
     padding: "20px 10vw",
-    margin_top: '50px',
+    margin_top: "50px",
     display: "flex",
-    flex_direction: 'column',
-    align_items: 'flex-end',
-    color: '#333',
+    flex_direction: "column",
+    align_items: "flex-end",
+    color: "#333",
     background: colors.trans_red,
     psudo: {
       ">p": {
         margin: "0",
-        font_size: '12px'
-      },
+        font_size: "12px"
+      }
     }
   }
 };

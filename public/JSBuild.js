@@ -75,6 +75,7 @@ const Component = {
   }
 };
 
+//  physical construction function creates a DOM element
 const build = l => {
   // split element from class and id
   let d;
@@ -131,6 +132,7 @@ const build = l => {
   return d;
 };
 
+//  styles and places element
 const render = (ele, locale, sheet = {}) => {
   style(ele, sheet);
   // locates parent and places element inside
@@ -188,13 +190,14 @@ const createRuleString = obj => {
 
 //this is the main styling fucntion.
 //pass in your styles object and it will create a stylesheet and append it to the page
-
 const style = (element, sheet) => {
+  // bump out if no style object is in element
   if (typeof element === "string" || !element.style) {
     return;
   }
 
-  let styleSheet;
+  // create variable in scope for stylesheet
+  let styleSheet, keys = [];;
   //check if there is already a stylesheet
   if (!document.querySelector("#JSBuild_styles")) {
     //create a blank style tag
@@ -206,40 +209,45 @@ const style = (element, sheet) => {
 
     // access style sheet
     styleSheet = styleEle.sheet;
-    
+
     //add rules from style object
     for (var selector in sheet) {
       let ruleStr = createRuleString(sheet[selector]);
       appendCSSRules(styleSheet, selector, ruleStr);
     }
   } else {
+    // if it already exists fins it and assign it
     styleSheet = document.querySelector("#JSBuild_styles").sheet;
   }
-  
-  let keys = [];
 
+  // if selector was not already created for this element, make one
   if (!element.CSSselector) {
     element.CSSselector = createSelector(element);
   }
 
+  // push all selectors into an array
   for (var key in styleSheet.cssRules) {
     keys.push(styleSheet.cssRules[key].selectorText);
   }
 
+  // if selector is not already in style sheet proceed.
   if (!keys.includes(element.CSSselector)) {
-    // if (!styles[element.CSSselector]) {
-    ruleStr = createRuleString(element.style);
+    // create rule string
+    let ruleStr = createRuleString(element.style);
+    // append to sheet
     appendCSSRules(styleSheet, element.CSSselector, ruleStr);
 
     if (element.style.psudo) {
+      // loop through psudo elements if they are present
       for (var psudo in element.style.psudo) {
         let ruleStr = createRuleString(element.style.psudo[psudo]);
-        appendCSSRules(styleSheet, (element.CSSselector + psudo), ruleStr)
+        appendCSSRules(styleSheet, element.CSSselector + psudo, ruleStr);
       }
     }
   }
 };
 
+// router for internal navigation
 const router = {
   get(path, callback) {
     this.paths[`${path.replace(/[#/]/, "")}`] = callback;
@@ -272,3 +280,77 @@ const router = {
     };
   }
 };
+
+// JSON prep functions for development, 
+// build your app with js objects then transpile to json for shiping.
+
+function functionsToJSON(obj){
+  for(var key in obj){
+    if(typeof obj[key] === 'function'){
+      obj[key] = `${obj[key]}`
+    }
+  }
+  return obj;
+}
+
+function transpileToJSON(obj){
+  if(obj.events){
+    functionsToJSON(obj.events);
+  }
+  if(obj.timers){
+    functionsToJSON(obj.timers);
+  }
+  if(obj.has){
+    obj.has.forEach(has=>{
+      if(typeof has === 'function'){
+        has = `${has}`;
+      }
+      if(has.has){
+        transpileToJSON(has);
+      }
+    })
+  } else {
+    for(var key in obj){
+      transpileToJSON(obj[key]);
+    }
+  }
+  functionsToJSON(obj);
+  return obj;
+}
+
+// JSON processing functions for production, 
+// call your app with AJAX to get JSON then transpile to JS objects.
+
+function functionsFromJSON(obj){
+  for(var key in obj){
+    if(typeof obj[key] === 'string' && obj[key].includes('function')){
+      obj[key] = eval(`(${obj[key].replace('\n', '')})`);
+    }
+  }
+  return obj;
+}
+
+function transpileFromJSON(obj){
+  functionsFromJSON(obj);
+  if(obj.events){
+    functionsFromJSON(obj.events);
+  }
+  if(obj.timers){
+    functionsFromJSON(obj.timers);
+  }
+  if(obj.has){
+    obj.has.forEach(has=>{
+      if(typeof has === 'function'){
+        has = eval(`(${has})`);
+      }
+      if(has.has){
+        transpileFromJSON(has);
+      }
+    })
+  } else {
+    for(var key in obj){
+      transpileFromJSON(obj[key]);
+    }
+  }
+  return obj;
+}

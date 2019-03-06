@@ -1,11 +1,11 @@
 const colors = {
   black: "#343434",
-  trans_red: '#f1c1c166',
+  trans_red: "#f1c1c166",
   light_red: "#f1e1e1",
   red: "#f1c1c1",
-  dark_red: '#d88282',
-  yellow: '#f1e9d1',
-  dark_yellow: '#ebe0bd',
+  dark_red: "#d88282",
+  yellow: "#f1e9d1",
+  dark_yellow: "#ebe0bd",
   lightgrey: "#989898"
 };
 
@@ -28,7 +28,7 @@ const styles = {
   },
   ".underline": {
     text_decoration: "underline"
-  },
+  }
 };
 
-export { colors , styles };
+export { colors, styles };
