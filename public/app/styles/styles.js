@@ -20,23 +20,6 @@ const styles = {
   ".green": {
     background: "#f1e9d1"
   },
-  "#menuButton.active": {
-    color: "#d88282",
-    background: colors.red,
-    font_weight: "bold",
-    padding_bottom: `4px`,
-    border_top: `4px solid #d88282`,
-    border_bottom: "none"
-  },
-  "#menuButton.hover": {
-    color: "#d88282",
-    border_top: "none",
-    border_bottom: `4px solid #d88282`,
-    padding_top: `4px`
-  },
-  ".codeblock .code": {
-    margin: "0 20px"
-  },
   hr: {
     width: "65%"
   },
@@ -46,22 +29,6 @@ const styles = {
   ".underline": {
     text_decoration: "underline"
   },
-  "#footer p": {
-    margin: "0",
-    font_size: '12px'
-  },
-  ".sidebarItem:hover": {
-    color: "#d88282",
-    border_left: `4px solid #d88282`,
-    padding_left: '8px'
-  },
-  '.sidebarItem.viewing': {
-    width: '125px',
-    padding_left: '8px',
-    background_position: `0px 0px`,
-    border_left: `4px solid ${colors.dark_red}`,
-    box_shadow: `1px 1px 5px -1px ${colors.dark_red}`
-  }
 };
 
 export { colors , styles };

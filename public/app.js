@@ -40,9 +40,7 @@ const App = {
   }
 };
 
-render(App, document.querySelector("body"));
-
-style(e.styles);
+render(App, document.querySelector("body"), e.styles);
 
 router.paths = e.routes;
 router.run();

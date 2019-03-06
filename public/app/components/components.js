@@ -54,26 +54,17 @@ export const link = props => {
       box_shadow: "2px 3px 0 0",
       float: "right",
       padding: "8px 15px",
-      margin: "10px 50px 20px"
-    },
-    events: {
-      mouseenter: e => {
-        e.target.style.color = "#232323";
-      },
-      mouseleave: e => {
-        e.target.style.color = colors.black;
-      },
-      mousedown: e => {
-        e.preventDefault();
-        e.target.style.transform = "translate(1px,1px)";
-        e.target.style.boxShadow = "1px 2px 0 0";
-      },
-      mouseup: e => {
-        e.preventDefault();
-        e.target.style.transform = "translate(0)";
-        e.target.style.boxShadow = "2px 3px 0 0";
+      margin: "10px 50px 20px",
+      psudo: {
+        ':hover': {
+          color: "#232323"
+        },
+        ":active": {
+          transform: "translate(1px,1px)",
+          box_shadow: "1px 2px 0 0"
+        }
       }
-    }
+    },
   };
 };
 
@@ -95,14 +86,22 @@ export const menuButton = ({ ...props }) => {
       text_transform: "uppercase",
       text_decoration: "none",
       border: '0px solid transparent',
-      transition: "all .1s"
-    },
-    events: {
-      mouseenter: e => {
-        e.target.classList.toggle("hover");
-      },
-      mouseleave: e => {
-        e.target.classList.toggle("hover");
+      transition: "all .1s",
+      psudo: {
+        ':hover': {
+          color: "#d88282",
+          border_top: "none",
+          border_bottom: `4px solid ${colors.dark_red}`,
+          padding_top: `4px`
+        },
+        ".active": {
+          color: "#d88282",
+          background: colors.red,
+          font_weight: "bold",
+          padding_bottom: `4px`,
+          border_top: `4px solid ${colors.dark_red}`,
+          border_bottom: "none"
+        },
       }
     }
   };
@@ -198,7 +197,12 @@ export const codeBlock = props => {
       background: colors.trans_red,
       border_radius: '5px',
       border: `1px solid ${colors.red}`,
-      box_shadow: `2px 2px 5px ${colors.dark_yellow}`
+      box_shadow: `2px 2px 5px ${colors.dark_yellow}`,
+      psudo: {
+        ">.code": {
+          margin: "0 20px"
+        }
+      }
     }
   };
 };
@@ -314,7 +318,21 @@ export const sidebarItems = (props) => {
         background_repeat: 'no-repeat',
         background_position: '150px 0px',
         box_shadow: '0 0 0 0 transparent',
-        transition: 'all .1s'
+        transition: 'all .1s',
+        psudo: {
+          ":hover": {
+            color: "#d88282",
+            border_left: `4px solid #d88282`,
+            padding_left: '8px'
+          },
+          '.viewing': {
+            width: '125px',
+            padding_left: '8px',
+            background_position: `0px 0px`,
+            border_left: `4px solid ${colors.dark_red}`,
+            box_shadow: `1px 1px 5px -1px ${colors.dark_red}`
+          }
+        }
       },
       events: {
         click: (e)=>{
@@ -396,6 +414,12 @@ export const footer = {
     flex_direction: 'column',
     align_items: 'flex-end',
     color: '#333',
-    background: colors.trans_red
+    background: colors.trans_red,
+    psudo: {
+      ">p": {
+        margin: "0",
+        font_size: '12px'
+      },
+    }
   }
 };

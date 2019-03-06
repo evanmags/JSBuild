@@ -44,7 +44,7 @@ const Component = {
 
     // checks for styles to apply
     if (this.style) {
-      styleThis(this);
+      style(this);
     }
   },
 
@@ -131,7 +131,8 @@ const build = l => {
   return d;
 };
 
-const render = (ele, locale) => {
+const render = (ele, locale, sheet = {}) => {
+  style(ele, sheet);
   // locates parent and places element inside
   locale.appendChild(
     //build element
@@ -187,81 +188,34 @@ const createRuleString = obj => {
 
 //this is the main styling fucntion.
 //pass in your styles object and it will create a stylesheet and append it to the page
-const style = obj => {
-  //create a blank style tag
-  const styleEle = document.createElement("style");
-  styleEle.id = "JSBuild_styles";
-  //add to document
-  document.head.appendChild(styleEle);
-  // access style sheet
-  const styleSheet = styleEle.sheet;
 
-  // loop through array of elements created during the build process
-  elements.forEach(e => {
-    e.CSSselector = createSelector(e);
-
-    //define how to add selectors to the style object
-    if (obj[e.CSSselector]) {
-      // if the selector exists, add to it
-      for (var style in e.style) {
-        obj[e.CSSselector][style] = e.style[style];
-      }
-    } else {
-      // otherwise create it and append the entire component style object to it
-      obj[e.CSSselector] = e.style;
-    }
-  });
-
-  // organize styles for better readability of styleSheet
-  // unnecessary IF correct specificity is used in construction
-  // create blank arrays for sorting
-  let classRules = [];
-  let idRules = [];
-  let tagRules = [];
-  let rules = [];
-
-  for (var k in obj) {
-    if (k === "*") {
-      rules.push({ [k]: obj[k] });
-    } else if (k[0] === ".") {
-      classRules.push({ [k]: obj[k] });
-    } else if (k[0] === "#") {
-      idRules.push({ [k]: obj[k] });
-    } else {
-      tagRules.push({ [k]: obj[k] });
-    }
-  }
-
-  // ordered from general => specific (*>[tag]>.>#)
-  rules.push(
-    ...sortObjs(tagRules),
-    ...sortObjs(classRules),
-    ...sortObjs(idRules)
-  );
-
-  obj = {};
-
-  rules.forEach(o => {
-    obj[Object.keys(o)[0]] = o[Object.keys(o)[0]];
-  });
-
-  //loop through expanded styles object and add new styles to the styleSheet
-  for (let key in obj) {
-    //create base string in correct scope
-    ruleStr = createRuleString(obj[key]);
-
-    //insert selectors with rules to the end of the sheet.
-    appendCSSRules(styleSheet, key, ruleStr);
-  }
-  return obj;
-};
-
-const styleThis = element => {
-  if (typeof element === "string") {
+const style = (element, sheet) => {
+  if (typeof element === "string" || !element.style) {
     return;
   }
 
-  const styleSheet = document.querySelector("#JSBuild_styles").sheet;
+  let styleSheet;
+  //check if there is already a stylesheet
+  if (!document.querySelector("#JSBuild_styles")) {
+    //create a blank style tag
+    const styleEle = document.createElement("style");
+    styleEle.id = "JSBuild_styles";
+
+    //add to document
+    document.head.appendChild(styleEle);
+
+    // access style sheet
+    styleSheet = styleEle.sheet;
+    
+    //add rules from style object
+    for (var selector in sheet) {
+      let ruleStr = createRuleString(sheet[selector]);
+      appendCSSRules(styleSheet, selector, ruleStr);
+    }
+  } else {
+    styleSheet = document.querySelector("#JSBuild_styles").sheet;
+  }
+  
   let keys = [];
 
   if (!element.CSSselector) {
@@ -276,14 +230,13 @@ const styleThis = element => {
     // if (!styles[element.CSSselector]) {
     ruleStr = createRuleString(element.style);
     appendCSSRules(styleSheet, element.CSSselector, ruleStr);
-  }
 
-  if (element.has.length > 0) {
-    element.has.forEach(se => {
-      if (se && se.style) {
-        styleThis(se);
+    if (element.style.psudo) {
+      for (var psudo in element.style.psudo) {
+        let ruleStr = createRuleString(element.style.psudo[psudo]);
+        appendCSSRules(styleSheet, (element.CSSselector + psudo), ruleStr)
       }
-    });
+    }
   }
 };
 
