@@ -11,16 +11,16 @@
         -   same rules as above
     -   self control?
         -   render, but 'display: none;'?
--   about content:
+-   content:
     -   Components
-        -   general
-        -   Clock example
+        √   general 
+        √   Clock example
+        √   events
         -   functinal components
         -   lists
-        -   conditionals?
     -   Styling
         -   style object
-        -   self styling
+        √   self styling
         -   style packages
     -   Routing
         -   how routing works

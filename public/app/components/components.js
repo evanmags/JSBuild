@@ -292,6 +292,7 @@ export const sampleBlock = {
   },
   has: [sample, { hr: {} }, variable, func()],
   style: {
+    margin_bottom: '15px',
     display: "flex",
     flex_direction: "column",
     align_items: "center"
@@ -380,10 +381,10 @@ export const sidebar = {
   },
   has: sidebarItems([
     { text: "component", href: "#about" },
-    { text: "clock example", href: "#clock" },
+    { text: "Dynamic Comps.", href: "#clock" },
+    { text: "Events", href: "#events" },
     { text: "Function Comps.", href: "#functions" },
     { text: "list Example", href: "#list" },
-    { text: "conditionals", href: "#conditionals" },
     { text: "styling", href: "#style" },
     { text: "routing", href: "#routing" }
   ]),

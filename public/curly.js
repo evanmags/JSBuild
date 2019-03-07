@@ -23,6 +23,8 @@ const curly = {
     }
   },
 
+  //*** Helper Functions begin ***//
+
   createDOMSelector(obj) {
     const key = Object.keys(obj)[0];
     const attrs = obj[key];
@@ -52,6 +54,56 @@ const curly = {
     //clear own timers
     curly.resetInterval(ele);
   },
+
+  // takes in an array of objects and sorts by key
+  sortObjs(arr) {
+    return arr.sort((a, b) => {
+      return Object.keys(a)[0] > Object.keys(b)[0] ? 1 : -1;
+    });
+  },
+
+  //takes a stylesheet, a selector, and a string of rules
+  appendCSSRules(sheet, selector, ruleStr) {
+    //insert selectors with rules to the end of the sheet.
+    sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
+  },
+
+  createSelector(element) {
+    //requires element tag object to be first key:value in obj
+    for (var key in element) {
+      // creates selector with preference set as class>id>tag
+      if (element[key].classList) {
+        return (selector = `${key}.${element[key].classList
+          .split(" ")
+          .join(".")}`);
+      } else if (element[key].id) {
+        return (selector = `${key}#${element[key].id}`);
+      } else {
+        return (selector = `${key}`);
+      }
+    }
+  },
+
+  // takes a css style object and creates a string
+  // with selector and rules to append to the stylesheet
+  createRuleString(obj) {
+    // create base string in correct scope
+    ruleStr = ``;
+
+    // loop through and append each rule as string to base rule string
+    for (let rule in obj) {
+      ruleStr += `${rule.replace("_", "-")}: ${String(obj[rule]).replace(
+        "_",
+        "-"
+      )};\n`;
+    }
+
+    return ruleStr;
+  },
+
+  //*** Helper Functions end ***//
+
+  //*** Production objects and functions begin ***//
 
   // constructor object that is applied to all non-text-only componants
   Component: {
@@ -160,51 +212,7 @@ const curly = {
     );
   },
 
-  // takes in an array of objects and sorts by key
-  sortObjs(arr) {
-    return arr.sort((a, b) => {
-      return Object.keys(a)[0] > Object.keys(b)[0] ? 1 : -1;
-    });
-  },
-
-  //takes a stylesheet, a selector, and a string of rules
-  appendCSSRules(sheet, selector, ruleStr) {
-    //insert selectors with rules to the end of the sheet.
-    sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
-  },
-
-  createSelector(element) {
-    //requires element tag object to be first key:value in obj
-    for (var key in element) {
-      // creates selector with preference set as class>id>tag
-      if (element[key].classList) {
-        return (selector = `${key}.${element[key].classList
-          .split(" ")
-          .join(".")}`);
-      } else if (element[key].id) {
-        return (selector = `${key}#${element[key].id}`);
-      } else {
-        return (selector = `${key}`);
-      }
-    }
-  },
-
-  // takes a css style object and creates a string
-  // with selector and rules to append to the stylesheet
-  createRuleString(obj) {
-    // create base string in correct scope
-    ruleStr = ``;
-
-    // loop through and append each rule as string to base rule string
-    for (let rule in obj) {
-      ruleStr += `${rule.replace("_", "-")}: ${String(obj[rule]).replace(
-        "_",
-        "-"
-      )};\n`;
-    }
-
-    return ruleStr;
-  },
+  //*** Styling function
 
   //this is the main styling fucntion.
   //pass in your styles object and it will create a stylesheet and append it to the page
@@ -271,6 +279,8 @@ const curly = {
     }
   },
 
+  //*** routing object
+
   // router for internal navigation
   router: {
     get(path, callback) {
@@ -303,9 +313,10 @@ const curly = {
     }
   },
 
+  //*** JSON functions for prep and parse
+
   // JSON prep functions for development,
   // build your app with js objects then transpile to json for shiping.
-
   functionsToJSON(obj) {
     for (var key in obj) {
       if (typeof obj[key] === "function") {

@@ -3,6 +3,7 @@ import {
   homeContent,
   aboutContent,
   clockContent,
+  eventContent,
   styleContent,
   contactContent
 } from "../exports.js";
@@ -41,18 +42,33 @@ export const routes = {
     changeTab(c.about);
     changeMenu("#sidebarItem0");
   },
-  style: () => {
-    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
-    c.container.setHas([...styleContent]);
-    changeTab(c.about);
-    changeMenu("#sidebarItem5");
-  },
   clock: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
     c.container.setHas([...clockContent]);
     changeTab(c.about);
     changeMenu("#sidebarItem1");
   },
+  events: () => {
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
+    c.container.setHas([...eventContent]);
+    changeTab(c.about);
+    changeMenu("#sidebarItem2");
+  },
+  functions: () => {
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
+    c.container.setHas([...functionContent]);
+    changeTab(c.about);
+    changeMenu("#sidebarItem3");
+  },
+  list: () => {},
+  conditions: () => {},
+  style: () => {
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
+    c.container.setHas([...styleContent]);
+    changeTab(c.about);
+    changeMenu("#sidebarItem5");
+  },
+  routing: () => {},
   contact: () => {
     c.main.setHas([c.container]);
     c.container.setHas([...contactContent]);
