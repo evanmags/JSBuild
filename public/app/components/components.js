@@ -254,7 +254,7 @@ export const banner = {
   div: {
     id: "banner"
   },
-  has: [header("JSBuild"), subhead("Websites built on JS Objects")],
+  has: [header("{curly.js}"), subhead("Websites built on JS Objects")],
   style: {
     margin: "5vh auto",
     text_align: "center"
@@ -381,6 +381,7 @@ export const sidebar = {
   has: sidebarItems([
     { text: "component", href: "#about" },
     { text: "clock example", href: "#clock" },
+    { text: "Function Comps.", href: "#functions" },
     { text: "lists", href: "#lists" },
     { text: "conditionals", href: "#conditionals" },
     { text: "styling", href: "#style" },
@@ -432,7 +433,7 @@ export const footer = {
   div: {
     id: "footer"
   },
-  has: [p("JSBuild"), p("Copyright (c) 2019 Evan Magnussen"), p("MIT License")],
+  has: [p("{curly.js}"), p("Copyright (c) 2019 Evan Magnussen"), p("MIT License")],
   style: {
     align_self: "flex-end",
     min_height: "80px",

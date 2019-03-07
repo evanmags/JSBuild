@@ -1,10 +1,10 @@
 import { c } from "../exports.js";
 
 export const aboutContent = [
-  c.sectionHeader("About JSBuild"),
+  c.sectionHeader("About Curly.js"),
   c.subhead("Building Components"),
   c.p(
-    "Components in JSBuild are JavaScript objects. This opens a world of possibility for what you can do. Constructing complex, self-contained components bocomes very simple but to start we will build an 'h1' element."
+    "Components in Curly.js are JavaScript objects. This opens a world of possibility for what you can do. Constructing complex, self-contained components bocomes very simple but to start we will build an 'h1' element."
   ),
   c.p("To begin, lets define our component:"),
   c.codeBlock(`const sample = {}`),

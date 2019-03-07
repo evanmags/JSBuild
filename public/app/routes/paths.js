@@ -8,10 +8,12 @@ import {
 } from "../exports.js";
 
 function changeTab(ele) {
-  document.querySelectorAll("#menuButton").forEach(l => {
-    l.classList.remove("active");
-  });
-  ele.DOMelement.classList.add("active");
+  if(!ele.DOMelement.classList.contains("active")){
+    document.querySelectorAll("#menuButton").forEach(l => {
+      l.classList.remove("active");
+    });
+    ele.DOMelement.classList.add("active");
+  }
 }
 
 function changeMenu(ele) {
@@ -21,6 +23,12 @@ function changeMenu(ele) {
   document.querySelector(ele).classList.add("viewing");
 }
 
+function gateSetHas(element, checkFor, elseSet){
+  if(!element.getHas().includes(checkFor)){
+    element.setHas(elseSet);
+  }
+}
+
 export const routes = {
   home: () => {
     c.main.setHas([c.container]);
@@ -28,19 +36,19 @@ export const routes = {
     changeTab(c.home);
   },
   about: () => {
-    c.main.setHas([c.sidebar, c.container]);
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
     c.container.setHas([...aboutContent]);
     changeTab(c.about);
     changeMenu("#sidebarItem0");
   },
   style: () => {
-    c.main.setHas([c.sidebar, c.container]);
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
     c.container.setHas([...styleContent]);
     changeTab(c.about);
-    changeMenu("#sidebarItem4");
+    changeMenu("#sidebarItem5");
   },
   clock: () => {
-    c.main.setHas([c.sidebar, c.container]);
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
     c.container.setHas([...clockContent]);
     changeTab(c.about);
     changeMenu("#sidebarItem1");

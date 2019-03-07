@@ -7,10 +7,10 @@ export const homeContent = [
     "Building beautiful and functional sites and delivering them to the client browser just got a whole lot easier."
   ),
   c.p(
-    "With JSBuild building your next big this is as simple as building a JavaScript object or JSON file. Why fuss with potentially massive file bases to build a site that could by any measure be served through API call."
+    "With Curly.js building your next big this is as simple as building a JavaScript object or JSON file. Why fuss with potentially massive file bases to build a site that could by any measure be served through API call."
   ),
-  c.p("Simply link JSBuild in the head of your .html:"),
-  c.code(`<script src='your/path/to/JSBuild.js'><script>`),
+  c.p("Simply link Curly.js in the head of your .html:"),
+  c.code(`<script src='your/path/to/curly.js'><script>`),
   c.p("then just before the closing body tag link:"),
   c.code(`<script src='/path/to/your/app.js'><script>`),
   c.p(

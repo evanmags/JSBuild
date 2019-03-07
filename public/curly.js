@@ -6,7 +6,7 @@ const curly = {
   // quick reimplementation of React.createElement(e, p, c) for jsx use without React loaded...
   // does not handle functions from jsx well (if at all in some cases)
   // need to change the Babel pragma for jsx if you want to use this
-  createElement: (element, props, children) => {
+  createElement(element, props, children) {
     //check to see if element is defined as a function
     if (typeof element === "function") {
       props = {
@@ -94,7 +94,7 @@ const curly = {
   },
 
   //  physical construction function creates a DOM element
-  build: l => {
+  build(l) {
     // split element from class and id
     let d;
     // create element
@@ -151,7 +151,7 @@ const curly = {
   },
 
   //  styles and places element
-  render: (ele, locale, styles = {}) => {
+  render(ele, locale, styles = {}) {
     curly.style(ele, styles);
     // locates parent and places element inside
     locale.appendChild(
@@ -161,19 +161,19 @@ const curly = {
   },
 
   // takes in an array of objects and sorts by key
-  sortObjs: arr => {
+  sortObjs(arr) {
     return arr.sort((a, b) => {
       return Object.keys(a)[0] > Object.keys(b)[0] ? 1 : -1;
     });
   },
 
   //takes a stylesheet, a selector, and a string of rules
-  appendCSSRules: (sheet, selector, ruleStr) => {
+  appendCSSRules(sheet, selector, ruleStr) {
     //insert selectors with rules to the end of the sheet.
     sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
   },
 
-  createSelector: element => {
+  createSelector(element) {
     //requires element tag object to be first key:value in obj
     for (var key in element) {
       // creates selector with preference set as class>id>tag
@@ -191,7 +191,7 @@ const curly = {
 
   // takes a css style object and creates a string
   // with selector and rules to append to the stylesheet
-  createRuleString: obj => {
+  createRuleString(obj) {
     // create base string in correct scope
     ruleStr = ``;
 
@@ -208,7 +208,7 @@ const curly = {
 
   //this is the main styling fucntion.
   //pass in your styles object and it will create a stylesheet and append it to the page
-  style: (element, sheet) => {
+  style(element, sheet) {
     // bump out if no style object is in element
     if (typeof element === "string" || !element.style) {
       return;
