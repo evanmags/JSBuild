@@ -11,9 +11,22 @@
         -   same rules as above
     -   self control?
         -   render, but 'display: none;'?
--   JSON creation and parsing functions
-    -   currently work for non-self reference functions
-    -   how to get setHas/getHas reference correct
-    -   must query componants NOT jsut the compiled 'app'
-    -   static pages will work with just the app componant stored as JSON
-    -   any dynamic pieces must have correct references to final object
+-   about content:
+    -   Components
+        -   general
+        -   Clock example
+        -   functinal components
+        -   lists
+        -   conditionals?
+    -   Styling
+        -   style object
+        -   self styling
+        -   style packages
+    -   Routing
+        -   how routing works
+        -   setting up routes
+        -   routing options
+    -   Production
+        -   preparing to ship
+        -   calling your app
+        -   processing app.json

@@ -382,7 +382,7 @@ export const sidebar = {
     { text: "component", href: "#about" },
     { text: "clock example", href: "#clock" },
     { text: "Function Comps.", href: "#functions" },
-    { text: "lists", href: "#lists" },
+    { text: "list Example", href: "#list" },
     { text: "conditionals", href: "#conditionals" },
     { text: "styling", href: "#style" },
     { text: "routing", href: "#routing" }
