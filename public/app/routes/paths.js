@@ -61,7 +61,6 @@ export const routes = {
     changeTab(c.about);
     changeMenu("#sidebarItem4");
   },
-  conditions: () => {},
   style: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
     c.container.setHas(pages.styleContent);

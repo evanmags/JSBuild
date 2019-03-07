@@ -31,26 +31,25 @@ export const listContent = [
   });
   
   return arr;
-};
-
-
-export const sidebar = {
-  div: {
-    id: "sidebar"
-  },
-  has: sidebarItems([
-    { text: "component", href: "#about" },
-    { text: "Dynamic Comps.", href: "#clock" },
-    { text: "Events", href: "#events" },
-    { text: "Function Comps.", href: "#functions" },
-    { text: "list Example", href: "#list" },
-    { text: "styling", href: "#style" },
-    { text: "routing", href: "#routing" }
-  ]),
 };`),
-  c.p("So lets dig through this wall of code. First we see our function sidebarItem() for creating sidebar items. This function takes in props, as do all functional componants. You will also notice that there is an array created adn if you go down one line that props itself is an array."),
-  c.p("In the last section it was said that props could be anything. In this case it is an array that, if you look to where the function is called in the sidebar, contains objects of key:value pairs. Each of these objects is looped through and using the key:value pairs the href attribute and 'has' array are set. this new element is then pushed into another array and returned."),
-  c.p("It was also stated that functional compnants can only output objects, and that is true, but in this case we output an array of objects. Each of which is identical except for the text and href."),
+c.p("So lets dig through this wall of code. First we see our function sidebarItem() for creating sidebar items. This function takes in props, as do all functional componants. You will also notice that there is an array created and if you go down one line that props itself is an array."),
+c.p("It was also stated that functional compnants can only output objects, and that is true, but in this case we output an array of objects. Each of which is identical except for the text, id, and href. You'll see why our output is an array below."),
+c.codeBlock(
+  `export const sidebar = {
+    div: {
+      id: "sidebar"
+    },
+    has: sidebarItems([
+      { text: "component", href: "#about" },
+      { text: "Dynamic Comps.", href: "#clock" },
+      { text: "Events", href: "#events" },
+      { text: "Function Comps.", href: "#functions" },
+      { text: "list Example", href: "#list" },
+      { text: "styling", href: "#style" },
+      { text: "routing", href: "#routing" }
+    ]),
+  };`),
+  c.p("In the last section it was said that props could be anything. If you look to where the function is called, where the 'has' array should be in the sidebar componant, you will see that props is an array that contains objects of key:value pairs. Each of these objects is looped through in the function. then the return of the function becomes the 'has' array of the sidebar component."),
   c.p("Continue to dig through this functional componant and try to build one yourself. Then in the next section we will move on to styling our components."),
   c.buttonRow([
     c.link({ href: "#Home", text: "Home" }),

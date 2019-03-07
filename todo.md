@@ -12,21 +12,24 @@
     -   self control?
         -   render, but 'display: none;'?
 -   content:
-    -   Components
-        √   general 
-        √   Clock example
-        √   events
-        √   functinal components
-        -   lists
-    -   Styling
-        -   style object
-        √   self styling
-        -   style packages
-    -   Routing
-        -   how routing works
-        -   setting up routes
-        -   routing options
-    -   Production
-        -   preparing to ship
-        -   calling your app
-        -   processing app.json
+    √   home
+    -   about
+        √   Components
+            √   general 
+            √   dynamic components
+            √   events
+            √   functinal components
+            √   lists
+        -   Styling
+            √   self styling
+            -   style object
+            -   style packages
+        -   Routing
+            -   how routing works
+            -   setting up routes
+            -   routing options
+        -   Production
+            -   preparing to ship
+            -   calling your app
+            -   processing app.json
+    -   contact

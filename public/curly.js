@@ -126,7 +126,7 @@ const curly = {
       replace.replaceWith(curly.build(this));
 
       // checks for styles to apply
-      if (!this.CSSselector && this.style) {
+      if (this.style) {
         curly.style(this);
       }
     },
@@ -218,7 +218,7 @@ const curly = {
   //pass in your styles object and it will create a stylesheet and append it to the page
   style(element, sheet) {
     // bump out if no style object is in element
-    if (typeof element === "string" || !element.style) {
+    if (typeof element === "string" || element.CSSselector || !element.style) {
       return;
     }
 
