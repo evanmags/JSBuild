@@ -20,12 +20,8 @@ import * as c from "./components/components.js";
 export { c };
 
 //export pages
-export { homeContent } from "./pages/home.js";
-export { aboutContent } from "./pages/about.js";
-export { clockContent } from "./pages/clock.js";
-export { eventContent } from "./pages/events.js";
-export { styleContent } from "./pages/style.js";
-export { contactContent } from "./pages/contact.js";
+import * as pages from "./pages/exports.js";
+export { pages };
 
 //routes comes last
 export { routes } from "./routes/paths.js";

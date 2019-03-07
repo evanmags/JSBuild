@@ -1,11 +1,6 @@
 import {
   c,
-  homeContent,
-  aboutContent,
-  clockContent,
-  eventContent,
-  styleContent,
-  contactContent
+  pages
 } from "../exports.js";
 
 function changeTab(ele) {
@@ -33,45 +28,50 @@ function gateSetHas(element, checkFor, elseSet){
 export const routes = {
   home: () => {
     c.main.setHas([c.container]);
-    c.container.setHas([...homeContent]);
+    c.container.setHas(pages.homeContent);
     changeTab(c.home);
   },
   about: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
-    c.container.setHas([...aboutContent]);
+    c.container.setHas(pages.aboutContent);
     changeTab(c.about);
     changeMenu("#sidebarItem0");
   },
   clock: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
-    c.container.setHas([...clockContent]);
+    c.container.setHas(pages.clockContent);
     changeTab(c.about);
     changeMenu("#sidebarItem1");
   },
   events: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
-    c.container.setHas([...eventContent]);
+    c.container.setHas(pages.eventContent);
     changeTab(c.about);
     changeMenu("#sidebarItem2");
   },
   functions: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
-    c.container.setHas([...functionContent]);
+    c.container.setHas(pages.functionContent);
     changeTab(c.about);
     changeMenu("#sidebarItem3");
   },
-  list: () => {},
+  list: () => {
+    gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
+    c.container.setHas(pages.listContent);
+    changeTab(c.about);
+    changeMenu("#sidebarItem4");
+  },
   conditions: () => {},
   style: () => {
     gateSetHas(c.main, c.sidebar, [c.sidebar, c.container])
-    c.container.setHas([...styleContent]);
+    c.container.setHas(pages.styleContent);
     changeTab(c.about);
     changeMenu("#sidebarItem5");
   },
   routing: () => {},
   contact: () => {
     c.main.setHas([c.container]);
-    c.container.setHas([...contactContent]);
+    c.container.setHas(pages.contactContent);
     changeTab(c.contact);
   }
 };

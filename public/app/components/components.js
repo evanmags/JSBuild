@@ -421,7 +421,7 @@ export const main = {
   },
   has: [container],
   style: {
-    padding: "0 9vw",
+    padding: "0 12vw",
     width: "100%",
     flex: "1 1 100%",
     display: "flex",

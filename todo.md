@@ -16,7 +16,7 @@
         √   general 
         √   Clock example
         √   events
-        -   functinal components
+        √   functinal components
         -   lists
     -   Styling
         -   style object
