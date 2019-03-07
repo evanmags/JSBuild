@@ -36,16 +36,27 @@
 //   }
 // }
 
-//  general element function structure:
-//  function element()
-//  -OR-
-//  const element = (props) => {
-//    doSomething(props.val1)
-//    doAnotherThing(props.val1)
-//    return {
-//      ....general compnant structure....
-//    }
-//  }
+// general element function structure:
+// function element()
+// -OR-
+// const element = () => {
+//
+//   /** these finctions can do almost anything to
+//       modify the output object, however functions
+//       MUST always return a buildable object **/
+//
+//   doSomething()
+//   doOtherThing()
+//
+//   return {
+//     type: {
+//       id: `id-${key}`
+//       /** for the sake of specificity
+//           all functional componants should
+//           utilize a key in their ID attribute **/
+//     }
+//   }
+// }
 
 import { colors } from "../exports.js";
 
@@ -57,10 +68,8 @@ export const link = props => {
     },
     has: [props.text || "click here!"],
     style: {
-      color: colors.black,
       border: `1px solid`,
       border_radius: "3px",
-      text_decoration: "none",
       transition: "all .1s",
       box_shadow: "2px 3px 0 0",
       float: "right",
@@ -309,14 +318,17 @@ export const menu = {
 
 export const sidebarItems = props => {
   let arr = [];
-  props.forEach((el, i, ar) => {
+  props.forEach((el, i) => {
     const item = {
-      span: {
+      a: {
         id: `sidebarItem${i}`,
-        classList: `sidebarItem`
+        classList: `sidebarItem`,
+        href: el.href
       },
-      has: [el],
+      has: [el.text],
       style: {
+        color: "#333",
+        text_decoration: "none",
         font_size: "13px",
         margin: "10px 0",
         flex: "0 0 30px",
@@ -331,7 +343,7 @@ export const sidebarItems = props => {
         background_repeat: "no-repeat",
         background_position: "150px 0px",
         box_shadow: "0 0 0 0 transparent",
-        transition: "all .1s",
+        transition: "all .1s, background .1s .08s",
         psudo: {
           ":hover": {
             color: "#d88282",
@@ -343,7 +355,8 @@ export const sidebarItems = props => {
             padding_left: "8px",
             background_position: `0px 0px`,
             border_left: `4px solid ${colors.dark_red}`,
-            box_shadow: `1px 1px 5px -1px ${colors.dark_red}`
+            box_shadow: `1px 1px 5px -1px ${colors.dark_red}`,
+            transition: "all .1s, box-shadow .1s .08s",
           }
         }
       },
@@ -366,12 +379,12 @@ export const sidebar = {
     id: "sidebar"
   },
   has: sidebarItems([
-    "component",
-    "clock example",
-    "lists",
-    "conditionals",
-    "styling",
-    "routing"
+    { text: "component", href: "#about" },
+    { text: "clock example", href: "#clock" },
+    { text: "lists", href: "#lists" },
+    { text: "conditionals", href: "#conditionals" },
+    { text: "styling", href: "#style" },
+    { text: "routing", href: "#routing" }
   ]),
   style: {
     position: "sticky",

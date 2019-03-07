@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   black: "#343434",
   trans_red: "#f1c1c166",
   light_red: "#f1e1e1",
@@ -9,7 +9,7 @@ const colors = {
   lightgrey: "#989898"
 };
 
-const styles = {
+export const styles = {
   "*": {
     margin: 0,
     padding: 0,
@@ -19,6 +19,13 @@ const styles = {
   },
   ".green": {
     background: "#f1e9d1"
+  },
+  body: {
+    color: colors.black
+  },
+  a: {
+    color: colors.black,
+    text_decoration: "none"
   },
   hr: {
     width: "65%"
@@ -30,5 +37,3 @@ const styles = {
     text_decoration: "underline"
   }
 };
-
-export { colors, styles };

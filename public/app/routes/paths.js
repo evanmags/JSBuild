@@ -21,7 +21,7 @@ function changeMenu(ele) {
   document.querySelector(ele).classList.add("viewing");
 }
 
-const routes = {
+export const routes = {
   home: () => {
     c.main.setHas([c.container]);
     c.container.setHas([...homeContent]);
@@ -51,5 +51,3 @@ const routes = {
     changeTab(c.contact);
   }
 };
-
-export { routes };

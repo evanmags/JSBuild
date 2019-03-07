@@ -40,7 +40,7 @@ const App = {
   }
 };
 
-render(App, document.querySelector("body"), e.styles);
+curly.render(App, document.querySelector("body"), e.styles);
 
-router.paths = e.routes;
-router.run();
+curly.router.paths = e.routes;
+curly.router.run();
