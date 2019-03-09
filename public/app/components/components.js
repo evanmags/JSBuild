@@ -60,95 +60,6 @@
 
 import { colors } from "../exports.js";
 
-export const link = props => {
-  return {
-    a: {
-      id: "link",
-      href: props.href || "#"
-    },
-    has: [props.text || "click here!"],
-    style: {
-      border: `1px solid`,
-      border_radius: "3px",
-      transition: "all .1s",
-      box_shadow: "2px 3px 0 0",
-      float: "right",
-      padding: "8px 15px",
-      margin: "10px 50px 20px",
-      psudo: {
-        ":hover": {
-          color: "#232323"
-        },
-        ":active": {
-          transform: "translate(1px,1px)",
-          box_shadow: "1px 2px 0 0"
-        }
-      }
-    }
-  };
-};
-
-export const menuButton = ({ ...props }) => {
-  return {
-    a: {
-      id: "menuButton",
-      classList: props.class || "",
-      href: props.href
-    },
-    has: [props.name],
-    style: {
-      color: colors.black,
-      flex: "1 1 50px",
-      max_width: "100px",
-      display: "flex",
-      justify_content: "center",
-      align_items: "center",
-      text_transform: "uppercase",
-      text_decoration: "none",
-      border: "0px solid transparent",
-      transition: "all .1s",
-      psudo: {
-        ":hover": {
-          color: "#d88282",
-          border_top: "none",
-          border_bottom: `4px solid ${colors.dark_red}`,
-          padding_top: `4px`
-        },
-        ".active": {
-          color: "#d88282",
-          background: colors.red,
-          font_weight: "bold",
-          padding_bottom: `4px`,
-          border_top: `4px solid ${colors.dark_red}`,
-          border_bottom: "none"
-        }
-      }
-    }
-  };
-};
-export const home = menuButton({
-  name: "home",
-  class: "active",
-  href: "#home"
-});
-
-export const about = menuButton({ name: "about", href: "#about" });
-export const contact = menuButton({ name: "contact", href: "#contact" });
-
-export const buttonRow = props => {
-  return {
-    div: {
-      classList: "buttonRow"
-    },
-    has: [...props],
-    style: {
-      width: "100%",
-      display: "flex",
-      justify_content: "space-between"
-    }
-  };
-};
-
 export const header = props => {
   return {
     h1: {
@@ -187,6 +98,106 @@ export const p = props => {
       margin_bottom: "15px"
     }
   };
+};
+
+export const link = props => {
+  return {
+    a: {
+      id: "link",
+      href: props.href || "#"
+    },
+    has: [props.text || "click here!"],
+    style: {
+      background: 'transparent',
+      font_size: '13px',
+      border: `1px solid`,
+      border_radius: "3px",
+      transition: "all .1s",
+      float: 'right',
+      box_shadow: "2px 3px 0 0",
+      padding: "6px 12px",
+      margin: "10px 50px 20px",
+      psudo: {
+        ":hover": {
+          color: "#232323",
+          background: colors.dark_yellow,
+        },
+        ":active": {
+          transform: "translate(1px,1px)",
+          box_shadow: "1px 2px 0 0"
+        }
+      }
+    }
+  };
+};
+
+export const menuButton = ({ ...props }) => {
+  return {
+    a: {
+      id: "menuButton",
+      classList: props.class || "",
+      href: props.href
+    },
+    has: [props.name],
+    style: {
+      color: colors.black,
+      font_size: "13px",
+      flex: "1 1 50px",
+      max_width: "100px",
+      display: "flex",
+      justify_content: "center",
+      align_items: "center",
+      text_transform: "uppercase",
+      text_decoration: "none",
+      border: "0px solid transparent",
+      transition: "all .1s",
+      psudo: {
+        ":hover": {
+          color: "#d88282",
+          border_top: "none",
+          border_bottom: `4px solid ${colors.dark_red}`,
+          padding_top: `4px`
+        },
+        ".active": {
+          color: "#d88282",
+          background: colors.red,
+          font_weight: "bold",
+          padding_bottom: `4px`,
+          border_top: `4px solid ${colors.dark_red}`,
+          border_bottom: "none"
+        },
+        ".active:hover": {
+          color: "#d88282",
+          border_top: "none",
+          border_bottom: `4px solid ${colors.dark_red}`,
+          padding_top: `4px`
+        }
+      }
+    }
+  };
+};
+export const home = menuButton({ name: "home", href: "#home" });
+export const about = menuButton({ name: "about", href: "#about" });
+export const download = menuButton({ name: "download", href: "#download" });
+export const contact = menuButton({ name: "contact", href: "#contact" });
+
+export const buttonRow = props => {
+  let obj = {
+    div: {
+      classList: "buttonRow"
+    },
+    has: [...props],
+    style: {
+      width: "100%",
+      display: "flex",
+      justify_content: "space-between"
+    }
+  };
+  if (props.length === 1) {
+    obj.div.classList = "oneButtonRow";
+    obj.style.justify_content = "center";
+  }
+  return obj;
 };
 
 export const code = props => {
@@ -250,17 +261,6 @@ export const clock = {
   }
 };
 
-export const banner = {
-  div: {
-    id: "banner"
-  },
-  has: [header("{curly.js}"), subhead("Websites built on JS Objects")],
-  style: {
-    margin: "5vh auto",
-    text_align: "center"
-  }
-};
-
 export const variable = "From Variable";
 
 export const func = () => {
@@ -292,7 +292,7 @@ export const sampleBlock = {
   },
   has: [sample, { hr: {} }, variable, func()],
   style: {
-    margin_bottom: '15px',
+    margin_bottom: "15px",
     display: "flex",
     flex_direction: "column",
     align_items: "center"
@@ -303,17 +303,28 @@ export const menu = {
   div: {
     id: "menu"
   },
-  has: [home, about, contact],
+  has: [home, about, download, contact],
   style: {
     position: "fixed",
     top: "0",
-    height: "50px",
+    height: "40px",
     width: "100vw",
     padding: "0 10vw",
     display: "flex",
     color: "#333",
     box_shadow: `3px 0 3px ${colors.red}`,
     background: colors.yellow
+  }
+};
+
+export const banner = {
+  div: {
+    id: "banner"
+  },
+  has: [header("{curly}.js"), subhead("Websites built on JS Objects")],
+  style: {
+    margin: "5vh auto",
+    text_align: "center"
   }
 };
 
@@ -357,7 +368,7 @@ export const sidebarItems = props => {
             background_position: `0px 0px`,
             border_left: `4px solid ${colors.dark_red}`,
             box_shadow: `1px 1px 5px -1px ${colors.dark_red}`,
-            transition: "all .1s, box-shadow .1s .08s",
+            transition: "all .1s, box-shadow .1s .08s"
           }
         }
       },
@@ -434,7 +445,11 @@ export const footer = {
   div: {
     id: "footer"
   },
-  has: [p("{curly.js}"), p("Copyright (c) 2019 Evan Magnussen"), p("MIT License")],
+  has: [
+    p("{curly.js}"),
+    p("Copyright (c) 2019 Evan Magnussen"),
+    p("MIT License")
+  ],
   style: {
     align_self: "flex-end",
     min_height: "80px",

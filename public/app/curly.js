@@ -36,6 +36,12 @@ const curly = {
     }
   },
 
+  selectElement(ele) {
+    return (
+      ele.DOMelement || document.querySelector(curly.createDOMSelector(ele))
+    );
+  },
+
   resetInterval(ele) {
     //check for a set interval
     if (ele.int) {
@@ -46,13 +52,11 @@ const curly = {
     }
   },
 
-  clearAllIntervals(ele) {
+  clearChildIntervals(ele) {
     // loop through has object
     ele.has.forEach(e => {
       curly.resetInterval(e);
     });
-    //clear own timers
-    curly.resetInterval(ele);
   },
 
   // takes in an array of objects and sorts by key
@@ -60,12 +64,6 @@ const curly = {
     return arr.sort((a, b) => {
       return Object.keys(a)[0] > Object.keys(b)[0] ? 1 : -1;
     });
-  },
-
-  //takes a stylesheet, a selector, and a string of rules
-  appendCSSRules(sheet, selector, ruleStr) {
-    //insert selectors with rules to the end of the sheet.
-    sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
   },
 
   createSelector(element) {
@@ -87,6 +85,7 @@ const curly = {
   // takes a css style object and creates a string
   // with selector and rules to append to the stylesheet
   createRuleString(obj) {
+    if(obj.CSSselector) return obj.CSSselector;
     // create base string in correct scope
     ruleStr = ``;
 
@@ -101,6 +100,32 @@ const curly = {
     return ruleStr;
   },
 
+  //takes a stylesheet, a selector, and a string of rules
+  appendCSSRules(sheet, selector, ruleStr) {
+    //insert selectors with rules to the end of the sheet.
+    sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
+  },
+
+  addToStyleSheet(selector, styleObj, styleSheet) {
+    // create rule string
+    let ruleStr = curly.createRuleString(styleObj);
+    // append to sheet
+    curly.appendCSSRules(styleSheet, selector, ruleStr);
+  },
+
+  removeFromStyleSheet(selector, styleSheet){
+    for(var index in styleSheet.rules){
+      if(styleSheet.rules[index].selectorText === selector){
+        styleSheet.deleteRule(index);
+      }
+    }
+  },
+
+  updateStyleSheet(selector, styleObj, styleSheet){
+    removeFromStyleSheet(selector, styleSheet);
+    addToStyleSheet(selector, styleObj, styleSheet);
+  },
+
   //*** Helper Functions end ***//
 
   //*** Production objects and functions begin ***//
@@ -110,25 +135,13 @@ const curly = {
     // called on 'has' change
     // can also be called at will with other functions
     update() {
-      // removed element from 'elements' array
-      if (curly.elements.includes(this)) {
-        curly.elements = curly.elements.filter(ele => {
-          return ele.DOMelement !== this.DOMelement;
-        });
-      }
+      this.DOMelement.innerHTML = "";
 
-      // locates the "this" aka the element to replace
-      const replace =
-        this.DOMelement ||
-        document.querySelector(curly.createDOMSelector(this));
+      const parent = curly.selectElement(this);
 
-      // replaces self
-      replace.replaceWith(curly.build(this));
-
-      // checks for styles to apply
-      if (this.style) {
-        curly.style(this);
-      }
+      this.has.forEach(child => {
+        curly.render(child, parent);
+      });
     },
 
     //getter function for has array
@@ -137,11 +150,33 @@ const curly = {
     },
 
     //setter function for has array
-    setHas(val) {
-      curly.clearAllIntervals(this);
+    setHas(arr) {
+      curly.clearChildIntervals(this);
       // sets value and forces update
-      this.has = val;
+      this.has = arr;
       this.update();
+    },
+
+    // insert an item at a specific point in the has array
+    addHas(ele, i) {
+      if (!this.has.includes(ele)) {
+        this.has.splice(i, 0, ele);
+        if (i < this.has.length) {
+          curly.style(ele);
+          const sibling = this.has[i + 1].DOMelement;
+          sibling.parentNode.insertBefore(curly.build(ele), sibling);
+        } else {
+          curly.render(ele, this.DOMelement);
+        }
+      }
+    },
+
+    // remove a specific item
+    removeHas(ele) {
+      if (this.has.includes(ele)) {
+        this.has.splice(this.has.indexOf(ele), 1);
+        ele.DOMelement.remove();
+      }
     }
   },
 
@@ -177,7 +212,7 @@ const curly = {
 
       //add child elements
       if (l.has) {
-        [...l.has].forEach(i => {
+        l.has.forEach(i => {
           if (typeof i === "string") {
             d.appendChild(document.createTextNode(i));
           } else if (typeof i === "object") {
@@ -205,20 +240,17 @@ const curly = {
   //  styles and places element
   render(ele, locale, styles = {}) {
     curly.style(ele, styles);
-    // locates parent and places element inside
-    locale.appendChild(
-      //build element
-      curly.build(ele)
-    );
+    // locates parent and places built element inside
+    locale.appendChild( curly.build(ele) );
   },
 
   //*** Styling function
 
   //this is the main styling fucntion.
   //pass in your styles object and it will create a stylesheet and append it to the page
-  style(element, sheet) {
+  style(element, styleObj) {
     // bump out if no style object is in element
-    if (typeof element === "string" || element.CSSselector || !element.style) {
+    if (typeof element === "string" || !element.style) {
       return;
     }
 
@@ -239,9 +271,8 @@ const curly = {
       styleSheet = styleEle.sheet;
 
       //add rules from style object
-      for (var selector in sheet) {
-        let ruleStr = curly.createRuleString(sheet[selector]);
-        curly.appendCSSRules(styleSheet, selector, ruleStr);
+      for (var selector in styleObj) {
+        curly.addToStyleSheet(selector, styleObj[selector], styleSheet);
       }
     } else {
       // if it already exists fins it and assign it
@@ -260,19 +291,15 @@ const curly = {
 
     // if selector is not already in style sheet proceed.
     if (!keys.includes(element.CSSselector)) {
-      // create rule string
-      let ruleStr = curly.createRuleString(element.style);
-      // append to sheet
-      curly.appendCSSRules(styleSheet, element.CSSselector, ruleStr);
+      curly.addToStyleSheet(element.CSSselector, element.style, styleSheet);
 
       if (element.style.psudo) {
         // loop through psudo elements if they are present
         for (var psudo in element.style.psudo) {
-          let ruleStr = curly.createRuleString(element.style.psudo[psudo]);
-          curly.appendCSSRules(
-            styleSheet,
+          curly.addToStyleSheet(
             element.CSSselector + psudo,
-            ruleStr
+            element.style.psudo[psudo],
+            styleSheet
           );
         }
       }

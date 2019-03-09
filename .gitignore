@@ -1,2 +1,2 @@
-lib/
-spec/
+public/test/
+views/tests.ejs
