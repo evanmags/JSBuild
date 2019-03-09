@@ -33,3 +33,7 @@
             -   calling your app
             -   processing app.json
     -   contact
+-   testing
+    -   render
+    -   style
+    -   build
