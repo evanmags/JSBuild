@@ -200,16 +200,113 @@ export const buttonRow = props => {
   return obj;
 };
 
-export const code = props => {
+export const d = props => {
   return {
-    p: {
-      classList: "code"
+    span:{
+      classList: 'declairation'
     },
     has: [props],
     style: {
+      color: colors.code.purple
+    }
+  }
+}
+
+export const vr = props => {
+  return {
+    span:{
+      classList: 'variable'
+    },
+    has: [props],
+    style: {
+      color: colors.code.orange
+    }
+  }
+}
+
+export const va = props => {
+  return {
+    span:{
+      classList: 'value'
+    },
+    has: [props],
+    style: {
+      color: colors.code.green
+    }
+  }
+}
+
+export const t = props => {
+  return {
+    span:{
+      classList: 'tag'
+    },
+    has: [props],
+    style: {
+      color: colors.code.teal
+    }
+  }
+}
+
+export const f = props => {
+  return {
+    span:{
+      classList: 'function'
+    },
+    has: [props],
+    style: {
+      color: colors.code.blue
+    }
+  }
+}
+
+export const al = props => {
+  return {
+    span:{
+      classList: 'alt'
+    },
+    has: [props],
+    style: {
+      color: colors.code.red
+    }
+  }
+}
+
+export const ln = (num, props) => {
+  return {
+    span:{
+      classList: 'lineNumber'
+    },
+    has: [(num > 1 ? `\n` : ``) + (num < 10 ? ` ` : ``) + `${num}  ` + (props || '')],
+    style: {
+      color: colors.code.black
+    }
+  }
+} 
+
+export const co = props => {
+  return {
+    span:{
+      classList: 'comment'
+    },
+    has: [props],
+    style: {
+      color: colors.code.grey
+    }
+  }
+}
+
+export const code = props => {
+  return {
+    pre: {
+      classList: "code"
+    },
+    has: [...props],
+    style: {
+      color: colors.code.black,
       white_space: "pre-wrap",
-      font_family: "Courier",
-      font_size: "14px",
+      font_family: "Source Code Pro",
+      font_size: "12px",
       margin: "15px 20px"
     }
   };
@@ -222,13 +319,14 @@ export const codeBlock = props => {
     },
     has: [code(props)],
     style: {
-      margin: "15px auto",
+      margin: "5px auto 25px",
       max_width: "85%",
+      align_self: 'center',
       padding: "20px",
       background: colors.trans_red,
       border_radius: "5px",
       border: `1px solid ${colors.red}`,
-      box_shadow: `2px 2px 5px ${colors.dark_yellow}`,
+      box_shadow: `2px 2px 15px ${colors.gold}`,
       psudo: {
         ">.code": {
           margin: "0 20px"
@@ -330,58 +428,85 @@ export const banner = {
 
 export const sidebarItems = props => {
   let arr = [];
-  props.forEach((el, i) => {
-    const item = {
-      a: {
-        id: `sidebarItem${i}`,
-        classList: `sidebarItem`,
-        href: el.href
-      },
-      has: [el.text],
-      style: {
-        color: "#333",
-        text_decoration: "none",
-        font_size: "13px",
-        margin: "10px 0",
-        flex: "0 0 30px",
-        display: "flex",
-        align_items: "center",
-        text_transform: "capitalize",
-        padding_left: "12px",
-        border_left: "0px solid #d88282",
-        background_image: `linear-gradient(to right, ${colors.red} 0px, ${
-          colors.red
-        } 150px)`,
-        background_repeat: "no-repeat",
-        background_position: "150px 0px",
-        box_shadow: "0 0 0 0 transparent",
-        transition: "all .1s, background .1s .08s",
-        psudo: {
-          ":hover": {
-            color: "#d88282",
-            border_left: `4px solid #d88282`,
-            padding_left: "8px"
-          },
-          ".viewing": {
-            width: "125px",
-            padding_left: "8px",
-            background_position: `0px 0px`,
-            border_left: `4px solid ${colors.dark_red}`,
-            box_shadow: `1px 1px 5px -1px ${colors.dark_red}`,
-            transition: "all .1s, box-shadow .1s .08s"
+  let itemnum = 0;
+  let headnum = 0;
+  props.forEach((el) => {
+    if(el.type === 'item'){
+      itemnum++
+      const item = {
+        a: {
+          id: `sidebarItem${itemnum}`,
+          classList: `sidebarItem`,
+          href: el.href
+        },
+        has: [el.text],
+        style: {
+          color: "#333",
+          text_decoration: "none",
+          font_size: "12px",
+          margin: "5px 0",
+          flex: "0 0 24px",
+          display: "flex",
+          align_items: "center",
+          text_transform: "capitalize",
+          padding_left: "12px",
+          border_left: "0px solid #d88282",
+          background_image: `linear-gradient(to right, ${colors.red} 0px, ${
+            colors.red
+          } 150px)`,
+          background_repeat: "no-repeat",
+          background_position: "150px 0px",
+          box_shadow: "0 0 0 0 transparent",
+          transition: "all .1s, background .1s .08s",
+          psudo: {
+            ":hover": {
+              color: "#d88282",
+              border_left: `4px solid #d88282`,
+              padding_left: "8px"
+            },
+            ".viewing": {
+              width: "125px",
+              padding_left: "8px",
+              background_position: `0px 0px`,
+              border_left: `4px solid ${colors.dark_red}`,
+              box_shadow: `1px 1px 5px -1px ${colors.dark_red}`,
+              transition: "all .1s, box-shadow .1s .08s"
+            }
+          }
+        },
+        events: {
+          click: e => {
+            document.querySelectorAll(".sidebarItem").forEach(li => {
+              li.classList.remove("viewing");
+            });
+            e.target.classList.toggle("viewing");
           }
         }
-      },
-      events: {
-        click: e => {
-          document.querySelectorAll(".sidebarItem").forEach(li => {
-            li.classList.remove("viewing");
-          });
-          e.target.classList.toggle("viewing");
-        }
-      }
-    };
-    arr.push(item);
+      };
+      arr.push(item);
+    } else if(el.type ==='head'){
+      headnum++
+      const head = {
+          h5: {
+            id: `sidebarHead${headnum}`,
+            classList: `sidebarHead`,
+          },
+          has: [el.text],
+          style: {
+            color: "#333",
+            text_decoration: "none",
+            font_size: "13px",
+            margin: "10px 0 5px 0",
+            flex: "0 0 25px",
+            display: "flex",
+            align_items: "flex-end",
+            text_transform: "capitalize",
+            padding_left: "4px",
+            border_bottom: "2px solid #d88282",
+          }
+        };
+      arr.push(head);
+    }
   });
   return arr;
 };
@@ -391,13 +516,22 @@ export const sidebar = {
     id: "sidebar"
   },
   has: sidebarItems([
-    { text: "component", href: "#about" },
-    { text: "Dynamic Comps.", href: "#clock" },
-    { text: "Events", href: "#events" },
-    { text: "Function Comps.", href: "#functions" },
-    { text: "list Example", href: "#list" },
-    { text: "styling", href: "#style" },
-    { text: "routing", href: "#routing" }
+    { text: "Components", type: 'head'},
+    { text: "Building", href: "#about", type: 'item'},
+    { text: "Dynamic Comps.", href: "#clock", type: 'item' },
+    { text: "Events", href: "#events", type: 'item' },
+    { text: "Function Comps.", href: "#functions", type: 'item' },
+    { text: "list Example", href: "#list", type: 'item' },
+    { text: "Styling", type: 'head'},
+    { text: "comp. styles", href: "#style", type: 'item' },
+    { text: "styles object", href: "#style", type: 'item' },
+    { text: "branding", href: "#style", type: 'item' },
+    { text: "Routing", type: 'head'},
+    { text: "Set up", href: "#routing", type: 'item' },
+    { text: "options", href: "#routing", type: 'item' },
+    { text: "JSON", type: 'head'},
+    { text: "Preparing", href: "#routing", type: 'item' },
+    { text: "Parsing", href: "#routing", type: 'item' }
   ]),
   style: {
     position: "sticky",
@@ -417,12 +551,15 @@ export const container = {
   },
   has: [],
   style: {
-    min_width: "50vw",
-    max_width: "1100px",
-    padding: "15px 30px",
+    min_width: "400px",
+    flex: '1 1 650px',
+    max_width: "900px",
+    padding: "15px 50px",
     box_shadow: `1px 1px 8px 0 ${colors.red}`,
     transition: `transform .2s, box-shadow .2s`,
-    overflow: "hidden"
+    display: 'flex',
+    flex_direction: 'column',
+    overflow: "hidden",
   }
 };
 
@@ -432,7 +569,7 @@ export const main = {
   },
   has: [container],
   style: {
-    padding: "0 12vw",
+    padding: "0 18vw",
     width: "100%",
     flex: "1 1 100%",
     display: "flex",

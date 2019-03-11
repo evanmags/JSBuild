@@ -85,16 +85,16 @@ const curly = {
   // takes a css style object and creates a string
   // with selector and rules to append to the stylesheet
   createRuleString(obj) {
-    if(obj.CSSselector) return obj.CSSselector;
+    if (obj.CSSselector) return obj.CSSselector;
     // create base string in correct scope
     ruleStr = ``;
 
     // loop through and append each rule as string to base rule string
     for (let rule in obj) {
-      ruleStr += `${rule.replace("_", "-")}: ${String(obj[rule]).replace(
-        "_",
+      ruleStr += `${rule.replace(/_/g, "-")}: ${String(obj[rule]).replace(
+        /_/g,
         "-"
-      )};\n`;
+      )}; \n`;
     }
 
     return ruleStr;
@@ -113,15 +113,15 @@ const curly = {
     curly.appendCSSRules(styleSheet, selector, ruleStr);
   },
 
-  removeFromStyleSheet(selector, styleSheet){
-    for(var index in styleSheet.rules){
-      if(styleSheet.rules[index].selectorText === selector){
+  removeFromStyleSheet(selector, styleSheet) {
+    for (var index in styleSheet.rules) {
+      if (styleSheet.rules[index].selectorText === selector) {
         styleSheet.deleteRule(index);
       }
     }
   },
 
-  updateStyleSheet(selector, styleObj, styleSheet){
+  updateStyleSheet(selector, styleObj, styleSheet) {
     removeFromStyleSheet(selector, styleSheet);
     addToStyleSheet(selector, styleObj, styleSheet);
   },
@@ -241,7 +241,7 @@ const curly = {
   render(ele, locale, styles = {}) {
     curly.style(ele, styles);
     // locates parent and places built element inside
-    locale.appendChild( curly.build(ele) );
+    locale.appendChild(curly.build(ele));
   },
 
   //*** Styling function

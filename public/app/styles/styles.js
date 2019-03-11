@@ -6,7 +6,18 @@ export const colors = {
   dark_red: "#d88282",
   yellow: "#f1e9d1",
   dark_yellow: "#ebe0bd",
-  lightgrey: "#989898"
+  gold: "#c9c09b",
+  lightgrey: "#989898",
+  code: {
+    black: '#444',
+    grey: "#777",
+    red: "#a10101",
+    blue: '#010181',
+    green: '#018101',
+    teal: '#018181',
+    orange: '#b18101',
+    purple: '#810181'
+  }
 };
 
 export const styles = {

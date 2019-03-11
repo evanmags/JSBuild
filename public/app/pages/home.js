@@ -16,5 +16,7 @@ export const homeContent = [
   c.p(
     "Your app can either be seved through an API call using the XHR or Fetch or contained in your app.js, this is covered more in depth in the docs."
   ),
-  c.link({ href: "#about", text: "Learn More!" })
+  c.buttonRow([
+    c.link({ href: "#about", text: "Learn More!" })
+  ])
 ];

@@ -9,33 +9,33 @@ export const clockContent = [
   c.p(
     "To examine this further lets take the example of the ticking clock. As a componant the initial structure is fairly simple."
   ),
-  c.codeBlock(
-    `export const clock = {
-        span: {
-            id: 'clock'
-        },
-        has: [new Date().toLocaleTimeString()],
-    }`
-  ),
+  c.codeBlock([
+    c.ln('1'),c.d(`const `),c.vr(`clock`),` = {`,
+    c.ln('2', `  `),c.t(`span`),`: {`,
+    c.ln('3', `    `),c.t(`id`),`: `,c.va(`'clock'`),
+    c.ln('4', '  '),`},`,
+    c.ln('5', `  `),c.t(`has`),`: [`,c.al(`new `),c.f(`Date`),`().`,c.f(`toLocaleTimeString`),`()],`,
+    c.ln('6'),`}`
+  ]),
   c.p(
     "Initially our clock is just a span element with an id of 'clock'. This clock generates a string of the time at render. This however wouldn't be a very functional element as we would like our clock to 'tick' anf displsy the current time."
   ),
   c.p("To acheve this we will use a new object inside of our componant, the timers object."),
-  c.codeBlock(
-    `export const clock = {
-    span: {
-        id: 'clock'
-    },
-    has: [new Date().toLocaleTimeString()],
-    timers: {
-        date() {
-            return (clock.int = setInterval(() => {
-                return clock.setHas([new Date().toLocaleTimeString()]);
-            }, 1000));
-        }
-    }
-}`
-  ),
+  c.codeBlock([
+    c.ln('1'),c.d(`const `),c.vr(`clock`),` = {`,
+    c.ln('2', `  `),c.t(`span`),`: {`,
+    c.ln('3', `    `),c.t(`id`),`: `,c.va(`'clock'`),
+    c.ln('4', '  '),`},`,
+    c.ln('5', `  `),c.t(`has`),`: [`,c.al(`new `),c.f(`Date`),`().`,c.f(`toLocaleTimeString`),`()],`,
+    c.ln('6', `  `),c.t(`timers`),`: {`,
+    c.ln('7', `    `),c.f(`date`),`() {`,
+    c.ln('8', `      `),c.al(`return`),` (`,c.vr(`clock`),`.`,c.t(`int`),` = `,c.f(`setInterval`),`(() `,c.al(`=>`),` {`,
+    c.ln('9', `        `),c.al(`return`),c.vr(` clock`),`.`,c.f(`setHas`),`([`,c.al(`new `),c.f(`Date`),`().`,c.f(`toLocaleTimeString`),`()]);`,
+    c.ln('10', `      `),`}, `,c.al(`1000`),`));`,
+    c.ln('11', `    `),`}`,
+    c.ln('12', `  `),`}`,
+    c.ln('13'),`}`
+  ]),
   c.p(
     "The timers object is a special object within componants in curly.js. Everything in this object will be evaluated during the rendering process. However returns from intervals or timers are not automatically retrieved. These returns should be pushed into the this.int array or in the case that there is only one timer, this.int can be set as a single value. When these elements are removed from the page the this.int object is used to clear any intervals that may be running."
   ),
