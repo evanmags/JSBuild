@@ -73,26 +73,26 @@ export const header = props => {
 };
 
 export const openLogo = {
-  span:{
-    id: 'logo',
+  span: {
+    id: "logo"
   },
   has: ["curly"],
   style: {
-    display: 'inline-flex',
-    justify_content: 'center',
-    align_items: 'center',
-    width: '0px',
-    overflow: 'hidden',
-    transition: "all .75s cubic-bezier(.3,.7,.36,1.5)",
+    display: "inline-flex",
+    justify_content: "center",
+    align_items: "center",
+    width: "0px",
+    overflow: "hidden",
+    transition: "all .75s cubic-bezier(.3,.7,.36,1.5)"
   },
   timers: {
-    logoOpen(){
-      return setTimeout(()=>{
-        openLogo.setStyle('width', '7rem')
-      }, 200)
+    logoOpen() {
+      return setTimeout(() => {
+        openLogo.setStyle("width", "7rem");
+      }, 270);
     }
   }
-}
+};
 
 export const sectionHeader = props => {
   return {
@@ -101,8 +101,8 @@ export const sectionHeader = props => {
     },
     has: [props],
     style: {
-      justify_content: 'center',
-      align_items: 'flex-end',
+      justify_content: "center",
+      align_items: "flex-end",
       font_size: "1.75rem"
     }
   };
@@ -138,19 +138,19 @@ export const link = props => {
     },
     has: [props.text || "click here!"],
     style: {
-      background: 'transparent',
-      font_size: '13px',
+      background: "transparent",
+      font_size: "13px",
       border: `1px solid`,
       border_radius: "3px",
       transition: "all .1s",
-      float: 'right',
+      float: "right",
       box_shadow: "2px 3px 0 0",
       padding: "6px 12px",
       margin: "10px 50px 20px",
       psudo: {
         ":hover": {
           color: "#232323",
-          background: colors.dark_yellow,
+          background: colors.dark_yellow
         },
         ":active": {
           transform: "translate(1px,1px)",
@@ -191,14 +191,15 @@ export const menuButton = ({ ...props }) => {
         ".active": {
           color: "#d88282",
           background: colors.red,
-          font_weight: "bold",
+          // font_weight: "bold",
           padding_bottom: `4px`,
           border_top: `4px solid ${colors.dark_red}`,
-          border_bottom: "none"
+          border_bottom: "0px solid transparent",
         },
         ".active:hover": {
           color: "#d88282",
-          border_top: "none",
+          border_top: "0px solid transparent",
+          padding_bottom: `0px`,
           border_bottom: `4px solid ${colors.dark_red}`,
           padding_top: `4px`
         }
@@ -232,99 +233,101 @@ export const buttonRow = props => {
 
 export const d = props => {
   return {
-    span:{
-      classList: 'declairation'
+    span: {
+      classList: "declairation"
     },
     has: [props],
     style: {
       color: colors.code.purple
     }
-  }
-}
+  };
+};
 
 export const vr = props => {
   return {
-    span:{
-      classList: 'variable'
+    span: {
+      classList: "variable"
     },
     has: [props],
     style: {
       color: colors.code.orange
     }
-  }
-}
+  };
+};
 
 export const va = props => {
   return {
-    span:{
-      classList: 'value'
+    span: {
+      classList: "value"
     },
     has: [props],
     style: {
       color: colors.code.green
     }
-  }
-}
+  };
+};
 
 export const t = props => {
   return {
-    span:{
-      classList: 'tag'
+    span: {
+      classList: "tag"
     },
     has: [props],
     style: {
       color: colors.code.teal
     }
-  }
-}
+  };
+};
 
 export const f = props => {
   return {
-    span:{
-      classList: 'function'
+    span: {
+      classList: "function"
     },
     has: [props],
     style: {
       color: colors.code.blue
     }
-  }
-}
+  };
+};
 
 export const al = props => {
   return {
-    span:{
-      classList: 'alt'
+    span: {
+      classList: "alt"
     },
     has: [props],
     style: {
       color: colors.code.red
     }
-  }
-}
+  };
+};
 
 export const ln = (num, props) => {
   return {
-    span:{
-      classList: 'lineNumber'
+    span: {
+      classList: "lineNumber"
     },
-    has: [(num > 1 ? `\n` : ``) + (num < 10 ? ` ` : ``) + `${num}  ` + (props || '')],
+    has: [
+      (num > 1 ? `\n` : ``) + (num < 10 ? ` ` : ``) + `${num}  ` + (props || "")
+    ],
     style: {
       color: colors.code.black
     }
-  }
-} 
+  };
+};
 
 export const co = props => {
   return {
-    span:{
-      classList: 'comment'
+    span: {
+      classList: "comment"
     },
     has: [props],
     style: {
       color: colors.code.grey
     }
-  }
-}
+  };
+};
 
 export const code = props => {
   return {
@@ -351,7 +354,7 @@ export const codeBlock = props => {
     style: {
       margin: "5px auto 25px",
       max_width: "85%",
-      align_self: 'center',
+      align_self: "center",
       padding: "20px",
       background: colors.trans_red,
       border_radius: "5px",
@@ -376,7 +379,7 @@ export const clock = {
   },
   events: {
     click() {
-      clock.setStyle('background', "blue")
+      clock.setStyle("background", "blue");
     }
   },
   timers: {
@@ -449,7 +452,10 @@ export const banner = {
   div: {
     id: "banner"
   },
-  has: [header(["{", openLogo, "}.js"]), subhead("Websites built on JS Objects")],
+  has: [
+    header(["{", openLogo, "}.js"]),
+    subhead("Websites built on JS Objects")
+  ],
   style: {
     margin: "5vh auto",
     text_align: "center"
@@ -460,9 +466,9 @@ export const sidebarItems = props => {
   let arr = [];
   let itemnum = 0;
   let headnum = 0;
-  props.forEach((el) => {
-    if(el.type === 'item'){
-      itemnum++
+  props.forEach(el => {
+    if (el.type === "item") {
+      itemnum++;
       const item = {
         a: {
           id: `sidebarItem${itemnum}`,
@@ -514,27 +520,27 @@ export const sidebarItems = props => {
         }
       };
       arr.push(item);
-    } else if(el.type ==='head'){
-      headnum++
+    } else if (el.type === "head") {
+      headnum++;
       const head = {
-          h5: {
-            id: `sidebarHead${headnum}`,
-            classList: `sidebarHead`,
-          },
-          has: [el.text],
-          style: {
-            color: "#333",
-            text_decoration: "none",
-            font_size: "13px",
-            margin: "10px 0 5px 0",
-            flex: "0 0 25px",
-            display: "flex",
-            align_items: "flex-end",
-            text_transform: "capitalize",
-            padding_left: "4px",
-            border_bottom: "2px solid #d88282",
-          }
-        };
+        h5: {
+          id: `sidebarHead${headnum}`,
+          classList: `sidebarHead`
+        },
+        has: [el.text],
+        style: {
+          color: "#333",
+          text_decoration: "none",
+          font_size: "13px",
+          margin: "10px 0 5px 0",
+          flex: "0 0 25px",
+          display: "flex",
+          align_items: "flex-end",
+          text_transform: "capitalize",
+          padding_left: "4px",
+          border_bottom: "2px solid #d88282"
+        }
+      };
       arr.push(head);
     }
   });
@@ -546,22 +552,22 @@ export const sidebar = {
     id: "sidebar"
   },
   has: sidebarItems([
-    { text: "Components", type: 'head'},
-    { text: "Building", href: "#about", type: 'item'},
-    { text: "Dynamic Comps.", href: "#clock", type: 'item' },
-    { text: "Events", href: "#events", type: 'item' },
-    { text: "Function Comps.", href: "#functions", type: 'item' },
-    { text: "list Example", href: "#list", type: 'item' },
-    { text: "Styling", type: 'head'},
-    { text: "comp. styles", href: "#style", type: 'item' },
-    { text: "styles object", href: "#style", type: 'item' },
-    { text: "branding", href: "#style", type: 'item' },
-    { text: "Routing", type: 'head'},
-    { text: "Set up", href: "#routing", type: 'item' },
-    { text: "options", href: "#routing", type: 'item' },
-    { text: "JSON", type: 'head'},
-    { text: "Preparing", href: "#routing", type: 'item' },
-    { text: "Parsing", href: "#routing", type: 'item' }
+    { text: "Components", type: "head" },
+    { text: "Building", href: "#about", type: "item" },
+    { text: "Dynamic Comps.", href: "#clock", type: "item" },
+    { text: "Events", href: "#events", type: "item" },
+    { text: "Function Comps.", href: "#functions", type: "item" },
+    { text: "list Example", href: "#list", type: "item" },
+    { text: "Styling", type: "head" },
+    { text: "comp. styles", href: "#style", type: "item" },
+    { text: "styles object", href: "#style", type: "item" },
+    { text: "branding", href: "#style", type: "item" },
+    { text: "Routing", type: "head" },
+    { text: "Set up", href: "#routing", type: "item" },
+    { text: "options", href: "#routing", type: "item" },
+    { text: "JSON", type: "head" },
+    { text: "Preparing", href: "#routing", type: "item" },
+    { text: "Parsing", href: "#routing", type: "item" }
   ]),
   style: {
     position: "sticky",
@@ -582,14 +588,14 @@ export const container = {
   has: [],
   style: {
     min_width: "400px",
-    flex: '1 1 700px',
+    flex: "1 1 700px",
     max_width: "1000px",
     padding: "15px 50px",
     box_shadow: `1px 1px 8px 0 ${colors.red}`,
     transition: `transform .2s, box-shadow .2s`,
-    display: 'flex',
-    flex_direction: 'column',
-    overflow: "hidden",
+    display: "flex",
+    flex_direction: "column",
+    overflow: "hidden"
   }
 };
 

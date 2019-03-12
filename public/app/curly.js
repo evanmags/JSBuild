@@ -339,11 +339,11 @@ const curly = {
           : "#home";
 
       window.onhashchange = function() {
-        const p = window.location.hash.replace(/[#/]/, "");
+        const h = window.location.hash.replace(/[#/]/, "");
         window.scrollTo(0, 0);
-        if (curly.router.paths[p]) {
-          window.history.replaceState({}, p, `/${p}`);
-          return curly.router.paths[p]();
+        if (curly.router.paths[h]) {
+          window.history.replaceState({}, h, `/${h}`);
+          return curly.router.paths[h]();
         }
       };
 
