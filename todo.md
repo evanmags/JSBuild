@@ -1,5 +1,7 @@
 ### To Do
 -   Clean up style function
+-   curly lite (no styles)
+-   curly build (no styles or router)
 -   functional styling
     -   setStyle/getStyle functions
     -   auto update

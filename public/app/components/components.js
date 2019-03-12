@@ -346,7 +346,7 @@ export const clock = {
   },
   events: {
     click() {
-      clearInterval(clock.int);
+      clock.setStyle('background', "blue")
     }
   },
   timers: {

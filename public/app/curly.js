@@ -91,19 +91,20 @@ const curly = {
 
     // loop through and append each rule as string to base rule string
     for (let rule in obj) {
-      ruleStr += `${rule.replace(/_/g, "-")}: ${String(obj[rule]).replace(
-        /_/g,
-        "-"
-      )}; \n`;
+      if (rule !== "psudo") {
+        ruleStr += ` ${rule.replace(/_/g, "-")}: ${String(obj[rule]).replace(
+          /_/g,
+          "-"
+        )};`;
+      }
     }
-
     return ruleStr;
   },
 
   //takes a stylesheet, a selector, and a string of rules
   appendCSSRules(sheet, selector, ruleStr) {
     //insert selectors with rules to the end of the sheet.
-    sheet.insertRule(`${selector} { ${ruleStr} } \n`, sheet.cssRules.length);
+    sheet.insertRule(`${selector} { ${ruleStr} }`, sheet.cssRules.length);
   },
 
   addToStyleSheet(selector, styleObj, styleSheet) {
@@ -113,17 +114,21 @@ const curly = {
     curly.appendCSSRules(styleSheet, selector, ruleStr);
   },
 
-  removeFromStyleSheet(selector, styleSheet) {
+  removeFromStyleSheet(selector, styleObj, styleSheet) {
     for (var index in styleSheet.rules) {
-      if (styleSheet.rules[index].selectorText === selector) {
+      if (
+        styleSheet.rules[index].selectorText === selector &&
+        styleSheet.rules[index].cssText !==
+          `${selector} {${curly.createRuleString(styleObj)} }`
+      ) {
         styleSheet.deleteRule(index);
       }
     }
   },
 
   updateStyleSheet(selector, styleObj, styleSheet) {
-    removeFromStyleSheet(selector, styleSheet);
-    addToStyleSheet(selector, styleObj, styleSheet);
+    curly.removeFromStyleSheet(selector, styleObj, styleSheet);
+    curly.addToStyleSheet(selector, styleObj, styleSheet);
   },
 
   //*** Helper Functions end ***//
@@ -177,6 +182,15 @@ const curly = {
         this.has.splice(this.has.indexOf(ele), 1);
         ele.DOMelement.remove();
       }
+    },
+
+    // update styles after changing
+    setStyle(property, value) {
+      if (!this.style) {
+        this.style = {};
+      }
+      this.style[property] = value;
+      curly.style(this);
     }
   },
 
@@ -303,6 +317,10 @@ const curly = {
           );
         }
       }
+    }
+    // expirimental update of styles
+    else if (keys.includes(element.CSSselector)) {
+      curly.updateStyleSheet(element.CSSselector, element.style, styleSheet);
     }
   },
 
