@@ -77,7 +77,7 @@ export const routes = {
   },
   download: () => {
     c.main.removeHas(c.sidebar);
-    c.container.setHas([]);
+    c.container.setHas(pages.downloadContent);
     changeTab(c.download);
   },
   contact: () => {

@@ -65,16 +65,46 @@ export const header = props => {
     h1: {
       classList: "header"
     },
-    has: [props]
+    has: props,
+    style: {
+      font_size: "2.75rem"
+    }
   };
 };
+
+export const openLogo = {
+  span:{
+    id: 'logo',
+  },
+  has: ["curly"],
+  style: {
+    display: 'inline-flex',
+    justify_content: 'center',
+    align_items: 'center',
+    width: '0px',
+    overflow: 'hidden',
+    transition: "all .75s cubic-bezier(.3,.7,.36,1.5)",
+  },
+  timers: {
+    logoOpen(){
+      return setTimeout(()=>{
+        openLogo.setStyle('width', '7rem')
+      }, 200)
+    }
+  }
+}
 
 export const sectionHeader = props => {
   return {
     h2: {
       classList: "header"
     },
-    has: [props]
+    has: [props],
+    style: {
+      justify_content: 'center',
+      align_items: 'flex-end',
+      font_size: "1.75rem"
+    }
   };
 };
 
@@ -419,7 +449,7 @@ export const banner = {
   div: {
     id: "banner"
   },
-  has: [header("{curly}.js"), subhead("Websites built on JS Objects")],
+  has: [header(["{", openLogo, "}.js"]), subhead("Websites built on JS Objects")],
   style: {
     margin: "5vh auto",
     text_align: "center"
@@ -536,7 +566,7 @@ export const sidebar = {
   style: {
     position: "sticky",
     top: "130px",
-    margin: "0 2.5vw 0 0",
+    margin: "0 35px 0 -140px",
     width: "140px",
     display: "flex",
     align_items: "stretch",
@@ -552,8 +582,8 @@ export const container = {
   has: [],
   style: {
     min_width: "400px",
-    flex: '1 1 650px',
-    max_width: "900px",
+    flex: '1 1 700px',
+    max_width: "1000px",
     padding: "15px 50px",
     box_shadow: `1px 1px 8px 0 ${colors.red}`,
     transition: `transform .2s, box-shadow .2s`,

@@ -1,10 +1,16 @@
 ### To Do
--   Clean up style function
--   curly lite (no styles)
--   curly build (no styles or router)
--   functional styling
-    -   setStyle/getStyle functions
-    -   auto update
+√   Clean up style function
+-   packages
+    -   curly
+    -   curly lite (no styles)
+    -   curly build (no styles or router)
+√   functional styling
+    √   setStyle function
+    √   auto update
+-   style limitations
+    -   @media
+    -   @keyframes
+    -   @imports
 -   Conditional Rendering
     -   check on render
         -   if false, do nothing
@@ -34,7 +40,7 @@
             -   preparing to ship
             -   calling your app
             -   processing app.json
-    -   contact
+    √   contact
 -   testing
     -   render
     -   style
