@@ -7,5 +7,6 @@ export { eventContent } from "./events.js";
 export { functionContent } from "./functions.js";
 export { listContent } from "./list.js";
 export { styleContent } from "./style.js";
+export { psudoContent } from "./psudo.js";
 export { downloadContent } from "./download.js";
 export { contactContent } from "./contact.js";

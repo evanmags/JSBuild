@@ -560,7 +560,7 @@ export const sidebar = {
     { text: "list Example", href: "#list", type: "item" },
     { text: "Styling", type: "head" },
     { text: "comp. styles", href: "#style", type: "item" },
-    { text: "styles object", href: "#style", type: "item" },
+    { text: "psudo styles", href: "#psudo", type: "item" },
     { text: "branding", href: "#style", type: "item" },
     { text: "Routing", type: "head" },
     { text: "Set up", href: "#routing", type: "item" },

@@ -4,9 +4,10 @@
     -   curly
     -   curly lite (no styles)
     -   curly build (no styles or router)
-√   functional styling
+-   functional styling
     √   setStyle function
     √   auto update
+    -   multiple style updates at once
 -   style limitations
     -   @media
     -   @keyframes

@@ -34,9 +34,10 @@ export const styleContent = [
   c.p(
     "Properties on the other hand are either single words or written with underscores replacing hyphens. Properties can also be written using strings or template literals but, as with values, will become a string and must eventually match a CSS property that your browser will understand"
   ),
+
   c.p("Next up we take a look at the global styles object."),
   c.buttonRow([
     c.link({ href: "#list", text: "Lists" }),
-    c.link({ href: "#global", text: "Global Styles" })
+    c.link({ href: "#psudo", text: "Psudo Styles" })
   ])
 ];

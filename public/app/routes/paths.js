@@ -64,8 +64,12 @@ export const routes = {
     docsGenericRoute(5)
     c.container.setHas(pages.styleContent);
   },
+  psudo: () => {
+    docsGenericRoute(6)
+    c.container.setHas(pages.psudoContent);
+  },
   routing: () => {
-    docsGenericRoute(6);
+    docsGenericRoute(7);
   },
 
   // downloads
