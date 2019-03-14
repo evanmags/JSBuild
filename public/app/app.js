@@ -33,7 +33,7 @@ const App = {
   style: {
     background: e.colors.light_red,
     min_height: "100vh",
-    padding: "50px 0 0 0",
+    padding_top: "50px",
     display: "flex",
     flex_direction: "column",
     font_family: "Laila"

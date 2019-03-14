@@ -1,9 +1,9 @@
 ### To Do
 √   Clean up style function
--   packages
-    -   curly
-    -   curly lite (no styles)
-    -   curly build (no styles or router)
+√   packages
+    √   curly dev
+    √   curly min
+    √   curly prod
 √   functional styling
     √   setStyle function
     √   auto update
