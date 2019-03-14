@@ -1,8 +1,8 @@
 import { c } from "../exports.js";
 
 export const psudoContent = [
-    c.sectionHeader("Styling"),
-    c.subhead("Creating CSS sheets in curly.js"),
+    c.sectionHeader("Styling with psudo"),
+    c.subhead(".element:nth-of-type(2) > .text:not(h1), and everything in between"),
     c.p("Now that we see how general styles are applied to components, lets take a look at yet another special object. This time, within the styles object."),
     c.p(`The 'psudo' object, inside of the styles object, is where you can place all of your psudo selectors, psudo elements, and even utility classes. Lets examine the example below.`),
     c.codeBlock([

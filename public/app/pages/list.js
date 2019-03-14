@@ -5,50 +5,55 @@ export const listContent = [
   c.subhead("An example of functinal components"),
   c.p("Take a look at the sidebar to the right. You might think that each of the items in it are individually defined components. While this would be possible, it isn't practical or efficent."),
   c.p("In reality, the sidebar itself is an individual componant, but the links in side are the output of a function in the 'has' array of this element. Below is the underlying code, minus styling, of these elements."),
-  c.codeBlock(
-    `export const sidebarItems = props => {
-  
-  let arr = [];
-  
-  props.forEach((el, i) => {
-    const item = {
-      a: {
-        id: 'sidebarItem$\{i\}',
-        classList: 'sidebarItem',
-        href: el.href
-      },
-      has: [el.text],
-      events: {
-        click: e => {
-          document.querySelectorAll(".sidebarItem").forEach(li => {
-            li.classList.remove("viewing");
-          });
-          e.target.classList.toggle("viewing");
-        }
-      }
-    };
-    arr.push(item);
-  });
-  
-  return arr;
-};`),
+  c.codeBlock([
+    c.ln('1'), c.d('const '), c.f('sidebarItems'), ' = ', c.vr('props'), c.al(' => '), '{',
+    c.ln('2', '  '), c.d('let '), c.vr('arr'), ' = [];',
+    c.ln('3'),
+    c.ln('4', '  '), c.vr('props'), '.', c.f('forEach'), '((', c.vr('el'), ', ', c.vr('i'), ') ', c.al('=>'), ' {',
+    c.ln('5', '    '), c.d('const '), c.vr('item'), ' = {',
+    c.ln('6', '      '), c.t('a'), ': {',
+    c.ln('7', '        '), c.t('id'), ': ', c.va('`sidebarItem${i}`'), ',', 
+    c.ln('8', '        '), c.t('classList'), ': ', c.va('`sidebarItem`'), ',', 
+    c.ln('9', '        '), c.t('href'), ': ', c.va('el.href'),
+    c.ln('10', '      '), '},',
+    c.ln('11', '      '), c.t('has'), ': [', c.vr('el'), '.', c.t('text'), '],',
+    c.ln('12', '      '), c.t('events'), ': {',
+    c.co('\n...        '), c.co('// click event function'),
+    c.ln('19', '      '), '},',
+    c.ln('20', '    '), '};', 
+    c.ln('21'),
+    c.ln('22', '    '), c.d('const '), c.vr('head'), ' = {',
+    c.co('\n...        '), c.co('/* head compnent definition'),
+    c.co('\n...        '), c.co('   similar structure to above */'),
+    c.ln('42', '    '), '};', 
+    c.ln('43'),
+    c.ln('44', '    '), c.d('if'), '(', c.vr('props'), '.', c.t('el.type '), c.al('=== '), c.va('"item"'), '){',
+    c.ln('45', '      '), c.vr('arr'), '.', c.f('push'), '(', c.va('item'), ')',
+    c.ln('46', '    '), '} ', c.d('else if'), '(', c.vr('props'), '.', c.t('el.type '), c.al('=== '), c.va('"head"'), '){',
+    c.ln('47', '      '),, c.vr('arr'), '.', c.f('push'), '(', c.va('head'), ')',
+    c.ln('48', '    '), '}',
+    c.ln('49', '  '), '});',
+    c.ln('50'),
+    c.ln('51', '  '), c.al('return '), c.vr('arr'), ';',
+    c.ln('52',), '};'
+]),
 c.p("So lets dig through this wall of code. First we see our function sidebarItem() for creating sidebar items. This function takes in props, as do all functional componants. You will also notice that there is an array created and if you go down one line that props itself is an array."),
 c.p("It was also stated that functional compnants can only output objects, and that is true, but in this case we output an array of objects. Each of which is identical except for the text, id, and href. You'll see why our output is an array below."),
-c.codeBlock(
-  `export const sidebar = {
-    div: {
-      id: "sidebar"
-    },
-    has: sidebarItems([
-      { text: "component", href: "#about" },
-      { text: "Dynamic Comps.", href: "#clock" },
-      { text: "Events", href: "#events" },
-      { text: "Function Comps.", href: "#functions" },
-      { text: "list Example", href: "#list" },
-      { text: "styling", href: "#style" },
-      { text: "routing", href: "#routing" }
-    ]),
-  };`),
+c.codeBlock([
+  c.ln('1'), c.d(`const `), c.vr(`sidebar`), ` = {`,
+  c.ln('2', '  '), c.t('div'), `:{`,
+  c.ln('3', '    '), c.t(`id`),`:`, c.va(`'sidebar'`),
+  c.ln('4', '  '), `}`,
+  c.ln('5', '  '), c.t('has'), ': ', c.f('sidebarItems'), '([',
+  c.ln('6', '    '), `{`, c.t('text'), ': ', c.va('"Components"'), ', ', c.t('type'), ': ', c.va('"head"'), `}`,
+  c.ln('7', '    '), `{`, c.t('text'), ': ', c.va('"Building"'), ', ', c.t('href'), ': ', c.va('"#about"'), , ', ', c.t('type'), ': ', c.va('"item"'),`}`,
+  c.ln('8', '    '), `{`, c.t('text'), ': ', c.va('"Dynamic Components"'), ', ', c.t('href'), ': ', c.va('"#clock"'), , ', ', c.t('type'), ': ', c.va('"item"'),`}`,
+  c.ln('9', '    '), `{`, c.t('text'), ': ', c.va('"Event Handling"'), ', ', c.t('href'), ': ', c.va('"#events"'), , ', ', c.t('type'), ': ', c.va('"item"'),`}`,
+  c.ln('10', '    '), `{`, c.t('text'), ': ', c.va('"Function Components"'), ', ', c.t('href'), ': ', c.va('"#functions"'), , ', ', c.t('type'), ': ', c.va('"item"'),`}`,
+  c.ln('11', '    '), `{`, c.t('text'), ': ', c.va('"List Example"'), ', ', c.t('href'), ': ', c.va('"#list"'), , ', ', c.t('type'), ': ', c.va('"item"'),`}`,
+  c.ln('12', '  '), ']),',
+  c.ln('13'), `};`
+]),
   c.p("In the last section it was said that props could be anything. If you look to where the function is called, where the 'has' array should be in the sidebar componant, you will see that props is an array that contains objects of key:value pairs. Each of these objects is looped through in the function. then the return of the function becomes the 'has' array of the sidebar component."),
   c.p("Continue to dig through this functional componant and try to build one yourself. Then in the next section we will move on to styling our components."),
   c.buttonRow([

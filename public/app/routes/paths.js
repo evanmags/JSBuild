@@ -2,7 +2,7 @@ import { c, pages } from "../exports.js";
 
 function changeTab(ele) {
   if (!ele.DOMelement.classList.contains("active")) {
-    document.querySelectorAll("#menuButton").forEach(l => {
+    document.querySelectorAll("a[id*='menuButton']").forEach(l => {
       l.classList.remove("active");
     });
     ele.DOMelement.classList.add("active");
@@ -43,7 +43,6 @@ export const routes = {
   about: () => {
     docsGenericRoute(0)
     c.container.setHas(pages.aboutContent);
-    c.home.setStyle({'background': 'green'}, ":hover");
   },
   clock: () => {
     docsGenericRoute(1)

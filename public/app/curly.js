@@ -231,8 +231,16 @@ const curly = {
       Object.assign(l, curly.Component);
 
       for (var tag in l) {
-        //create element
-        newDOMelement = document.createElement(tag);
+        //create element'
+        try {
+          newDOMelement = document.createElement(tag);
+        } catch {
+          console.group('Element creation error')
+          console.error(`${tag} is not a valid html tag at:`)
+          console.error(l)
+          console.groupEnd('Element creation error')
+        }
+
 
         l.DOMelement = newDOMelement;
 

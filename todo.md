@@ -32,16 +32,14 @@
             √   lists
         -   Styling
             √   self styling
-            -   style object
+            √   psudo Styles
             -   Global style and packages
         -   Routing
-            -   how routing works
             -   setting up routes
             -   routing options
         -   Production
             -   preparing to ship
-            -   calling your app
-            -   processing app.json
+            -   call and process
     √   contact
 -   testing
     -   render
