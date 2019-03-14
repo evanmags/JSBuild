@@ -28,11 +28,10 @@ const curly = {
   createDOMSelector(obj) {
     const key = Object.keys(obj)[0];
     const attrs = obj[key];
-
     if (attrs.id) {
-      return `#${attrs.id}`;
+      select = `${key}#${attrs.id}`;
     } else if (attrs.classList) {
-      return `${key}.${attrs.classList.split(" ").join(".")}`;
+      select = `${key}.${attrs.classList.split(" ").join(".")}`;
     }
   },
 
@@ -57,6 +56,20 @@ const curly = {
     ele.has.forEach(e => {
       curly.resetInterval(e);
     });
+  },
+
+  // remove listeners from element
+  removeListeners(ele) {
+    for (event in ele.events) {
+      ele.DOMelement.removeEventListener(event, ele.events[event]);
+    }
+  },
+
+  removeElement(ele) {
+    curly.resetInterval(ele);
+    curly.removeListeners(ele);
+    ele.DOMelement.remove();
+    ele.DOMelement = null;
   },
 
   // takes in an array of objects and sorts by key
@@ -180,7 +193,7 @@ const curly = {
     removeHas(ele) {
       if (this.has.includes(ele)) {
         this.has.splice(this.has.indexOf(ele), 1);
-        ele.DOMelement.remove();
+        curly.removeElement(ele);
       }
     },
 
@@ -237,13 +250,31 @@ const curly = {
 
       // add events
       for (let key in l.events) {
-        d.addEventListener(key, l.events[key]);
+        try {
+          d.addEventListener(key, l.events[key]);
+        } catch (error) {
+          console.group("Error in Events object");
+          console.error(
+            "One or more of the keys in the events object is not a function at:"
+          );
+          console.error(l);
+          console.groupEnd("Error in Events object");
+        }
       }
 
       // start timers
       if (!l.int) {
         for (let key in l.timers) {
-          l.timers[key]();
+          try {
+            l.timers[key]();
+          } catch (error) {
+            console.group("Error in Timers object");
+            console.error(
+              "One or more of the keys in the timers object is not a function at:"
+            );
+            console.error(l);
+            console.groupEnd("Error in Timers object");
+          }
         }
       }
     }
@@ -273,7 +304,9 @@ const curly = {
       keys = [];
 
     //check if there is already a stylesheet
-    if (!document.querySelector("#CurlyJS_styles")) {
+    try {
+      styleSheet = document.querySelector("#CurlyJS_styles").sheet;
+    } catch {
       //create a blank style tag
       const styleEle = document.createElement("style");
       styleEle.id = "CurlyJS_styles";
@@ -288,9 +321,6 @@ const curly = {
       for (var selector in styleObj) {
         curly.addToStyleSheet(selector, styleObj[selector], styleSheet);
       }
-    } else {
-      // if it already exists fins it and assign it
-      styleSheet = document.querySelector("#CurlyJS_styles").sheet;
     }
 
     // if selector was not already created for this element, make one
@@ -340,6 +370,7 @@ const curly = {
 
       window.onhashchange = function() {
         const h = window.location.hash.replace(/[#/]/, "");
+        console.log(h, 'hashchange')
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
           window.history.replaceState({}, h, `/${h}`);
@@ -347,13 +378,17 @@ const curly = {
         }
       };
 
-      window.onpopstate = function() {
-        const p = window.location.pathname.replace(/[#/]/, "");
-        window.scrollTo(0, 0);
-        if (curly.router.paths[p]) {
-          return curly.router.paths[p]();
+      window.onpopstate = function(e) {
+        const h = window.location.hash.replace(/[#/]/, "");
+        if(!h){
+          const p = window.location.pathname.replace(/[#/]/, "");
+          console.log(p, 'popstate')
+          window.scrollTo(0, 0);
+          if (curly.router.paths[p]) {
+            return curly.router.paths[p]();
+          }
+          return curly.router.paths.home();
         }
-        return curly.router.paths.home();
       };
     }
   },

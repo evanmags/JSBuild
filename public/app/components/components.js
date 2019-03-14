@@ -378,9 +378,9 @@ export const clock = {
     text_align: "center"
   },
   events: {
-    click() {
-      clock.setStyle("background", "blue");
-    }
+      click: e => {
+        console.log('clicked');
+      }
   },
   timers: {
     date() {
@@ -445,7 +445,7 @@ export const menu = {
     color: "#333",
     box_shadow: `3px 0 3px ${colors.red}`,
     background: colors.yellow
-  }
+  },
 };
 
 export const banner = {
@@ -491,7 +491,7 @@ export const sidebarItems = props => {
             colors.red
           } 150px)`,
           background_repeat: "no-repeat",
-          background_position: "150px 0px",
+          background_position: "170px 0px",
           box_shadow: "0 0 0 0 transparent",
           transition: "all .1s, background .1s .08s",
           psudo: {
@@ -501,7 +501,7 @@ export const sidebarItems = props => {
               padding_left: "8px"
             },
             ".viewing": {
-              width: "125px",
+              // width: "155px",
               padding_left: "8px",
               background_position: `0px 0px`,
               border_left: `4px solid ${colors.dark_red}`,
@@ -554,12 +554,12 @@ export const sidebar = {
   has: sidebarItems([
     { text: "Components", type: "head" },
     { text: "Building", href: "#about", type: "item" },
-    { text: "Dynamic Comps.", href: "#clock", type: "item" },
-    { text: "Events", href: "#events", type: "item" },
-    { text: "Function Comps.", href: "#functions", type: "item" },
+    { text: "Dynamic Components", href: "#clock", type: "item" },
+    { text: "Event Handling", href: "#events", type: "item" },
+    { text: "Function Components", href: "#functions", type: "item" },
     { text: "list Example", href: "#list", type: "item" },
     { text: "Styling", type: "head" },
-    { text: "comp. styles", href: "#style", type: "item" },
+    { text: "Component styles", href: "#style", type: "item" },
     { text: "psudo styles", href: "#psudo", type: "item" },
     { text: "branding", href: "#style", type: "item" },
     { text: "Routing", type: "head" },
@@ -572,12 +572,12 @@ export const sidebar = {
   style: {
     position: "sticky",
     top: "130px",
-    margin: "0 35px 0 -140px",
-    width: "140px",
+    margin: "0 35px 0 -160px",
+    width: "160px",
     display: "flex",
     align_items: "stretch",
     flex_direction: "column"
-  }
+  },
 };
 
 export const container = {

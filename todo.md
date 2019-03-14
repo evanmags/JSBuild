@@ -46,3 +46,6 @@
     -   render
     -   style
     -   build
+- ! writing in error messages
+-   use import() to hotload modules in the router.'
+-   remove event listeners

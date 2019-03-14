@@ -39,8 +39,8 @@ const App = {
     font_family: "Laila"
   }
 };
-
-curly.render(App, document.querySelector("body"), e.styles);
-
 curly.router.paths = e.routes;
 curly.router.run();
+curly.render(App, document.querySelector("body"), e.styles);
+
+
