@@ -4,12 +4,13 @@
     -   curly
     -   curly lite (no styles)
     -   curly build (no styles or router)
--   functional styling
+√   functional styling
     √   setStyle function
     √   auto update
-    -   multiple style updates at once
+    √   multiple style updates at once
+    √   works with psudos
 -   style limitations
-    -   @media
+    -   @media - use text?
     -   @keyframes
     -   @imports
 -   Conditional Rendering
@@ -32,7 +33,7 @@
         -   Styling
             √   self styling
             -   style object
-            -   style packages
+            -   Global style and packages
         -   Routing
             -   how routing works
             -   setting up routes
@@ -46,6 +47,7 @@
     -   render
     -   style
     -   build
-- ! writing in error messages
+-   writing in error messages
 -   use import() to hotload modules in the router.'
--   remove event listeners
+√   remove event listeners
+√   fix firing of both popstate and hash events

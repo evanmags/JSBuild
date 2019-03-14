@@ -72,28 +72,6 @@ export const header = props => {
   };
 };
 
-export const openLogo = {
-  span: {
-    id: "logo"
-  },
-  has: ["curly"],
-  style: {
-    display: "inline-flex",
-    justify_content: "center",
-    align_items: "center",
-    width: "0px",
-    overflow: "hidden",
-    transition: "all .75s cubic-bezier(.3,.7,.36,1.5)"
-  },
-  timers: {
-    logoOpen() {
-      return setTimeout(() => {
-        openLogo.setStyle("width", "7rem");
-      }, 270);
-    }
-  }
-};
-
 export const sectionHeader = props => {
   return {
     h2: {
@@ -124,9 +102,6 @@ export const p = props => {
   return {
     p: {},
     has: [props],
-    style: {
-      margin_bottom: "15px"
-    }
   };
 };
 
@@ -164,8 +139,8 @@ export const link = props => {
 export const menuButton = ({ ...props }) => {
   return {
     a: {
-      id: "menuButton",
-      classList: props.class || "",
+      // id: "menuButton",
+      classList: props.class || "menuButton",
       href: props.href
     },
     has: [props.name],
@@ -207,7 +182,7 @@ export const menuButton = ({ ...props }) => {
     }
   };
 };
-export const home = menuButton({ name: "home", href: "#home" });
+export const home = menuButton({ name: "home", href: "#home" , class: 'altered'});
 export const about = menuButton({ name: "about", href: "#about" });
 export const download = menuButton({ name: "download", href: "#download" });
 export const contact = menuButton({ name: "contact", href: "#contact" });
@@ -448,12 +423,34 @@ export const menu = {
   },
 };
 
+export const openLogo = {
+  span: {
+    id: "logo"
+  },
+  has: ["Curly.js"],
+  style: {
+    display: "inline-flex",
+    justify_content: "center",
+    align_items: "center",
+    width: "0px",
+    overflow: "hidden",
+    transition: "all .75s cubic-bezier(.3,.7,.36,1.5)"
+  },
+  timers: {
+    logoOpen() {
+      return setTimeout(() => {
+        openLogo.setStyle({"width": "11rem"});
+      }, 270);
+    }
+  }
+};
+
 export const banner = {
   div: {
     id: "banner"
   },
   has: [
-    header(["{", openLogo, "}.js"]),
+    header(["{", openLogo, "}"]),
     subhead("Websites built on JS Objects")
   ],
   style: {
@@ -573,8 +570,8 @@ export const sidebar = {
     position: "sticky",
     top: "130px",
     margin: "0 35px 0 -160px",
-    width: "160px",
-    display: "flex",
+    min_width: "160px",
+    display: "flex",  
     align_items: "stretch",
     flex_direction: "column"
   },

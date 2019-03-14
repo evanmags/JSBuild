@@ -1,3 +1,6 @@
+// full dev bundle with errors written
+// all prod versions will not have errors and will just pass over.
+
 const curly = {
   // the only truely global variable in Curly.js is this array,
   // which will hold a reference of every element rendered to the page
@@ -79,7 +82,7 @@ const curly = {
     });
   },
 
-  createSelector(element) {
+  createCSSSelector(element) {
     //requires element tag object to be first key:value in obj
     for (var key in element) {
       // creates selector with preference set as class>id>tag
@@ -90,6 +93,9 @@ const curly = {
       } else if (element[key].id) {
         return (selector = `${key}#${element[key].id}`);
       } else {
+        console.group('Selector Creation Warning')
+        console.warn(`Curly created a generic tag selector: ${key} \n This could cause unwanted effects in styling. \n Please add a more specific selector like class or id to your component. \n Or place style in the global styles object.`)
+        console.groupEnd('Selector Creation Warning')
         return (selector = `${key}`);
       }
     }
@@ -104,7 +110,7 @@ const curly = {
 
     // loop through and append each rule as string to base rule string
     for (let rule in obj) {
-      if (rule !== "psudo") {
+      if (rule !== "psudo" || rule !== 'updated') {
         ruleStr += ` ${rule.replace(/_/g, "-")}: ${String(obj[rule]).replace(
           /_/g,
           "-"
@@ -129,19 +135,19 @@ const curly = {
 
   removeFromStyleSheet(selector, styleObj, styleSheet) {
     for (var index in styleSheet.rules) {
-      if (
-        styleSheet.rules[index].selectorText === selector &&
-        styleSheet.rules[index].cssText !==
-          `${selector} {${curly.createRuleString(styleObj)} }`
-      ) {
+      if ( styleObj.updated && styleSheet.rules[index].selectorText === selector ) {
+        console.warn(`Deleting rule from stylesheet: \n ${styleSheet.rules[index].cssText};\n This rule has been updated.`)
         styleSheet.deleteRule(index);
       }
     }
   },
 
   updateStyleSheet(selector, styleObj, styleSheet) {
-    curly.removeFromStyleSheet(selector, styleObj, styleSheet);
-    curly.addToStyleSheet(selector, styleObj, styleSheet);
+    if(styleObj.updated){
+      curly.removeFromStyleSheet(selector, styleObj, styleSheet);
+      curly.addToStyleSheet(selector, styleObj, styleSheet);
+      styleObj.updated = false;
+    }
   },
 
   //*** Helper Functions end ***//
@@ -179,7 +185,7 @@ const curly = {
     addHas(ele, i) {
       if (!this.has.includes(ele)) {
         this.has.splice(i, 0, ele);
-        if (i < this.has.length) {
+        if (i < this.has.length - 1) {
           curly.style(ele);
           const sibling = this.has[i + 1].DOMelement;
           sibling.parentNode.insertBefore(curly.build(ele), sibling);
@@ -198,41 +204,48 @@ const curly = {
     },
 
     // update styles after changing
-    setStyle(property, value) {
+    //  pass in parameters as {property: value},
+    setStyle(stylesObj, psudo = false) {
       if (!this.style) {
         this.style = {};
       }
-      this.style[property] = value;
+      if(!psudo){
+        this.style = Object.assign(this.style, stylesObj)
+        this.style['updated'] = true;
+      } else {
+        this.style.psudo[psudo] = Object.assign(this.style.psudo[psudo], stylesObj)
+        this.style.psudo[psudo]['updated'] = true;
+      } 
+      
       curly.style(this);
     }
   },
 
   //  physical construction function creates a DOM element
   build(l) {
-    // split element from class and id
-    let d;
+    let newDOMelement;
     // create element
     if (typeof l === "string") {
-      return (d = document.createTextNode(l));
+      return (newDOMelement = document.createTextNode(l));
     } else if (typeof l === "object") {
       Object.assign(l, curly.Component);
 
       for (var tag in l) {
         //create element
-        d = document.createElement(tag);
+        newDOMelement = document.createElement(tag);
 
-        l.DOMelement = d;
+        l.DOMelement = newDOMelement;
 
         // loop through attribute object
         for (var a in l[tag]) {
-          d[a] = l[tag][a];
+          newDOMelement[a] = l[tag][a];
         }
 
         break;
       }
 
       curly.elements = curly.elements.filter(ele => {
-        return ele.DOMelement !== d;
+        return ele.DOMelement !== newDOMelement;
       });
 
       curly.elements.push(l);
@@ -241,9 +254,9 @@ const curly = {
       if (l.has) {
         l.has.forEach(i => {
           if (typeof i === "string") {
-            d.appendChild(document.createTextNode(i));
+            newDOMelement.appendChild(document.createTextNode(i));
           } else if (typeof i === "object") {
-            curly.render(i, d);
+            curly.render(i, newDOMelement);
           }
         });
       }
@@ -251,7 +264,7 @@ const curly = {
       // add events
       for (let key in l.events) {
         try {
-          d.addEventListener(key, l.events[key]);
+          newDOMelement.addEventListener(key, l.events[key]);
         } catch (error) {
           console.group("Error in Events object");
           console.error(
@@ -279,7 +292,7 @@ const curly = {
       }
     }
 
-    return d;
+    return newDOMelement;
   },
 
   //  styles and places element
@@ -307,6 +320,7 @@ const curly = {
     try {
       styleSheet = document.querySelector("#CurlyJS_styles").sheet;
     } catch {
+      console.info('Creating new StyleSheet: #CurlyJS_styles')
       //create a blank style tag
       const styleEle = document.createElement("style");
       styleEle.id = "CurlyJS_styles";
@@ -325,7 +339,7 @@ const curly = {
 
     // if selector was not already created for this element, make one
     if (!element.CSSselector) {
-      element.CSSselector = curly.createSelector(element);
+      element.CSSselector = curly.createCSSSelector(element);
     }
 
     // push all selectors into an array
@@ -351,6 +365,15 @@ const curly = {
     // expirimental update of styles
     else if (keys.includes(element.CSSselector)) {
       curly.updateStyleSheet(element.CSSselector, element.style, styleSheet);
+      if (element.style.psudo) {
+        for (var psudo in element.style.psudo) {
+          curly.updateStyleSheet(
+            element.CSSselector + psudo,
+            element.style.psudo[psudo],
+            styleSheet
+          );
+        }
+      }
     }
   },
 
@@ -370,7 +393,6 @@ const curly = {
 
       window.onhashchange = function() {
         const h = window.location.hash.replace(/[#/]/, "");
-        console.log(h, 'hashchange')
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
           window.history.replaceState({}, h, `/${h}`);
@@ -379,15 +401,12 @@ const curly = {
       };
 
       window.onpopstate = function(e) {
-        const h = window.location.hash.replace(/[#/]/, "");
-        if(!h){
+        if (!window.location.hash) {
           const p = window.location.pathname.replace(/[#/]/, "");
-          console.log(p, 'popstate')
           window.scrollTo(0, 0);
-          if (curly.router.paths[p]) {
-            return curly.router.paths[p]();
-          }
-          return curly.router.paths.home();
+          return curly.router.paths[p]
+            ? curly.router.paths[p]()
+            : curly.router.paths.home();
         }
       };
     }

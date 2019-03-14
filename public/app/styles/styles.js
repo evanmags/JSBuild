@@ -38,6 +38,9 @@ export const styles = {
     color: colors.black,
     text_decoration: "none"
   },
+  p: {
+    margin_bottom: "15px"
+  },
   hr: {
     width: "65%"
   },

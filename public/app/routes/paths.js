@@ -43,6 +43,7 @@ export const routes = {
   about: () => {
     docsGenericRoute(0)
     c.container.setHas(pages.aboutContent);
+    c.home.setStyle({'background': 'green'}, ":hover");
   },
   clock: () => {
     docsGenericRoute(1)
@@ -67,6 +68,7 @@ export const routes = {
   psudo: () => {
     docsGenericRoute(6)
     c.container.setHas(pages.psudoContent);
+
   },
   routing: () => {
     docsGenericRoute(7);
