@@ -379,10 +379,12 @@ const curly = {
     },
     paths: {},
     run() {
+      curly.router.paths.home();
+
       window.location.hash =
         window.location.pathname !== `/curly.js-docs/`
-          ? window.location.pathname.replace(`/`, "#")
-          : "#home";
+          ? window.location.pathname.replace(`/curly.js-docs/`, "/curly.js-docs#")
+          : "/curly.js-docs#home";
 
       window.onhashchange = function() {
         const h = window.location.hash.replace(/[#/]/, "");
