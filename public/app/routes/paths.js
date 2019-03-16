@@ -31,6 +31,11 @@ function docsGenericRoute(id){
     changeMenu(id);
 }
 
+function fourOHfour(){
+  docsGenericRoute(0)
+  c.container.setHas(pages.four_O_four);
+}
+
 export const routes = {
   // landing page
   home: () => {
@@ -71,6 +76,9 @@ export const routes = {
   },
   routing: () => {
     docsGenericRoute(7);
+  },
+  fourOHfour: () => {
+    fourOHfour();
   },
 
   // downloads

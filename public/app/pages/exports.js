@@ -10,3 +10,4 @@ export { styleContent } from "./style.js";
 export { psudoContent } from "./psudo.js";
 export { downloadContent } from "./download.js";
 export { contactContent } from "./contact.js";
+export { four_O_four } from "./404.js";

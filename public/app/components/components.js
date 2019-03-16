@@ -558,13 +558,13 @@ export const sidebar = {
     { text: "Styling", type: "head" },
     { text: "Component styles", href: "#style", type: "item" },
     { text: "psudo styles", href: "#psudo", type: "item" },
-    { text: "branding", href: "#style", type: "item" },
+    { text: "branding", href: "#fourOHfour", type: "item" },
     { text: "Routing", type: "head" },
-    { text: "Set up", href: "#routing", type: "item" },
-    { text: "options", href: "#routing", type: "item" },
+    { text: "Set up", href: "#fourOHfour", type: "item" },
+    { text: "options", href: "#fourOHfour", type: "item" },
     { text: "JSON", type: "head" },
-    { text: "Preparing", href: "#routing", type: "item" },
-    { text: "Parsing", href: "#routing", type: "item" }
+    { text: "Preparing", href: "#fourOHfour", type: "item" },
+    { text: "Parsing", href: "#fourOHfour", type: "item" }
   ]),
   style: {
     position: "sticky",

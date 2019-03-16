@@ -5,7 +5,7 @@ export const contactContent = [
   c.subhead("Reach out to help, ask, or suggest"),
   c.p("We are always looking for help maintaining or updating curly.js. If you are looking to contribute, or just want to dig further into the project checkout our GitHub repository."),
   c.buttonRow([
-    c.link({href:"https://github.com/evanmags/JSBuild", text: 'GitHub Repo'})
+    c.link({href:"https://github.com/evanmags/Curly.js", text: 'GitHub Repo'})
   ]),
   c.p("We also have a sandbox hosted on Codepen with the entire development version of curly.js for you to expiriment and learn before diving into a full application"),
   c.buttonRow([
