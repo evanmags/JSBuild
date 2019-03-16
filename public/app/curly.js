@@ -379,7 +379,6 @@ const curly = {
     },
     paths: {},
     run() {
-
       window.location.hash =
         window.location.pathname !== `/curly.js-docs/`
           ? window.location.pathname.replace(`/curly.js-docs/`, "/curly.js-docs#")
