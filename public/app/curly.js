@@ -378,28 +378,24 @@ const curly = {
       this.paths[`${path.replace(/[#/]/, "")}`] = callback;
     },
     paths: {},
-    run(rootPath) {
+    run(rootPath, homeRoute) {
       rootPath = rootPath || '';
-      // console.log(window.location.hash)
       window.location.hash =
-        window.location.pathname !== '/'
-          ? window.location.pathname.replace(`${rootPath}/`, '')
-          : `#home`;
-      
+        window.location.pathname !== rootPath
+          ? homeRoute
+          : window.location.pathname.replace(`${rootPath}` || "/", '');
+
       window.onhashchange = function(e) {
-        console.log('hash')
         const h = window.location.hash.replace(rootPath, '').replace(/[\/#]/g, "");
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
-          window.location.pathname = `${rootPath}/${h}`;
           window.history.replaceState({}, h, `${rootPath}/${h}`);
           return curly.router.paths[h]();
         }
       };
 
       window.onpopstate = function(e) {
-        console.log('pop')
-        if (!window.location.hash || window.location.pathname.includes(rootPath)) {
+        if (!window.location.hash) {
           const p = window.location.pathname.replace(`${rootPath}/`, "");
           window.scrollTo(0, 0);
           return curly.router.paths[p]
