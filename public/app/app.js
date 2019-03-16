@@ -40,7 +40,7 @@ const App = {
   }
 };
 curly.router.paths = e.routes;
-curly.router.run();
+curly.router.run("/curly.js-docs");
 curly.render(App, document.querySelector("body"), e.styles);
 
 
