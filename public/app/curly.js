@@ -399,8 +399,7 @@ const curly = {
 
       window.onpopstate = function(e) {
         console.log('pop')
-        console.log(window.location.hash)
-        if (!window.location.hash || window.location.hash.includes(rootPath)) {
+        if (!window.location.hash || window.location.pathname.includes(rootPath)) {
           const p = window.location.pathname.replace(`${rootPath}/`, "");
           window.scrollTo(0, 0);
           return curly.router.paths[p]
