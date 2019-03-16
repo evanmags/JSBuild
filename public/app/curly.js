@@ -380,7 +380,7 @@ const curly = {
     paths: {},
     run() {
       window.location.hash =
-        window.location.pathname !== `/`
+        window.location.pathname !== `/curly.js-docs/`
           ? window.location.pathname.replace(`/`, "#")
           : "#home";
 
@@ -388,7 +388,7 @@ const curly = {
         const h = window.location.hash.replace(/[#/]/, "");
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
-          window.history.replaceState({}, h, `/${h}`);
+          window.history.replaceState({}, h, `/curly.js-docs/${h}`);
           return curly.router.paths[h]();
         }
       };
