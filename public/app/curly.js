@@ -379,7 +379,6 @@ const curly = {
     },
     paths: {},
     run() {
-      // curly.router.paths.home();
 
       window.location.hash =
         window.location.pathname !== `/curly.js-docs/`
