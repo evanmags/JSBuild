@@ -1,9 +1,6 @@
 // full dev bundle with errors written
 
 const curly = {
-  // the only truely global variable in Curly.js is this array,
-  // which will hold a reference of every element rendered to the page
-  elements: [],
 
   // quick reimplementation of React.createElement(e, p, c) for jsx use without React loaded...
   // does not handle functions from jsx well (if at all in some cases)
@@ -249,13 +246,6 @@ const curly = {
 
         break;
       }
-
-      curly.elements = curly.elements.filter(ele => {
-        return ele.DOMelement !== newDOMelement;
-      });
-
-      curly.elements.push(l);
-
       //add child elements
       if (l.has) {
         l.has.forEach(i => {
@@ -266,7 +256,6 @@ const curly = {
           }
         });
       }
-
       // add events
       for (let key in l.events) {
         try {
@@ -382,11 +371,12 @@ const curly = {
       rootPath = rootPath || '';
       window.location.hash =
         window.location.pathname !== rootPath
-          ? homeRoute
-          : window.location.pathname.replace(`${rootPath}` || "/", '');
+        ? window.location.pathname.replace(`${rootPath}` || "/", '')
+        : homeRoute;
 
       window.onhashchange = function(e) {
         const h = window.location.hash.replace(rootPath, '').replace(/[\/#]/g, "");
+        // fetch('/curly_router/paths')
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
           window.history.replaceState({}, h, `${rootPath}/${h}`);
@@ -411,9 +401,9 @@ const curly = {
   // build your app with js objects then transpile to json for shiping.
   functionsToJSON(obj) {
     for (var key in obj) {
-      if (typeof obj[key] === "function") {
+      // if (typeof obj[key] === "function") {
         obj[key] = `${obj[key]}`;
-      }
+      // }
     }
     return obj;
   },
@@ -442,9 +432,15 @@ const curly = {
   // call your app with AJAX to get JSON then transpile to JS objects.
   functionsFromJSON(obj) {
     for (var key in obj) {
-      if (typeof obj[key] === "string" && obj[key].includes("function")) {
+      try{
         obj[key] = eval(`(${obj[key].replace("\n", "")})`);
       }
+      catch (error){
+        console.log(error);
+      }
+      // if (typeof obj[key] === "string" && obj[key].includes("function")) {
+        // obj[key] = eval(`(${obj[key].replace("\n", "")})`);
+      // }
     }
     return obj;
   },

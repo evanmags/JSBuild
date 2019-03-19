@@ -58,6 +58,6 @@ c.codeBlock([
   c.p("Continue to dig through this functional componant and try to build one yourself. Then in the next section we will move on to styling our components."),
   c.buttonRow([
     c.link({ href: "#Home", text: "Home" }),
-    c.link({ href: "#about", text: "Learn More!" })
+    c.link({ href: "#style", text: "Styling" })
   ])
 ];

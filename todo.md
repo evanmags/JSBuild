@@ -30,12 +30,12 @@
             √   events
             √   functinal components
             √   lists
-        -   Styling
+        √   Styling
             √   self styling
             √   psudo Styles
-            -   Global style and packages
+            √   Global style and packages
         -   Routing
-            -   setting up routes
+            √   setting up routes
             -   routing options
         -   Production
             -   preparing to ship
@@ -46,6 +46,7 @@
     -   style
     -   build
 -   writing in error messages
--   use import() to hotload modules in the router.'
+-   use import() to hotload modules in the router.
 √   remove event listeners
 √   fix firing of both popstate and hash events
+    -   still happens on load

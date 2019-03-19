@@ -45,6 +45,7 @@ export const routes = {
   },
 
   //docs start
+  // components
   about: () => {
     docsGenericRoute(0)
     c.container.setHas(pages.aboutContent);
@@ -65,6 +66,8 @@ export const routes = {
     docsGenericRoute(4)
     c.container.setHas(pages.listContent);
   },
+
+  // styles
   style: () => {
     docsGenericRoute(5)
     c.container.setHas(pages.styleContent);
@@ -72,11 +75,23 @@ export const routes = {
   psudo: () => {
     docsGenericRoute(6)
     c.container.setHas(pages.psudoContent);
+  },
+  global: () => {
+    docsGenericRoute(7)
+    c.container.setHas(pages.globalContent);
+  },
 
+  // routing
+  router: () => {
+    docsGenericRoute(8);
+    c.container.setHas(pages.routerContent);
   },
-  routing: () => {
-    docsGenericRoute(7);
+  paths: () => {
+    docsGenericRoute(9);
+    c.container.setHas(pages.pathsContent);
   },
+
+  // 404
   fourOHfour: () => {
     fourOHfour();
   },

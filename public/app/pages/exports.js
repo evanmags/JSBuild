@@ -10,4 +10,7 @@ export { styleContent } from "./style.js";
 export { psudoContent } from "./psudo.js";
 export { downloadContent } from "./download.js";
 export { contactContent } from "./contact.js";
+export { globalContent } from "./global.js";
+export { routerContent } from "./router_obj.js";
+export { pathsContent } from "./paths.js";
 export { four_O_four } from "./404.js";
