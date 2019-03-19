@@ -371,13 +371,14 @@ const curly = {
       window.location.hash =
         window.location.pathname !== rootPath
         ? window.location.pathname.includes(rootPath) 
-          ? window.location.pathname.replace(`${rootPath}/`, '')
+          ? window.location.pathname.replace(`${rootPath}/`, '') === '' 
+            ? homeRoute
+            : window.location.pathname.replace(`${rootPath}/`, '')
           : homeRoute
         : homeRoute;
 
       window.onhashchange = function(e) {
         const h = window.location.hash.replace(rootPath, '').replace(/[\/#]/g, "");
-        // fetch('/curly_router/paths')
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
           window.history.replaceState({}, h, `${rootPath}/${h}`);
