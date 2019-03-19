@@ -412,6 +412,7 @@ export const menu = {
   has: [home, about, download, contact],
   style: {
     position: "fixed",
+    z_index: '1000',
     top: "0",
     height: "40px",
     width: "100vw",
@@ -565,7 +566,7 @@ export const sidebar = {
   ]),
   style: {
     position: "sticky",
-    top: "130px",
+    top: "60px",
     margin: "0 35px 0 -160px",
     min_width: "160px",
     display: "flex",  
