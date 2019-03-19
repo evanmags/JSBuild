@@ -367,12 +367,11 @@ const curly = {
       this.paths[`${path.replace(/[#/]/, "")}`] = callback;
     },
     paths: {},
-    run(rootPath, homeRoute) {
-      rootPath = rootPath || '';
+    run(rootPath = '/', homeRoute) {
       window.location.hash =
         window.location.pathname !== rootPath
         ? window.location.pathname.includes(rootPath) 
-          ? window.location.pathname.replace(`${rootPath}/`, '#')
+          ? window.location.pathname.replace(`${rootPath}/`, '')
           : homeRoute
         : homeRoute;
 
