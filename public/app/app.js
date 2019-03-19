@@ -41,5 +41,5 @@ const App = {
 };
 
 curly.router.paths = e.routes;
-curly.router.run(false, "#home");
+curly.router.run('/curly.js-docs', "#home");
 curly.render(App, document.querySelector("body"), e.styles);
