@@ -1,2 +1,4 @@
-public/test/
-views/tests.ejs
+/node_modules
+_config.yml
+package-lock.json
+todo.md
