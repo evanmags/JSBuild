@@ -23,7 +23,7 @@
         -   render, but 'display: none;'?
 -   content:
     √   home
-    -   about
+    √   about
         √   Components
             √   general 
             √   dynamic components
@@ -34,13 +34,14 @@
             √   self styling
             √   psudo Styles
             √   Global style and packages
-        -   Routing
+        √   Routing
             √   setting up routes
-            -   routing options
-        -   Production
-            -   preparing to ship
-            -   call and process
+            √   routing options
+        √   Production
+            √   preparing to ship
+            √   call and process
     √   contact
+    - downloads
 -   testing
     -   render
     -   style
