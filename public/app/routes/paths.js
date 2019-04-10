@@ -1,4 +1,5 @@
 import { c, pages } from "../exports.js";
+import { App } from "../app.js";
 
 function changeTab(ele) {
   if (!ele.DOMelement.classList.contains("active")) {
@@ -26,6 +27,7 @@ function gateSetHas(element, checkFor, elseSet) {
 }
 
 function docsGenericRoute(id){
+    App.removeHas(c.banner);
     c.main.addHas(c.sidebar, 0);
     changeTab(c.about);
     changeMenu(id);
@@ -39,6 +41,7 @@ function fourOHfour(){
 export const routes = {
   // landing page
   home: () => {
+    App.addHas(c.banner, 1);
     c.main.removeHas(c.sidebar);
     c.container.setHas(pages.homeContent);
     changeTab(c.home);
@@ -98,6 +101,7 @@ export const routes = {
 
   // downloads
   download: () => {
+    App.removeHas(c.banner);
     c.main.removeHas(c.sidebar);
     c.container.setHas(pages.downloadContent);
     changeTab(c.download);
@@ -105,6 +109,7 @@ export const routes = {
 
   // contact and links
   contact: () => {
+    App.removeHas(c.banner);
     c.main.removeHas(c.sidebar);
     c.container.setHas(pages.contactContent);
     changeTab(c.contact);

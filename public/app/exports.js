@@ -13,10 +13,10 @@
 //  Your app uses all of these and accesses them from here.
 
 //styles import comes first
-export { colors, styles } from "./styles/styles.js";
+export { colors, sec, font, styles } from "./styles/styles.js";
 
 //then import and export components
-import * as c from "./components/components.js";
+import * as c from "./components/exports.js";
 export { c };
 
 //export pages

@@ -37,7 +37,7 @@ export const bannerHead = {
   } 
 };
 
-export const bannerButton = link("Get Started!");
+export const bannerButton = link({text: "Get Started!", href:'#main' });
 bannerButton.style = {
   color: colors.dark,
   border: `1px solid ${colors.dark}`,

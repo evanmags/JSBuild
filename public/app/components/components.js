@@ -58,7 +58,7 @@
 //   }
 // }
 
-import { colors } from "../exports.js";
+import { colors, sec, font } from "../exports.js";
 
 export const header = props => {
   return {
@@ -67,6 +67,7 @@ export const header = props => {
     },
     has: props,
     style: {
+      font_family: font.family.head,
       font_size: "2.75rem"
     }
   };
@@ -81,6 +82,7 @@ export const sectionHeader = props => {
     style: {
       justify_content: "center",
       align_items: "flex-end",
+      font_family: font.family.head,
       font_size: "1.75rem"
     }
   };
@@ -93,6 +95,7 @@ export const subhead = props => {
     },
     has: [props],
     style: {
+      font_family: font.family.head,
       margin_bottom: "15px"
     }
   };
@@ -346,7 +349,7 @@ export const main = {
     display: "flex",
     justify_content: "center",
     flex: "1 1 100%",
-    background: colors.mid
+    background: sec.mid
   }
 };
 
@@ -364,12 +367,11 @@ export const footer = {
     min_height: "80px",
     width: "100vw",
     padding: "20px 10vw",
-    margin_top: "50px",
     display: "flex",
     flex_direction: "column",
     align_items: "flex-end",
     color: "#333",
-    background: colors.trans_red,
+    background: sec.mid,
     psudo: {
       ">p": {
         margin: "0",
