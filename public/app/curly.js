@@ -1,16 +1,15 @@
 // full dev bundle with errors written
 
 const curly = {
-
   // quick reimplementation of React.createElement(e, p, c) for jsx use without React loaded...
   // does not handle functions from jsx well (if at all in some cases)
   // need to change the Babel pragma for jsx if you want to use this
   createElement(element, props, children) {
     //check to see if element is defined as a function
-    if (typeof element === "function") {
+    if (typeof element === 'function') {
       props = {
         ...props,
-        children: [children] || ""
+        children: [children] || ''
       };
       //return the function
       return element(props);
@@ -31,7 +30,7 @@ const curly = {
     if (attrs.id) {
       select = `${key}#${attrs.id}`;
     } else if (attrs.classList) {
-      select = `${key}.${attrs.classList.split(" ").join(".")}`;
+      select = `${key}.${attrs.classList.split(' ').join('.')}`;
     }
   },
   selectElement(ele) {
@@ -75,11 +74,11 @@ const curly = {
   },
 
   // style function helpers
-  createNewStyleSheet(){
-    console.info('Creating new StyleSheet: #CurlyJS_styles')
+  createNewStyleSheet() {
+    console.info('Creating new StyleSheet: #CurlyJS_styles');
     //create a blank style tag
-    const styleEle = document.createElement("style");
-    styleEle.id = "CurlyJS_styles";
+    const styleEle = document.createElement('style');
+    styleEle.id = 'CurlyJS_styles';
 
     //add to document
     document.head.appendChild(styleEle);
@@ -92,14 +91,16 @@ const curly = {
       // creates selector with preference set as class>id>tag
       if (element[key].classList) {
         return (selector = `${key}.${element[key].classList
-          .split(" ")
-          .join(".")}`);
+          .split(' ')
+          .join('.')}`);
       } else if (element[key].id) {
         return (selector = `${key}#${element[key].id}`);
       } else {
-        console.group('Selector Creation Warning')
-        console.warn(`Curly created a generic tag selector: ${key} \n This could cause unwanted effects in styling. \n Please add a more specific selector like class or id to your component. \n Or place style in the global styles object.`)
-        console.groupEnd('Selector Creation Warning')
+        console.group('Selector Creation Warning');
+        console.warn(
+          `Curly created a generic tag selector: ${key} \n This could cause unwanted effects in styling. \n Please add a more specific selector like class or id to your component. \n Or place style in the global styles object.`
+        );
+        console.groupEnd('Selector Creation Warning');
         return (selector = `${key}`);
       }
     }
@@ -113,10 +114,10 @@ const curly = {
 
     // loop through and append each rule as string to base rule string
     for (let rule in obj) {
-      if (rule !== "psudo" || rule !== 'updated') {
-        ruleStr += ` ${rule.replace(/_/g, "-")}: ${String(obj[rule]).replace(
+      if (rule !== 'psudo' || rule !== 'updated') {
+        ruleStr += ` ${rule.replace(/_/g, '-')}: ${String(obj[rule]).replace(
           /_/g,
-          "-"
+          '-'
         )};`;
       }
     }
@@ -135,14 +136,21 @@ const curly = {
   },
   removeFromStyleSheet(selector, styleObj, styleSheet) {
     for (var index in styleSheet.rules) {
-      if ( styleObj.updated && styleSheet.rules[index].selectorText === selector ) {
-        console.warn(`Deleting rule from stylesheet: \n ${styleSheet.rules[index].cssText};\n This rule has been updated.`)
+      if (
+        styleObj.updated &&
+        styleSheet.rules[index].selectorText === selector
+      ) {
+        console.warn(
+          `Deleting rule from stylesheet: \n ${
+            styleSheet.rules[index].cssText
+          };\n This rule has been updated.`
+        );
         styleSheet.deleteRule(index);
       }
     }
   },
   updateStyleSheet(selector, styleObj, styleSheet) {
-    if(styleObj.updated){
+    if (styleObj.updated) {
       curly.removeFromStyleSheet(selector, styleObj, styleSheet);
       curly.addToStyleSheet(selector, styleObj, styleSheet);
       styleObj.updated = false;
@@ -155,7 +163,7 @@ const curly = {
     // called on 'has' change
     // can also be called at will with other functions
     update() {
-      this.DOMelement.innerHTML = "";
+      this.DOMelement.innerHTML = '';
 
       const parent = curly.selectElement(this);
 
@@ -205,14 +213,17 @@ const curly = {
       if (!this.style) {
         this.style = {};
       }
-      if(!psudo){
-        this.style = Object.assign(this.style, stylesObj)
+      if (!psudo) {
+        this.style = Object.assign(this.style, stylesObj);
         this.style['updated'] = true;
       } else {
-        this.style.psudo[psudo] = Object.assign(this.style.psudo[psudo], stylesObj)
+        this.style.psudo[psudo] = Object.assign(
+          this.style.psudo[psudo],
+          stylesObj
+        );
         this.style.psudo[psudo]['updated'] = true;
-      } 
-      
+      }
+
       curly.style(this);
     }
   },
@@ -220,22 +231,21 @@ const curly = {
   build(l) {
     let newDOMelement;
     // create element
-    if (typeof l === "string") {
+    if (typeof l === 'string') {
       return (newDOMelement = document.createTextNode(l));
-    } else if (typeof l === "object") {
+    } else if (typeof l === 'object') {
       Object.assign(l, curly.Component);
 
       for (var tag in l) {
         //create element'
         try {
           newDOMelement = document.createElement(tag);
-        } catch {
-          console.group('Element creation error')
-          console.error(`${tag} is not a valid html tag at:`)
-          console.error(l)
-          console.groupEnd('Element creation error')
+        } catch (Error) {
+          console.group('Element creation error');
+          console.error(`${tag} is not a valid html tag at:`);
+          console.error(l);
+          console.groupEnd('Element creation error');
         }
-
 
         l.DOMelement = newDOMelement;
 
@@ -249,9 +259,9 @@ const curly = {
       //add child elements
       if (l.has) {
         l.has.forEach(i => {
-          if (typeof i === "string") {
+          if (typeof i === 'string') {
             newDOMelement.appendChild(document.createTextNode(i));
-          } else if (typeof i === "object") {
+          } else if (typeof i === 'object') {
             curly.render(i, newDOMelement);
           }
         });
@@ -261,12 +271,12 @@ const curly = {
         try {
           newDOMelement.addEventListener(key, l.events[key]);
         } catch (error) {
-          console.group("Error in Events object");
+          console.group('Error in Events object');
           console.error(
-            "One or more of the keys in the events object is not a function at:"
+            'One or more of the keys in the events object is not a function at:'
           );
           console.error(l);
-          console.groupEnd("Error in Events object");
+          console.groupEnd('Error in Events object');
         }
       }
 
@@ -276,12 +286,12 @@ const curly = {
           try {
             l.timers[key]();
           } catch (error) {
-            console.group("Error in Timers object");
+            console.group('Error in Timers object');
             console.error(
-              "One or more of the keys in the timers object is not a function at:"
+              'One or more of the keys in the timers object is not a function at:'
             );
             console.error(l);
-            console.groupEnd("Error in Timers object");
+            console.groupEnd('Error in Timers object');
           }
         }
       }
@@ -301,7 +311,7 @@ const curly = {
   //pass in your styles object and it will create a stylesheet and append it to the page
   style(element, styleObj) {
     // bump out if no style object is in element
-    if (typeof element === "string" || !element.style) {
+    if (typeof element === 'string' || !element.style) {
       return;
     }
 
@@ -311,10 +321,10 @@ const curly = {
 
     //check if there is already a stylesheet
     try {
-      styleSheet = document.querySelector("#CurlyJS_styles").sheet;
+      styleSheet = document.querySelector('#CurlyJS_styles').sheet;
     } catch {
       // create and access style sheet
-      styleSheet = curly.createNewStyleSheet()
+      styleSheet = curly.createNewStyleSheet();
 
       //add rules from style object
       for (var selector in styleObj) {
@@ -364,21 +374,23 @@ const curly = {
   // router for internal navigation
   router: {
     get(path, callback) {
-      this.paths[`${path.replace(/[#/]/, "")}`] = callback;
+      this.paths[`${path.replace(/[#/]/, '')}`] = callback;
     },
     paths: {},
     run(rootPath = '/', homeRoute) {
       window.location.hash =
         window.location.pathname !== rootPath
-        ? window.location.pathname.includes(rootPath) 
-          ? window.location.pathname.replace(`${rootPath}/`, '') === '' 
-            ? homeRoute
-            : window.location.pathname.replace(`${rootPath}/`, '')
-          : homeRoute
-        : homeRoute;
+          ? window.location.pathname.includes(rootPath)
+            ? window.location.pathname.replace(`${rootPath}/`, '') === ''
+              ? homeRoute
+              : window.location.pathname.replace(`${rootPath}/`, '')
+            : homeRoute
+          : homeRoute;
 
       window.onhashchange = function(e) {
-        const h = window.location.hash.replace(rootPath, '').replace(/[\/#]/g, "");
+        const h = window.location.hash
+          .replace(rootPath, '')
+          .replace(/[\/#]/g, '');
         window.scrollTo(0, 0);
         if (curly.router.paths[h]) {
           window.history.replaceState({}, h, `${rootPath}/${h}`);
@@ -388,7 +400,7 @@ const curly = {
 
       window.onpopstate = function(e) {
         if (!window.location.hash) {
-          const p = window.location.pathname.replace(`${rootPath}/`, "");
+          const p = window.location.pathname.replace(`${rootPath}/`, '');
           window.scrollTo(0, 0);
           return curly.router.paths[p]
             ? curly.router.paths[p]()
@@ -404,7 +416,7 @@ const curly = {
   functionsToJSON(obj) {
     for (var key in obj) {
       // if (typeof obj[key] === "function") {
-        obj[key] = `${obj[key]}`;
+      obj[key] = `${obj[key]}`;
       // }
     }
     return obj;
@@ -434,14 +446,13 @@ const curly = {
   // call your app with AJAX to get JSON then transpile to JS objects.
   functionsFromJSON(obj) {
     for (var key in obj) {
-      try{
-        obj[key] = eval(`(${obj[key].replace("\n", "")})`);
-      }
-      catch (error){
+      try {
+        obj[key] = eval(`(${obj[key].replace('\n', '')})`);
+      } catch (error) {
         console.log(error);
       }
       // if (typeof obj[key] === "string" && obj[key].includes("function")) {
-        // obj[key] = eval(`(${obj[key].replace("\n", "")})`);
+      // obj[key] = eval(`(${obj[key].replace("\n", "")})`);
       // }
     }
     return obj;

@@ -58,17 +58,17 @@
 //   }
 // }
 
-import { colors, sec, font } from "../exports.js";
+import { colors, sec, font } from '../exports.js';
 
 export const header = props => {
   return {
     h1: {
-      classList: "header"
+      classList: 'header'
     },
     has: props,
     style: {
       font_family: font.family.head,
-      font_size: "2.75rem"
+      font_size: '2.75rem'
     }
   };
 };
@@ -76,14 +76,14 @@ export const header = props => {
 export const sectionHeader = props => {
   return {
     h2: {
-      classList: "header"
+      classList: 'header'
     },
     has: [props],
     style: {
-      justify_content: "center",
-      align_items: "flex-end",
+      justify_content: 'center',
+      align_items: 'flex-end',
       font_family: font.family.head,
-      font_size: "1.75rem"
+      font_size: '1.75rem'
     }
   };
 };
@@ -91,12 +91,12 @@ export const sectionHeader = props => {
 export const subhead = props => {
   return {
     h5: {
-      classList: "subhead"
+      classList: 'subhead'
     },
     has: [props],
     style: {
       font_family: font.family.head,
-      margin_bottom: "15px"
+      margin_bottom: '15px'
     }
   };
 };
@@ -104,35 +104,35 @@ export const subhead = props => {
 export const p = props => {
   return {
     p: {},
-    has: [props],
+    has: [props]
   };
 };
 
 export const link = props => {
   return {
     a: {
-      id: "link",
-      href: props.href || "#"
+      classList: props.class || 'link',
+      href: props.href || '#'
     },
-    has: [props.text || "click here!"],
+    has: [props.text || 'click here!'],
     style: {
-      background: "transparent",
-      font_size: "13px",
-      border: `1px solid`,
-      border_radius: "3px",
-      transition: "all .1s",
-      float: "right",
-      box_shadow: "2px 3px 0 0",
-      padding: "6px 12px",
-      margin: "10px 50px 20px",
+      width: 'auto',
+      color: sec.dark,
+      border: `1px solid ${sec.dark}`,
+      border_radius: '3px',
+      text_decoration: 'none',
+      background_image: `linear-gradient(${sec.dark}, ${sec.dark})`,
+      background_repeat: 'no-repeat',
+      background_position: '120px 0px',
+      text_align: 'center',
+      align_self: 'flex-end',
+      transition: 'all .2s',
+      padding: '8px 15px',
+      margin: '30px',
       psudo: {
-        ":hover": {
-          color: "#232323",
-          background: colors.dark_yellow
-        },
-        ":active": {
-          transform: "translate(1px,1px)",
-          box_shadow: "1px 2px 0 0"
+        ':hover': {
+          color: sec.light,
+          background_position: '0px 0px'
         }
       }
     }
@@ -142,18 +142,18 @@ export const link = props => {
 export const buttonRow = props => {
   let obj = {
     div: {
-      classList: "buttonRow"
+      classList: 'buttonRow'
     },
     has: [...props],
     style: {
-      width: "100%",
-      display: "flex",
-      justify_content: "space-between"
+      width: '100%',
+      display: 'flex',
+      justify_content: 'space-between'
     }
   };
   if (props.length === 1) {
-    obj.div.classList = "oneButtonRow";
-    obj.style.justify_content = "center";
+    obj.div.classList = 'oneButtonRow';
+    obj.style.justify_content = 'center';
   }
   return obj;
 };
@@ -161,7 +161,7 @@ export const buttonRow = props => {
 export const d = props => {
   return {
     span: {
-      classList: "declairation"
+      classList: 'declairation'
     },
     has: [props],
     style: {
@@ -173,7 +173,7 @@ export const d = props => {
 export const vr = props => {
   return {
     span: {
-      classList: "variable"
+      classList: 'variable'
     },
     has: [props],
     style: {
@@ -185,7 +185,7 @@ export const vr = props => {
 export const va = props => {
   return {
     span: {
-      classList: "value"
+      classList: 'value'
     },
     has: [props],
     style: {
@@ -197,7 +197,7 @@ export const va = props => {
 export const t = props => {
   return {
     span: {
-      classList: "tag"
+      classList: 'tag'
     },
     has: [props],
     style: {
@@ -209,7 +209,7 @@ export const t = props => {
 export const f = props => {
   return {
     span: {
-      classList: "function"
+      classList: 'function'
     },
     has: [props],
     style: {
@@ -221,7 +221,7 @@ export const f = props => {
 export const al = props => {
   return {
     span: {
-      classList: "alt"
+      classList: 'alt'
     },
     has: [props],
     style: {
@@ -233,10 +233,10 @@ export const al = props => {
 export const ln = (num, props) => {
   return {
     span: {
-      classList: "lineNumber"
+      classList: 'lineNumber'
     },
     has: [
-      (num > 1 ? `\n` : ``) + (num < 10 ? ` ` : ``) + `${num}  ` + (props || "")
+      (num > 1 ? `\n` : ``) + (num < 10 ? ` ` : ``) + `${num}  ` + (props || '')
     ],
     style: {
       color: colors.code.black
@@ -247,7 +247,7 @@ export const ln = (num, props) => {
 export const co = props => {
   return {
     span: {
-      classList: "comment"
+      classList: 'comment'
     },
     has: [props],
     style: {
@@ -259,15 +259,15 @@ export const co = props => {
 export const code = props => {
   return {
     pre: {
-      classList: "code"
+      classList: 'code'
     },
     has: [...props],
     style: {
       color: colors.code.black,
-      white_space: "pre-wrap",
-      font_family: "Source Code Pro",
-      font_size: "12px",
-      margin: "15px 20px"
+      white_space: 'pre-wrap',
+      font_family: 'Source Code Pro',
+      font_size: '12px',
+      margin: '15px 20px'
     }
   };
 };
@@ -275,21 +275,21 @@ export const code = props => {
 export const codeBlock = props => {
   return {
     div: {
-      classList: "codeblock"
+      classList: 'codeblock'
     },
     has: [code(props)],
     style: {
-      margin: "5px auto 25px",
-      max_width: "85%",
-      align_self: "center",
-      padding: "20px",
+      margin: '5px auto 25px',
+      max_width: '85%',
+      align_self: 'center',
+      padding: '20px',
       background: colors.trans_red,
-      border_radius: "5px",
+      border_radius: '5px',
       border: `1px solid ${colors.red}`,
       box_shadow: `2px 2px 15px ${colors.gold}`,
       psudo: {
-        ">.code": {
-          margin: "0 20px"
+        '>.code': {
+          margin: '0 20px'
         }
       }
     }
@@ -298,21 +298,21 @@ export const codeBlock = props => {
 
 export const clock = {
   p: {
-    id: "clock"
+    id: 'clock'
   },
   has: [new Date().toLocaleTimeString()],
   style: {
-    text_align: "center"
+    text_align: 'center'
   },
   events: {
-      click: e => {
-        console.log('clicked');
-      }
+    click: () => {
+      console.log('clicked');
+    }
   },
   timers: {
     date() {
       return (clock.int = setInterval(() => {
-        console.log("timer fired");
+        console.log('timer fired');
         return clock.setHas([new Date().toLocaleTimeString()]);
       }, 1000));
     }
@@ -321,59 +321,59 @@ export const clock = {
 
 export const container = {
   div: {
-    classList: "container"
+    classList: 'container'
   },
   has: [],
   style: {
-    min_width: "400px",
-    max_width: "900px",
+    min_width: '400px',
+    max_width: '900px',
     margin_top: '-10vh',
     padding: '10vh 3vw 0',
-    display: "flex",
+    display: 'flex',
     justify_content: 'flex-start',
-    flex_direction: "column",
-    overflow: "hidden"
+    flex_direction: 'column',
+    overflow: 'hidden'
   }
 };
 
 export const main = {
   main: {
-    id: "main"
+    id: 'main'
   },
   has: [container],
   style: {
-    width: "100%",
+    width: '100%',
     min_height: '100vh',
-    padding: "10vh 5vw 4vh",
-    display: "flex",
-    justify_content: "center",
+    padding: '10vh 5vw 4vh',
+    display: 'flex',
+    justify_content: 'center',
     background: sec.mid
   }
 };
 
 export const footer = {
   div: {
-    id: "footer"
+    id: 'footer'
   },
   has: [
-    p("{curly.js}"),
-    p("Copyright (c) 2019 Evan Magnussen"),
-    p("MIT License")
+    p('{curly.js}'),
+    p('Copyright (c) 2019 Evan Magnussen'),
+    p('MIT License')
   ],
   style: {
-    align_self: "flex-end",
-    min_height: "80px",
-    width: "100vw",
-    padding: "20px 10vw",
-    display: "flex",
-    flex_direction: "column",
-    align_items: "flex-end",
-    color: "#333",
+    align_self: 'flex-end',
+    min_height: '80px',
+    width: '100vw',
+    padding: '20px 10vw',
+    display: 'flex',
+    flex_direction: 'column',
+    align_items: 'flex-end',
+    color: '#333',
     background: sec.mid,
     psudo: {
-      ">p": {
-        margin: "0",
-        font_size: "12px"
+      '>p': {
+        margin: '0',
+        font_size: '12px'
       }
     }
   }

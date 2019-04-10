@@ -1,25 +1,25 @@
-import { link, subhead } from "./components.js"
-import { sec, font } from "../exports.js";
+import { link, subhead } from './components.js';
+import { sec, font } from '../exports.js';
 
 let colors = sec;
 
 export const openLogo = {
   span: {
-    id: "logo"
+    id: 'logo'
   },
-  has: ["Curly.js"],
+  has: ['Curly.js'],
   style: {
-    display: "inline-flex",
-    justify_content: "center",
-    align_items: "center",
-    width: "0px",
-    overflow: "hidden",
-    transition: "all .75s cubic-bezier(.3,.7,.36,1.5)"
+    display: 'inline-flex',
+    justify_content: 'center',
+    align_items: 'center',
+    width: '0px',
+    overflow: 'hidden',
+    transition: 'all .75s cubic-bezier(.3,.7,.36,1.5)'
   },
   timers: {
     logoOpen() {
       return setTimeout(() => {
-        openLogo.setStyle({"width": "18rem"});
+        openLogo.setStyle({ width: '18rem' });
       }, 270);
     }
   }
@@ -27,41 +27,49 @@ export const openLogo = {
 
 export const bannerHead = {
   div: {
-    id: "bannerHead" },
+    id: 'bannerHead'
+  },
 
-  has: ["{", openLogo, "}"],
+  has: ['{', openLogo, '}'],
   style: {
-    font_size: "5rem",
-    text_align: "center",
-    font_family: font.family.head 
-  } 
+    font_size: '5rem',
+    text_align: 'center',
+    font_family: font.family.head
+  }
 };
 
-export const bannerButton = link({text: "Get Started!", href:'#main' });
+export const bannerButton = link({
+  class: 'bannerButton',
+  text: 'Get Started!',
+  href: '#main'
+});
 bannerButton.style = {
   color: colors.dark,
   border: `1px solid ${colors.dark}`,
-  border_radius: "3px",
-  text_decoration: "none",
+  border_radius: '3px',
+  text_decoration: 'none',
   background_image: `linear-gradient(${colors.dark}, ${colors.dark})`,
   background_repeat: 'no-repeat',
   background_position: '0px 45px',
-  text_align: "center",
-  transition: "all .2s",
-  padding: "8px 15px",
-  margin: "30px",
+  text_align: 'center',
+  transition: 'all .2s',
+  padding: '8px 15px',
+  margin: '30px',
   psudo: {
-    ":hover": {
+    ':hover': {
       color: colors.light,
-      background_position: '0px 0px' 
-    } 
-  } 
+      background_position: '0px 0px'
+    }
+  }
 };
 
-export const bannerSub = subhead({ children: ["Building Object Oriented Websites"] });
+export const bannerSub = subhead({
+  children: ['Building Object Oriented Websites']
+});
 export const banner = {
   div: {
-    classList: 'bannerLarge' },
+    classList: 'bannerLarge'
+  },
 
   has: [bannerHead, bannerSub, bannerButton],
   style: {
@@ -71,6 +79,6 @@ export const banner = {
     display: 'flex',
     flex_direction: 'column',
     justify_content: 'center',
-    align_items: 'center' 
-  } 
+    align_items: 'center'
+  }
 };
