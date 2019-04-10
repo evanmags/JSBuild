@@ -327,12 +327,11 @@ export const container = {
   style: {
     min_width: "400px",
     max_width: "900px",
+    margin_top: '-10vh',
+    padding: '10vh 3vw 0',
     display: "flex",
     justify_content: 'flex-start',
     flex_direction: "column",
-    flex: "1 1 700px",
-    padding: "15px 50px",
-    transition: `transform .2s, box-shadow .2s`,
     overflow: "hidden"
   }
 };
@@ -345,10 +344,9 @@ export const main = {
   style: {
     width: "100%",
     min_height: '100vh',
-    padding: "0 18vw",
+    padding: "10vh 5vw 4vh",
     display: "flex",
     justify_content: "center",
-    flex: "1 1 100%",
     background: sec.mid
   }
 };

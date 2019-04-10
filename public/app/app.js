@@ -33,7 +33,6 @@ export const App = {
   style: {
     background: e.sec.light,
     min_height: "100vh",
-    padding_top: "50px",
     display: "flex",
     flex_direction: "column",
   }

@@ -57,7 +57,8 @@ export const styles = {
     _moz_osx_font_smoothing: "grayscale"
   },
   html:{
-    font_size: font.size.main
+    font_size: font.size.main,
+    scroll_behavior: 'smooth'
   },
   body: {
     color: colors.black,
