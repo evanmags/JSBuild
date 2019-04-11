@@ -43,7 +43,7 @@ export const eventContent = [
   ]),
   c.p("To see this in action, go back and click on the clock from the last example. Or continue on to learn about componants rendered from functions."),
   c.buttonRow([
-    c.link({ href: "#clock", text: "Clock Example" }),
-    c.link({ href: "#functions", text: "Function Comps." })
+    c.link({ href: "#clock", text: "Back" }),
+    c.link({ href: "#functions", text: "Next" })
   ])
 ];

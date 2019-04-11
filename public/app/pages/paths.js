@@ -20,7 +20,7 @@ export const pathsContent = [
   ]),
   c.p('Now your app is ready for production! external traffic will be routed directly to the page they request and internal traffic will never hit the server.'),
   c.buttonRow([
-    c.link({ href: "#Home", text: "Home" }),
-    c.link({ href: "#about", text: "Learn More!" })
+    c.link({ href: "#router", text: "Back" }),
+    c.link({ href: "#download", text: "Get Curly" })
   ])
 ];

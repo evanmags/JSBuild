@@ -1,21 +1,21 @@
 import { c } from "../exports.js";
 
 export const aboutContent = [
-  c.sectionHeader("About curly.js"),
-  c.subhead("Building Components"),
+  c.sectionHeader('About curly.js'),
+  c.subhead('Building Components'),
   c.p(
-    "Components in curly.js are JavaScript objects, plain and simple. This opens a world of possibility for what you can do. Constructing complex, self-contained components bocomes very simple in curly, but to start we will build a simple 'h1' element."
+    'Components in curly.js are JavaScript objects, plain and simple. This opens a world of possibility for what you can do. Constructing complex, self-contained components bocomes very simple in curly, but to start we will build a simple \'h1\' element.'
   ),
-  c.p("To begin, we need to define our component:"),
-  c.codeBlock([c.ln('1'), c.d('const '), c.vr('sample'), ` = { }`]),
+  c.p('To begin, we need to define our component:'),
+  c.codeBlock([c.ln('1'), c.d('const '), c.vr('sample'), ' = { }']),
   c.p(
-    "Since we are don't want to be able to reassign the name of our component later in our app we use the 'const' declairation"
+    'Since we are don\'t want to be able to reassign the name of our component later in our app we use the \'const\' declairation'
   ),
   c.p(
-    "Now in order to render anything to the page we are required to declare an element object inside of our component"
+    'Now in order to render anything to the page we are required to declare an element object inside of our component'
   ),
   c.codeBlock([
-    c.ln('1'), c.d(`const `), c.vr(`sample`), ` = {`,
+    c.ln('1'), c.d('const '), c.vr('sample'), ' = {',
     c.ln('2', '  '), c.t('h1'), `:{`,
     c.ln('3', '    '), c.t(`id`),`:`, c.va(`'header'`),
     c.ln('4', '    '), c.t(`classList`),`:`, c.va(`'red underline'`),
@@ -74,6 +74,6 @@ export const aboutContent = [
   c.p("There are several keys in the outline above that we have not discussed yet. Don't worry, they will be covered in later sections."),
   c.buttonRow([
     c.link({ href: "#home", text: "Home" }),
-    c.link({ href: "#clock", text: "Dynamic Comps." })
+    c.link({ href: "#clock", text: "Next" })
   ])
 ];

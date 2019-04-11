@@ -68,7 +68,7 @@ export const routerContent = [
   ]),
   c.p('We will look at setting up more complex applications in the next section.'),
   c.buttonRow([
-    c.link({ href: "#global", text: "Global Styles" }),
-    c.link({ href: "#paths", text: "More Routing" })
+    c.link({ href: "#global", text: "Back" }),
+    c.link({ href: "#paths", text: "Next" })
   ])
 ];

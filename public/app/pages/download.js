@@ -12,7 +12,7 @@ export const downloadContent = [
     c.link({href: '/download/curly/prod', text: 'Download Production Package'})
   ]),
   c.buttonRow([
-    c.link({ href: "#Home", text: "Home" }),
+    c.link({ href: "#home", text: "Home" }),
     c.link({ href: "#about", text: "Learn More!" })
   ])
 ];

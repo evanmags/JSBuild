@@ -44,7 +44,7 @@ export const clockContent = [
   c.clock,
   c.p("Next we will take a look at how events are handled in curly.js"),
   c.buttonRow([
-    c.link({ href: "#about", text: "Componants" }),
-    c.link({ href: "#events", text: "Events" })
+    c.link({ href: "#about", text: "Back" }),
+    c.link({ href: "#events", text: "Next" })
   ])
 ];

@@ -57,7 +57,7 @@ c.codeBlock([
   c.p("In the last section it was said that props could be anything. If you look to where the function is called, where the 'has' array should be in the sidebar componant, you will see that props is an array that contains objects of key:value pairs. Each of these objects is looped through in the function. then the return of the function becomes the 'has' array of the sidebar component."),
   c.p("Continue to dig through this functional componant and try to build one yourself. Then in the next section we will move on to styling our components."),
   c.buttonRow([
-    c.link({ href: "#Home", text: "Home" }),
-    c.link({ href: "#style", text: "Styling" })
+    c.link({ href: "#Home", text: "Back" }),
+    c.link({ href: "#style", text: "Next" })
   ])
 ];

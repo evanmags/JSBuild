@@ -37,7 +37,7 @@ export const styleContent = [
 
   c.p("Next up we take a look at the global styles object."),
   c.buttonRow([
-    c.link({ href: "#list", text: "Lists" }),
-    c.link({ href: "#psudo", text: "Psudo Styles" })
+    c.link({ href: "#list", text: "Back" }),
+    c.link({ href: "#psudo", text: "Next" })
   ])
 ];

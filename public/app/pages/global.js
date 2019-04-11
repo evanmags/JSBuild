@@ -19,7 +19,7 @@ export const globalContent = [
   c.p('As you can see the major difference in the global object is that you will need to define all selectors and psudo selectors. Other than that your styling will look exactly the same.'),
   c.p('Lets continue on and learn about the router.'),
   c.buttonRow([
-    c.link({ href: "#psudo", text: "Psudo Styles" }),
-    c.link({ href: "#router", text: "Routing" })
+    c.link({ href: "#psudo", text: "Back" }),
+    c.link({ href: "#router", text: "Next" })
   ])
 ];

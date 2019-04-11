@@ -25,7 +25,7 @@ export const psudoContent = [
     ]),
     c.p("You may notice that the psudo object has one extra layer to it. This is where you will need to define the psudo selector, class, or psudo element to append to the generated css selector that curly creates for you. For each selector you then create a styles object and thats it! Utility classes such as '.closed' or '.open' are a breeze to implement."),
     c.buttonRow([
-      c.link({ href: "#style", text: "Component Styles" }),
-      c.link({ href: "#global", text: "Global Styles" })
+      c.link({ href: "#style", text: "Back" }),
+      c.link({ href: "#global", text: "Next" })
     ])
   ];
